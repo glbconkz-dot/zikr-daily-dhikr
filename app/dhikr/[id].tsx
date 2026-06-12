@@ -17,6 +17,7 @@ import {
   getDhikrTitle,
   getDhikrMeaning,
   getDhikrExplanation,
+  getDhikrTransliteration,
 } from '@/context/LanguageContext';
 import { isDhikrLocked, isPremiumDhikrContent } from '@/lib/premium';
 import PremiumBadge from '@/components/PremiumBadge';
@@ -131,8 +132,12 @@ export default function DhikrDetailScreen() {
         {/* Arapça metin — büyük ve ortalı */}
         <View style={[styles.arabicCard, SHADOW.md]}>
           <Text style={styles.arabicText}>{dhikr.arabic_text}</Text>
-          <View style={styles.divider} />
-          <Text style={styles.transliteration}>{dhikr.transliteration}</Text>
+          {getDhikrTransliteration(dhikr, language).length > 0 && (
+            <>
+              <View style={styles.divider} />
+              <Text style={styles.transliteration}>{getDhikrTransliteration(dhikr, language)}</Text>
+            </>
+          )}
         </View>
 
         <TouchableOpacity

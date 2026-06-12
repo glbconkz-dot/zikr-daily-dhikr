@@ -11,7 +11,7 @@ import { router, useLocalSearchParams, useFocusEffect } from 'expo-router';
 import { LinearGradient } from 'expo-linear-gradient';
 import { COLORS, FONTS, RADIUS, SHADOW, SPACING } from '@/constants/theme';
 import { useApp } from '@/context/AppContext';
-import { useLanguage, getDhikrTitle } from '@/context/LanguageContext';
+import { useLanguage, getDhikrTitle, getDhikrTransliteration } from '@/context/LanguageContext';
 import { getProgramTitle, getProgramDescription } from '@/data/programs-i18n';
 import { PROGRAM_MAP } from '@/data/programs';
 import { enrollProgram, markProgramDayComplete } from '@/lib/storage';
@@ -209,7 +209,7 @@ export default function ProgramDetailScreen() {
                   <View style={styles.dhikrRowText}>
                     <Text style={styles.dhikrRowTitle}>{getDhikrTitle(dhikr, language)}</Text>
                     <Text style={styles.dhikrRowSub} numberOfLines={1}>
-                      {dhikr.transliteration}
+                      {getDhikrTransliteration(dhikr, language)}
                     </Text>
                   </View>
                 </View>

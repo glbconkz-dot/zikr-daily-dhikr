@@ -2,8 +2,11 @@ import React, { createContext, useContext, useEffect, useState, ReactNode } from
 import { NativeModules, Platform } from 'react-native';
 import { Dhikr, Language } from '@/types';
 import { DHIKR_I18N } from '@/data/dhikr-i18n';
+import { getDhikrTransliteration } from '@/lib/dhikr-transliteration';
 import { getStoredLanguage, setStoredLanguage, hasSelectedLanguage as checkStoredLanguage } from '@/lib/storage';
 import { SUPPORTED_LANGUAGES } from '@/lib/languages';
+
+export { getDhikrTransliteration } from '@/lib/dhikr-transliteration';
 
 export type { Language } from '@/types';
 
@@ -37,7 +40,7 @@ export function getDhikrSearchText(dhikr: Dhikr, language: Language): string {
   const meaning = getDhikrMeaning(dhikr, language);
   return [
     getDhikrTitle(dhikr, language),
-    dhikr.transliteration,
+    getDhikrTransliteration(dhikr, language),
     meaning,
   ]
     .join(' ')

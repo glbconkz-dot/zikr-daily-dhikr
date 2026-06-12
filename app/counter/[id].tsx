@@ -13,7 +13,7 @@ import { router, useLocalSearchParams } from 'expo-router';
 import { LinearGradient } from 'expo-linear-gradient';
 import { COLORS, FONTS, RADIUS, SPACING } from '@/constants/theme';
 import { useApp } from '@/context/AppContext';
-import { useLanguage, getDhikrTitle } from '@/context/LanguageContext';
+import { useLanguage, getDhikrTitle, getDhikrTransliteration } from '@/context/LanguageContext';
 import {
   upsertSession,
   recordCount,
@@ -243,7 +243,9 @@ export default function CounterScreen() {
 
         <View style={styles.arabicSection}>
           <Text style={styles.arabicText}>{dhikr.arabic_text}</Text>
-          <Text style={styles.transliteration}>{dhikr.transliteration}</Text>
+          {getDhikrTransliteration(dhikr, language).length > 0 && (
+            <Text style={styles.transliteration}>{getDhikrTransliteration(dhikr, language)}</Text>
+          )}
         </View>
 
         <View style={styles.progressRing}>

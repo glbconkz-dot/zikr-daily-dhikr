@@ -3,7 +3,7 @@ import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
 import { COLORS, FONTS, RADIUS, SHADOW, SPACING } from '@/constants/theme';
 import { Dhikr } from '@/types';
 import { CATEGORY_MAP } from '@/data/categories';
-import { useLanguage, getDhikrTitle } from '@/context/LanguageContext';
+import { useLanguage, getDhikrTitle, getDhikrTransliteration } from '@/context/LanguageContext';
 import { Heart, Play, RotateCcw, Lock } from 'lucide-react-native';
 import PremiumBadge from '@/components/PremiumBadge';
 
@@ -71,9 +71,11 @@ export default function DhikrCard({
       <Text style={[styles.arabic, locked && styles.blurredText]} numberOfLines={3}>
         {dhikr.arabic_text}
       </Text>
-      <Text style={[styles.transliteration, locked && styles.blurredText]} numberOfLines={2}>
-        {dhikr.transliteration}
-      </Text>
+      {getDhikrTransliteration(dhikr, language).length > 0 && (
+        <Text style={[styles.transliteration, locked && styles.blurredText]} numberOfLines={2}>
+          {getDhikrTransliteration(dhikr, language)}
+        </Text>
+      )}
 
       {/* Progress bar */}
       {showProgress && currentCount > 0 && !locked && (

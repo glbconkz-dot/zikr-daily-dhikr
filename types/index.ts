@@ -17,7 +17,13 @@ export interface Dhikr {
   titleRu?: string;
   titleAr?: string;
   arabic_text: string;
-  transliteration: string;
+  /** Turkish pronunciation (Latin) */
+  transliteration_tr: string;
+  transliteration_en?: string;
+  transliteration_ru?: string;
+  transliteration_kk?: string;
+  /** @deprecated use transliteration_tr */
+  transliteration?: string;
   meaningTr: string;
   explanationTr: string;
   target_count: number;
