@@ -11,7 +11,7 @@ import {
   ActivityIndicator,
   Modal,
 } from 'react-native';
-import { SafeAreaView } from 'react-native-safe-area-context';
+import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context';
 import { useFocusEffect } from 'expo-router';
 import { COLORS, FONTS, RADIUS, SHADOW, SPACING } from '@/constants/theme';
 import { useLanguage } from '@/context/LanguageContext';
@@ -222,16 +222,18 @@ export default function TesbihimScreen() {
           presentationStyle="fullScreen"
           onRequestClose={() => setActiveTasbih(null)}
         >
-          {activeTasbih && (
-            <TasbihCounter
-              tasbih={activeTasbih}
-              onClose={() => {
-                setActiveTasbih(null);
-                refreshCustomTasbih();
-                refreshTasbihSessions();
-              }}
-            />
-          )}
+          <SafeAreaProvider>
+            {activeTasbih && (
+              <TasbihCounter
+                tasbih={activeTasbih}
+                onClose={() => {
+                  setActiveTasbih(null);
+                  refreshCustomTasbih();
+                  refreshTasbihSessions();
+                }}
+              />
+            )}
+          </SafeAreaProvider>
         </Modal>
       </SafeAreaView>
     </ScreenErrorBoundary>

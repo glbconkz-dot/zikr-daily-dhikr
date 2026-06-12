@@ -1,4 +1,4 @@
-import React, { useState, useRef, useCallback } from 'react';
+import React, { useState, useRef, useCallback, useEffect } from 'react';
 import {
   View,
   Text,
@@ -6,10 +6,19 @@ import {
   TouchableOpacity,
   Animated,
   Dimensions,
+  BackHandler,
 } from 'react-native';
-import { SafeAreaView } from 'react-native-safe-area-context';
+import { SafeAreaView, useSafeAreaInsets } from 'react-native-safe-area-context';
 import { LinearGradient } from 'expo-linear-gradient';
-import { COLORS, FONTS, RADIUS, SPACING } from '@/constants/theme';
+import { COLORS, FONTS, SPACING } from '@/constants/theme';
+import {
+  getCounterBottomPadding,
+  COUNTER_MIN_TOUCH,
+  COUNTER_BUTTON_TOP,
+  COUNTER_BUTTON_SIDE,
+  COUNTER_BUTTON_Z,
+  COUNTER_TITLE_TOP,
+} from '@/lib/counter-safe-area';
 import { useApp } from '@/context/AppContext';
 import { useLanguage } from '@/context/LanguageContext';
 import { upsertTasbihSession, recordTasbihCount } from '@/lib/tasbih-storage';
@@ -28,6 +37,8 @@ interface Props {
 export default function TasbihCounter({ tasbih, onClose }: Props) {
   const { tasbihSessions, refreshTasbihSessions, refreshTasbihStats, applyTasbihStats } = useApp();
   const { t } = useLanguage();
+  const insets = useSafeAreaInsets();
+  const bottomPadding = getCounterBottomPadding(insets.bottom);
 
   const existingSession = tasbihSessions.find((s) => s.tasbihId === tasbih.id);
   const [count, setCount] = useState(existingSession?.currentCount ?? 0);
@@ -100,11 +111,19 @@ export default function TasbihCounter({ tasbih, onClose }: Props) {
     saveTimeout.current = setTimeout(() => saveSession(newCount, !!isNowComplete), 300);
   };
 
-  const handleClose = async () => {
+  const handleClose = useCallback(async () => {
     if (saveTimeout.current) clearTimeout(saveTimeout.current);
     await saveSession(count, completed);
     onClose();
-  };
+  }, [count, completed, onClose, saveSession]);
+
+  useEffect(() => {
+    const sub = BackHandler.addEventListener('hardwareBackPress', () => {
+      void handleClose();
+      return true;
+    });
+    return () => sub.remove();
+  }, [handleClose]);
 
   const handleReset = async () => {
     setCount(0);
@@ -120,17 +139,31 @@ export default function TasbihCounter({ tasbih, onClose }: Props) {
 
   return (
     <LinearGradient colors={[COLORS.green, COLORS.bgDeep, '#0A1A10']} style={styles.container}>
-      <SafeAreaView style={styles.safe}>
-        <View style={styles.header}>
-          <TouchableOpacity onPress={handleClose} style={styles.closeBtn}>
-            <ArrowLeft size={24} color="rgba(250,247,242,0.9)" strokeWidth={2} />
-          </TouchableOpacity>
+      <SafeAreaView style={[styles.safe, { paddingBottom: bottomPadding }]} edges={[]}>
+        <TouchableOpacity
+          onPress={() => void handleClose()}
+          style={styles.backButton}
+          hitSlop={{ top: 12, bottom: 12, left: 12, right: 12 }}
+          activeOpacity={0.7}
+          accessibilityRole="button"
+          accessibilityLabel={t('tesbih_back_to_list')}
+        >
+          <ArrowLeft size={24} color="rgba(250,247,242,0.9)" strokeWidth={2} />
+        </TouchableOpacity>
+        <TouchableOpacity
+          onPress={() => void handleReset()}
+          style={styles.resetButton}
+          hitSlop={{ top: 12, bottom: 12, left: 12, right: 12 }}
+          activeOpacity={0.7}
+          accessibilityRole="button"
+          accessibilityLabel={t('tesbih_reset')}
+        >
+          <RotateCcw size={22} color="rgba(250,247,242,0.8)" strokeWidth={1.8} />
+        </TouchableOpacity>
+        <View style={styles.titleRow}>
           <Text style={styles.title} numberOfLines={2}>
             {tasbih.name}
           </Text>
-          <TouchableOpacity onPress={handleReset} style={styles.resetBtn}>
-            <RotateCcw size={22} color="rgba(250,247,242,0.8)" strokeWidth={1.8} />
-          </TouchableOpacity>
         </View>
 
         <View style={styles.counterSection}>
@@ -192,37 +225,46 @@ export default function TasbihCounter({ tasbih, onClose }: Props) {
 
 const styles = StyleSheet.create({
   container: { flex: 1 },
-  safe: { flex: 1 },
-  header: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    paddingHorizontal: SPACING.md,
-    paddingTop: SPACING.sm,
-    paddingBottom: SPACING.md,
-  },
-  closeBtn: {
-    width: 48,
-    height: 48,
-    borderRadius: 24,
+  safe: { flex: 1, position: 'relative' },
+  backButton: {
+    position: 'absolute',
+    top: COUNTER_BUTTON_TOP,
+    left: COUNTER_BUTTON_SIDE,
+    zIndex: COUNTER_BUTTON_Z,
+    width: COUNTER_MIN_TOUCH,
+    height: COUNTER_MIN_TOUCH,
+    borderRadius: COUNTER_MIN_TOUCH / 2,
     backgroundColor: 'rgba(250,247,242,0.15)',
     alignItems: 'center',
     justifyContent: 'center',
+    borderWidth: 1,
+    borderColor: 'rgba(250,247,242,0.25)',
+  },
+  resetButton: {
+    position: 'absolute',
+    top: COUNTER_BUTTON_TOP,
+    right: COUNTER_BUTTON_SIDE,
+    zIndex: COUNTER_BUTTON_Z,
+    width: COUNTER_MIN_TOUCH,
+    height: COUNTER_MIN_TOUCH,
+    borderRadius: COUNTER_MIN_TOUCH / 2,
+    backgroundColor: 'rgba(250,247,242,0.1)',
+    alignItems: 'center',
+    justifyContent: 'center',
+    borderWidth: 1,
+    borderColor: 'rgba(250,247,242,0.25)',
+  },
+  titleRow: {
+    marginTop: COUNTER_TITLE_TOP,
+    paddingHorizontal: COUNTER_MIN_TOUCH + COUNTER_BUTTON_SIDE + 8,
+    paddingBottom: SPACING.sm,
+    alignItems: 'center',
   },
   title: {
-    flex: 1,
     fontFamily: FONTS.serif,
     fontSize: 22,
     color: COLORS.cream,
     textAlign: 'center',
-    paddingHorizontal: SPACING.xs,
-  },
-  resetBtn: {
-    width: 48,
-    height: 48,
-    borderRadius: 24,
-    backgroundColor: 'rgba(250,247,242,0.1)',
-    alignItems: 'center',
-    justifyContent: 'center',
   },
   counterSection: { alignItems: 'center', marginVertical: SPACING.xl },
   countDisplay: {

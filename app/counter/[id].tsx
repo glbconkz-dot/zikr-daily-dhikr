@@ -4,12 +4,11 @@ import {
   Text,
   StyleSheet,
   TouchableOpacity,
-  SafeAreaView,
   Animated,
-  Platform,
   Dimensions,
   BackHandler,
 } from 'react-native';
+import { SafeAreaView, useSafeAreaInsets } from 'react-native-safe-area-context';
 import { router, useLocalSearchParams } from 'expo-router';
 import { LinearGradient } from 'expo-linear-gradient';
 import { COLORS, FONTS, RADIUS, SPACING } from '@/constants/theme';
@@ -24,6 +23,14 @@ import {
 import { CATEGORY_MAP } from '@/data/categories';
 import { ArrowLeft, RotateCcw, CheckCircle } from 'lucide-react-native';
 import { triggerTapHaptic, triggerSuccessHaptic } from '@/lib/haptics';
+import {
+  getCounterBottomPadding,
+  COUNTER_MIN_TOUCH,
+  COUNTER_BUTTON_TOP,
+  COUNTER_BUTTON_SIDE,
+  COUNTER_BUTTON_Z,
+  COUNTER_TITLE_TOP,
+} from '@/lib/counter-safe-area';
 import { isDhikrLocked } from '@/lib/premium';
 import { DhikrSession } from '@/types';
 
@@ -33,6 +40,8 @@ export default function CounterScreen() {
   const { id } = useLocalSearchParams<{ id: string }>();
   const { dhikrList, sessions, premium, hapticsEnabled, refreshSessions, refreshStats, applyStats } = useApp();
   const { t, language } = useLanguage();
+  const insets = useSafeAreaInsets();
+  const bottomPadding = getCounterBottomPadding(insets.bottom);
 
   const dhikr = dhikrList.find((d) => d.id === id);
   const existingSession = sessions.find((s) => s.dhikr_id === id);
@@ -209,15 +218,27 @@ export default function CounterScreen() {
 
   return (
     <LinearGradient colors={[gradientColors[0], gradientColors[1], '#0A1A10']} style={styles.container}>
-      <SafeAreaView style={styles.safe}>
-        <View style={styles.header}>
-          <TouchableOpacity onPress={handleClose} style={styles.closeBtn} activeOpacity={0.7}>
-            <ArrowLeft size={24} color="rgba(250,247,242,0.9)" strokeWidth={2} />
-          </TouchableOpacity>
+      <SafeAreaView style={[styles.safe, { paddingBottom: bottomPadding }]} edges={[]}>
+        <TouchableOpacity
+          onPress={handleClose}
+          style={styles.backButton}
+          activeOpacity={0.7}
+          hitSlop={{ top: 12, bottom: 12, left: 12, right: 12 }}
+          accessibilityRole="button"
+        >
+          <ArrowLeft size={24} color="rgba(250,247,242,0.9)" strokeWidth={2} />
+        </TouchableOpacity>
+        <TouchableOpacity
+          onPress={handleReset}
+          style={styles.resetButton}
+          activeOpacity={0.7}
+          hitSlop={{ top: 12, bottom: 12, left: 12, right: 12 }}
+          accessibilityRole="button"
+        >
+          <RotateCcw size={22} color="rgba(250,247,242,0.8)" strokeWidth={1.8} />
+        </TouchableOpacity>
+        <View style={styles.titleRow}>
           <Text style={styles.dhikrTitle} numberOfLines={2}>{getDhikrTitle(dhikr, language)}</Text>
-          <TouchableOpacity onPress={handleReset} style={styles.resetBtn} activeOpacity={0.7}>
-            <RotateCcw size={22} color="rgba(250,247,242,0.8)" strokeWidth={1.8} />
-          </TouchableOpacity>
         </View>
 
         <View style={styles.arabicSection}>
@@ -303,39 +324,46 @@ const TAP_SIZE = Math.min(W * 0.62, 260);
 
 const styles = StyleSheet.create({
   container: { flex: 1 },
-  safe: { flex: 1 },
-  header: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    paddingHorizontal: SPACING.md,
-    paddingTop: SPACING.sm,
-    paddingBottom: SPACING.md,
-  },
-  closeBtn: {
-    width: 48,
-    height: 48,
-    borderRadius: 24,
+  safe: { flex: 1, position: 'relative' },
+  backButton: {
+    position: 'absolute',
+    top: COUNTER_BUTTON_TOP,
+    left: COUNTER_BUTTON_SIDE,
+    zIndex: COUNTER_BUTTON_Z,
+    width: COUNTER_MIN_TOUCH,
+    height: COUNTER_MIN_TOUCH,
+    borderRadius: COUNTER_MIN_TOUCH / 2,
     backgroundColor: 'rgba(250,247,242,0.15)',
+    alignItems: 'center',
+    justifyContent: 'center',
+    borderWidth: 1,
+    borderColor: 'rgba(250,247,242,0.25)',
+  },
+  resetButton: {
+    position: 'absolute',
+    top: COUNTER_BUTTON_TOP,
+    right: COUNTER_BUTTON_SIDE,
+    zIndex: COUNTER_BUTTON_Z,
+    width: COUNTER_MIN_TOUCH,
+    height: COUNTER_MIN_TOUCH,
+    borderRadius: COUNTER_MIN_TOUCH / 2,
+    backgroundColor: 'rgba(250,247,242,0.1)',
     alignItems: 'center',
     justifyContent: 'center',
     borderWidth: 1,
     borderColor: 'rgba(250,247,242,0.2)',
   },
+  titleRow: {
+    marginTop: COUNTER_TITLE_TOP,
+    paddingHorizontal: COUNTER_MIN_TOUCH + COUNTER_BUTTON_SIDE + 8,
+    paddingBottom: SPACING.sm,
+    alignItems: 'center',
+  },
   dhikrTitle: {
-    flex: 1,
     fontFamily: FONTS.serif,
     fontSize: 20,
     color: COLORS.cream,
     textAlign: 'center',
-    paddingHorizontal: SPACING.xs,
-  },
-  resetBtn: {
-    width: 48,
-    height: 48,
-    borderRadius: 24,
-    backgroundColor: 'rgba(250,247,242,0.1)',
-    alignItems: 'center',
-    justifyContent: 'center',
   },
   arabicSection: {
     paddingHorizontal: SPACING.xl,

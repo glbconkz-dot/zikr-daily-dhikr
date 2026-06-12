@@ -16,6 +16,7 @@ import {
   Inter_700Bold,
 } from '@expo-google-fonts/inter';
 import * as SplashScreen from 'expo-splash-screen';
+import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { useFrameworkReady } from '@/hooks/useFrameworkReady';
 import { AppProvider } from '@/context/AppContext';
 import { LanguageProvider, hasSelectedLanguage } from '@/context/LanguageContext';
@@ -89,11 +90,13 @@ export default function RootLayout() {
   }
 
   return (
-    <LanguageProvider>
-      <AppProvider>
-        <RootLayoutNav />
-        <StatusBar style="dark" />
-      </AppProvider>
-    </LanguageProvider>
+    <SafeAreaProvider>
+      <LanguageProvider>
+        <AppProvider>
+          <RootLayoutNav />
+          <StatusBar style="dark" />
+        </AppProvider>
+      </LanguageProvider>
+    </SafeAreaProvider>
   );
 }
