@@ -409,10 +409,14 @@ const BASE_DHIKR: Dhikr[] = [
     titleEn: 'Ayat al-Kursi',
     titleRu: 'Аятуль-Курси',
     titleAr: 'آيَةُ الْكُرْسِيِّ',
-    arabic_text: 'اللَّهُ لَا إِلَٰهَ إِلَّا هُوَ الْحَيُّ الْقَيُّومُ',
-    transliteration: "Allâhu lâ ilâhe illâ hüve'l-hayyü'l-kayyûm...",
-    meaningTr: "Allah, kendisinden başka ilah olmayandır. Diridir, her şeyi ayakta tutandır.",
-    explanationTr: "Korunma ve Allah'a sığınma niyetiyle en çok okunan ayetlerden biridir.",
+    arabic_text:
+      'اللَّهُ لَا إِلَٰهَ إِلَّا هُوَ الْحَيُّ الْقَيُّومُ ۚ لَا تَأْخُذُهُ سِنَةٌ وَلَا نَوْمٌ ۚ لَهُ مَا فِي السَّمَاوَاتِ وَمَا فِي الْأَرْضِ ۗ مَنْ ذَا الَّذِي يَشْفَعُ عِنْدَهُ إِلَّا بِإِذْنِهِ ۚ يَعْلَمُ مَا بَيْنَ أَيْدِيهِمْ وَمَا خَلْفَهُمْ ۖ وَلَا يُحِيطُونَ بِشَيْءٍ مِنْ عِلْمِهِ إِلَّا بِمَا شَاءَ ۚ وَسِعَ كُرْسِيُّهُ السَّمَاوَاتِ وَالْأَرْضَ ۖ وَلَا يَئُودُهُ حِفْظُهُمَا ۚ وَهُوَ الْعَلِيُّ الْعَظِيمُ',
+    transliteration:
+      "Allâhu lâ ilâhe illâ hüve'l-hayyü'l-kayyûm, lâ te'huzuhû sinetün ve lâ nevm, lehû mâ fis-semâvâti ve mâ fil-ard, men-ze'llezî yeşfe'u 'indehû illâ bi iznih, ya'lemu mâ beyne eydîhim ve mâ halfehum, ve lâ yuhîtûne bi şey'in min 'ilmihî illâ bimâ şâ', vesia kursiyyuhu's-semâvâti vel-ard, ve lâ yeûduhû hıfzuhumâ, ve hüve'l-'aliyyü'l-'azîm.",
+    meaningTr:
+      "Allah, kendisinden başka ilah olmayandır. O, diridir, kayyumdur (her şeyi ayakta tutandır). O'nu ne bir uyuklama tutar ne de uyku. Göklerde ve yerde ne varsa hepsi O'nundur. O'nun izni olmadan katında kim şefaat edebilir? O, kullarının önlerindekini ve arkalarındakini bilir. Onlar O'nun ilminden, kendisinin dilediği kadarından başka bir şeyi kuşatamazlar. O'nun kürsüsü gökleri ve yeri kaplamıştır. Onları koruyup gözetmek O'na ağır gelmez. O, yücedir, büyüktür.",
+    explanationTr:
+      "Kur'an'ın en büyük ayetidir. Her farz namazdan sonra, yatmadan önce ve korunma niyetiyle okunur. Peygamber Efendimiz (s.a.v.), yatarken Ayetel Kürsi okuyanın sabaha kadar Allah'ın korumasında olduğunu bildirmiştir.",
     target_count: 1,
     premium: false,
     sort_order: 1,
@@ -424,10 +428,14 @@ const BASE_DHIKR: Dhikr[] = [
     titleEn: 'Surah Al-Falaq',
     titleRu: 'Сура Аль-Фаляк',
     titleAr: 'سُورَةُ الْفَلَقِ',
-    arabic_text: 'قُلْ أَعُوذُ بِرَبِّ الْفَلَقِ',
-    transliteration: 'Kul eûzü bi rabbil felak...',
-    meaningTr: "De ki: Sabahın Rabbine sığınırım.",
-    explanationTr: "Korku, nazar, kötülük ve görünmeyen şerlerden Allah'a sığınma niyetiyle okunur.",
+    arabic_text:
+      'قُلْ أَعُوذُ بِرَبِّ الْفَلَقِ\nمِن شَرِّ مَا خَلَقَ\nوَمِن شَرِّ غَاسِقٍ إِذَا وَقَبَ\nوَمِن شَرِّ النَّفَّاثَاتِ فِي الْعُقَدِ\nوَمِن شَرِّ حَاسِدٍ إِذَا حَسَدَ',
+    transliteration:
+      "Kul eûzü bi rabbil-felak, min şerri mâ halak, ve min şerri ghâsıkın izâ vekab, ve min şerrin-neffâsâti fil-'ukad, ve min şerri hâsidin izâ hased.",
+    meaningTr:
+      "De ki: Yarattığı şeylerin şerrinden, bastırdığı zaman karanlığın şerrinden, düğümlere üfleyenlerin şerrinden ve haset ettiği zaman hasetçinin şerrinden sabahın Rabbine sığınırım.",
+    explanationTr:
+      "Muavvizeteyn'in (Felak ve Nas) ilki olan bu sure, sabah-akşam 3'er kez okunur. Peygamber Efendimiz (s.a.v.) yatmadan önce Felak ve Nas'ı okuyup ellerine üfleyerek vücuduna sürmüştür. Nazar, korku ve görünmeyen şerlerden korunma niyetiyle okunur.",
     target_count: 3,
     premium: false,
     sort_order: 2,
@@ -439,10 +447,14 @@ const BASE_DHIKR: Dhikr[] = [
     titleEn: 'Surah An-Nas',
     titleRu: 'Сура Ан-Нас',
     titleAr: 'سُورَةُ النَّاسِ',
-    arabic_text: 'قُلْ أَعُوذُ بِرَبِّ النَّاسِ',
-    transliteration: 'Kul eûzü bi rabbin nâs...',
-    meaningTr: "De ki: İnsanların Rabbine sığınırım.",
-    explanationTr: "Vesvese, korku ve manevi korunma niyetiyle okunabilecek surelerdendir.",
+    arabic_text:
+      'قُلْ أَعُوذُ بِرَبِّ النَّاسِ\nمَلِكِ النَّاسِ\nإِلَٰهِ النَّاسِ\nمِن شَرِّ الْوَسْوَاسِ الْخَنَّاسِ\nالَّذِي يُوَسْوِسُ فِي صُدُورِ النَّاسِ\nمِنَ الْجِنَّةِ وَالنَّاسِ',
+    transliteration:
+      "Kul eûzü bi rabbin-nâs, melikin-nâs, ilâhin-nâs, min şerril-vesvâsil-hannâs, ellezî yuvesvisu fî sudûrin-nâs, minel-cinneti ven-nâs.",
+    meaningTr:
+      "De ki: İnsanların Rabbine, insanların Melikine, insanların İlahına sığınırım; insanların kalplerine vesvese veren, cinlerden ve insanlardan olan o sinsi vesvesecinin şerrinden.",
+    explanationTr:
+      "Muavvizeteyn'in ikincisi olan bu sure, Felak ile birlikte sabah-akşam 3'er kez okunur. Vesvese, şeytanın kışkırtması ve manevi zararlardan korunma niyetiyle okunur. Peygamber Efendimiz (s.a.v.) yatmadan önce bu sureleri okuyup ellerine üfleyerek vücuduna sürmüştür.",
     target_count: 3,
     premium: false,
     sort_order: 3,

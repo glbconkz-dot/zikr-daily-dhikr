@@ -577,68 +577,98 @@ export const DHIKR_I18N: Record<string, Record<Language, DhikrI18nEntry>> = {
   },
   'korunma_001': {
     tr: {
-      meaning: 'Allah, kendisinden başka ilah olmayandır. Diridir, her şeyi ayakta tutandır.',
-      explanation: "Korunma ve Allah'a sığınma niyetiyle en çok okunan ayetlerden biridir.",
+      meaning:
+        "Allah, kendisinden başka ilah olmayandır. O, diridir, kayyumdur (her şeyi ayakta tutandır). O'nu ne bir uyuklama tutar ne de uyku. Göklerde ve yerde ne varsa hepsi O'nundur. O'nun izni olmadan katında kim şefaat edebilir? O, kullarının önlerindekini ve arkalarındakini bilir. Onlar O'nun ilminden, kendisinin dilediği kadarından başka bir şeyi kuşatamazlar. O'nun kürsüsü gökleri ve yeri kaplamıştır. Onları koruyup gözetmek O'na ağır gelmez. O, yücedir, büyüktür.",
+      explanation:
+        "Kur'an'ın en büyük ayetidir. Her farz namazdan sonra, yatmadan önce ve korunma niyetiyle okunur. Peygamber Efendimiz (s.a.v.), yatarken Ayetel Kürsi okuyanın sabaha kadar Allah'ın korumasında olduğunu bildirmiştir.",
     },
     en: {
-      meaning: 'Allah — there is no god but Him, the Ever-Living, the Sustainer of all existence.',
-      explanation: 'One of the most recited verses for protection and seeking refuge in Allah.',
+      meaning:
+        'Allah — there is no deity except Him, the Ever-Living, the Sustainer of all existence. Neither drowsiness overtakes Him nor sleep. To Him belongs whatever is in the heavens and whatever is on the earth. Who can intercede with Him except by His permission? He knows what is before them and what is behind them, and they encompass nothing of His knowledge except what He wills. His Kursi extends over the heavens and the earth, and preserving them does not weary Him. He is the Most High, the Most Great.',
+      explanation:
+        'The greatest verse in the Quran. Recite it after every obligatory prayer, before sleep, and with the intention of divine protection. The Prophet ﷺ said that whoever recites Ayat al-Kursi before sleeping remains under Allah\'s protection until morning.',
     },
     ru: {
-      meaning: 'Аллах — нет бога кроме Него, Живой, поддерживающий всё сущее.',
-      explanation: 'Один из наиболее читаемых аятов для защиты и прибегания к Аллаху.',
+      meaning:
+        'Аллах — нет бога кроме Него, Живого, поддерживающего всё существо. Его не берёт ни дремота, ни сон. Ему принадлежит то, что на небесах и на земле. Кто может заступиться перед Ним без Его дозволения? Он знает то, что перед ними и то, что позади них, и они не охватывают ничего из Его знания, кроме того, что Он пожелает. Его Престол объемлет небеса и землю, и сохранение их не утомляет Его. Он — Всевышний, Великий.',
+      explanation:
+        'Величайший аят Корана. Читается после каждого обязательного намаза, перед сном и с намерением защиты. Пророк ﷺ сообщил, что тот, кто читает Аятуль-Курси перед сном, остаётся под защитой Аллаха до утра.',
     },
     ar: {
-      meaning: 'الله لا إله إلا هو الحي القيوم.',
-      explanation: 'من أكثر الآيات قراءة للحماية والاستعاذة بالله.',
+      meaning:
+        'الله لا إله إلا هو الحي القيوم، لا تأخذه سنة ولا نوم، له ما في السماوات وما في الأرض، من ذا الذي يشفع عنده إلا بإذنه، يعلم ما بين أيديهم وما خلفهم، ولا يحيطون بشيء من علمه إلا بما شاء، وسع كرسيه السماوات والأرض، ولا يؤوده حفظهما، وهو العلي العظيم.',
+      explanation:
+        'أعظم آية في القرآن. تُقرأ بعد كل صلاة فريضة وقبل النوم ونية الحماية. قال النبي ﷺ إن من قرأ آية الكرسي عند النوم لم يزل تحت حفظ الله حتى يصبح.',
     },
     kk: {
-      meaning: 'Аллах — нет бога кроме Него, Живой, поддерживающий всё сущее.',
-      explanation: 'Один из наиболее читаемых аятов для қорғанысы и прибегания к Аллаға.',
+      meaning:
+        'Алла — Оның өзінен басқа құдай жоқ. Ол тірі, Қайюм (барлығын тұрғызушы). Оны ұйқы да, күз жеткізе алмайды. Аспандағы да, жердегі де бәрі Оның. Оның рұқсатысыз Оның алдында кім аралықтық ете алады? Ол адамдардың алдындағы мен артындағыны біледі. Олар Оның білімінен тек Оның қалайтыны ғана қамти алады. Оның ақсиясы (тәлісі) аспанды да, жерді де қамтиды. Оларды қорғау Оған ауыр емес. Ол — Ұлы, Кеңұлылы.',
+      explanation:
+        'Құранның ең ұлы аяты. Әр міндетті намаздан кейін, ұйықтар алдында және қорғану ниетімен оқылады. Пайғамбар ﷺ ұйықтар алдында Аят әл-Күрсіні оқыған кісі таңға дейін Алланың қорғауында болады деп хабарлаған.',
     },
   },
   'korunma_002': {
     tr: {
-      meaning: 'De ki: Sabahın Rabbine sığınırım.',
-      explanation: "Korku, nazar, kötülük ve görünmeyen şerlerden Allah'a sığınma niyetiyle okunur.",
+      meaning:
+        "De ki: Yarattığı şeylerin şerrinden, bastırdığı zaman karanlığın şerrinden, düğümlere üfleyenlerin şerrinden ve haset ettiği zaman hasetçinin şerrinden sabahın Rabbine sığınırım.",
+      explanation:
+        "Muavvizeteyn'in (Felak ve Nas) ilki olan bu sure, sabah-akşam 3'er kez okunur. Peygamber Efendimiz (s.a.v.) yatmadan önce Felak ve Nas'ı okuyup ellerine üfleyerek vücuduna sürmüştür. Nazar, korku ve görünmeyen şerlerden korunma niyetiyle okunur.",
     },
     en: {
-      meaning: 'Say: I seek refuge in the Lord of the daybreak.',
-      explanation: 'Recited with the intention of seeking refuge in Allah from fear, the evil eye, harm, and unseen evils.',
+      meaning:
+        'Say: I seek refuge in the Lord of the daybreak, from the evil of what He has created, from the evil of darkness when it settles, from the evil of those who blow on knots, and from the evil of an envier when he envies.',
+      explanation:
+        'The first of the two protective surahs (Al-Mu\'awwidhatain). Recite it three times in the morning and three times in the evening. The Prophet ﷺ would recite Al-Falaq and An-Nas before sleeping, blow into his hands, and wipe them over his body. Recite with the intention of protection from the evil eye, fear, and unseen harm.',
     },
     ru: {
-      meaning: 'Скажи: Я прибегаю к Господу рассвета.',
-      explanation: 'Читается с намерением прибегать к Аллаху от страха, сглаза, зла и невидимых опасностей.',
+      meaning:
+        'Скажи: Прибегаю к Господу рассвета от зла того, что Он сотворил, от зла мрака, когда он сгущается, от зла колдунов, дующих на узлы, и от зла завистника, когда он завидует.',
+      explanation:
+        'Первая из двух защитных сур (Муаввизатайн). Читается три раза утром и три раза вечером. Пророк ﷺ перед сном читал суры Аль-Фаляк и Ан-Нас, дул в ладони и проводил ими по телу. Читается с намерением защиты от сглаза, страха и невидимого вреда.',
     },
     ar: {
-      meaning: 'قل أعوذ برب الفلق.',
-      explanation: 'يُقرأ بنية الاستعاذة بالله من الخوف والعين والشرور الخفية.',
+      meaning:
+        'قل أعوذ برب الفلق، من شر ما خلق، ومن شر غاسق إذا وقب، ومن شر النفاثات في العقد، ومن شر حاسد إذا حسد.',
+      explanation:
+        'أولى المعوذتين. تُقرأ ثلاث مرات صباحاً وثلاث مرات مساءً. كان النبي ﷺ يقرأ الفلق والناس قبل النوم وينفث في كفيه ويمسح بهما على جسده. تُقرأ بنية الحماية من العين والخوف والشرور الخفية.',
     },
     kk: {
-      meaning: 'Скажи: Я прибегаю к Господу рассвета.',
-      explanation: 'Читается ниетімен прибегать к Аллаға от страха, сглаза, зла и невидимых опасностей.',
+      meaning:
+        'Айт: Таңның Раббына жасынамын: Оның жаратқанының жамандығынан, қоюланған қараңғылықтың жамандығынан, түйінге үйретушілердің жамандығынан және қызғанған кездегі қызғаныштың жамандығынан.',
+      explanation:
+        'Муаввизатайннің біріншісі. Таңертең және кешке 3 рет оқылады. Пайғамбар ﷺ ұйықтар алдында Фаляқ пен Нас сүрелерін оқып, алақанына үріп, денесіне сүрткен. Көз қорқынышы, қорқыныш және көрінбейтін зияннан қорғану ниетімен оқылады.',
     },
   },
   'korunma_003': {
     tr: {
-      meaning: 'De ki: İnsanların Rabbine sığınırım.',
-      explanation: 'Vesvese, korku ve manevi korunma niyetiyle okunabilecek surelerdendir.',
+      meaning:
+        "De ki: İnsanların Rabbine, insanların Melikine, insanların İlahına sığınırım; insanların kalplerine vesvese veren, cinlerden ve insanlardan olan o sinsi vesvesecinin şerrinden.",
+      explanation:
+        "Muavvizeteyn'in ikincisi olan bu sure, Felak ile birlikte sabah-akşam 3'er kez okunur. Vesvese, şeytanın kışkırtması ve manevi zararlardan korunma niyetiyle okunur. Peygamber Efendimiz (s.a.v.) yatmadan önce bu sureleri okuyup ellerine üfleyerek vücuduna sürmüştür.",
     },
     en: {
-      meaning: 'Say: I seek refuge in the Lord of mankind.',
-      explanation: 'Among the chapters recited with the intention of protection from whispers, fear, and spiritual harm.',
+      meaning:
+        'Say: I seek refuge in the Lord of mankind, the Sovereign of mankind, the God of mankind, from the evil of the retreating whisperer who whispers into the hearts of mankind — from among the jinn and mankind.',
+      explanation:
+        'The second of the two protective surahs (Al-Mu\'awwidhatain). Recite it three times in the morning and three times in the evening together with Al-Falaq. Recite with the intention of protection from whispers, Satan\'s provocation, and spiritual harm. The Prophet ﷺ would recite both surahs before sleeping, blow into his hands, and wipe them over his body.',
     },
     ru: {
-      meaning: 'Скажи: Я прибегаю к Господу людей.',
-      explanation: 'Из сур, которые читают с намерением защиты от наваждений, страха и духовного вреда.',
+      meaning:
+        'Скажи: Прибегаю к Господу людей, Царю людей, Богу людей от зла наущающего уклоняющегося, который нашёптывает в сердца людей — из числа джиннов и людей.',
+      explanation:
+        'Вторая из двух защитных сур (Муаввизатайн). Читается три раза утром и три раза вечером вместе с сурой Аль-Фаляк. Читается с намерением защиты от наваждений, провокаций шайтана и духовного вреда. Пророк ﷺ перед сном читал обе суры, дул в ладони и проводил ими по телу.',
     },
     ar: {
-      meaning: 'قل أعوذ برب الناس.',
-      explanation: 'من السور التي تُقرأ بنية الحماية من الوسوسة والخوف والأذى المعنوي.',
+      meaning:
+        'قل أعوذ برب الناس، ملك الناس، إله الناس، من شر الوسواس الخناس، الذي يوسوس في صدور الناس، من الجنة والناس.',
+      explanation:
+        'ثانية المعوذتين. تُقرأ ثلاث مرات صباحاً وثلاث مرات مساءً مع سورة الفلق. تُقرأ بنية الحماية من الوسوسة وإغواء الشيطان والأذى المعنوي. كان النبي ﷺ يقرأ السورتين قبل النوم وينفث في كفيه ويمسح بهما على جسده.',
     },
     kk: {
-      meaning: 'Скажи: Я прибегаю к Господу людей.',
-      explanation: 'Из сур, олар читают ниетімен қорғанысы от наваждений, страха и руханиого вреда.',
+      meaning:
+        'Айт: Адамзаттың Раббына, адамзаттың Патшасына, адамзаттың Құдайына жасынамын: адамзаттың жүрегіне сыбырлаған, жасырынып кететін сыбыршының жамандығынан — жин мен адамзаттан.',
+      explanation:
+        'Муаввизатайннің екіншісі. Фаляқ сүресімен бірге таңертең және кешке 3 рет оқылады. Сыбыр, шайтанның ынталандыруы және рухани зияннан қорғану ниетімен оқылады. Пайғамбар ﷺ ұйықтар алдында екі сүрені оқып, алақанына үріп, денесіне сүрткен.',
     },
   },
   'korunma_004': {
