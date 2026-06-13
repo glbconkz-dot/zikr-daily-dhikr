@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import {
   View,
   Text,
@@ -7,27 +7,106 @@ import {
   TouchableOpacity,
   SafeAreaView,
   Platform,
+  ActivityIndicator,
+  Alert,
 } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 import { COLORS, FONTS, RADIUS, SHADOW, SPACING } from '@/constants/theme';
 import { useLanguage } from '@/context/LanguageContext';
 import { useApp } from '@/context/AppContext';
+import {
+  getFallbackPrice,
+  getSubscriptionOffering,
+  isNativeStoreSupported,
+  PurchaseErrorCode,
+  SubscriptionPlan,
+} from '@/lib/revenuecat';
 import { Crown, CheckCircle, CloudUpload, BarChart3, Infinity, Sparkles, Lock } from 'lucide-react-native';
 
 export default function PremiumScreen() {
   const { t } = useLanguage();
-  const { premium, togglePremium } = useApp();
-  const [selectedPlan, setSelectedPlan] = useState<'monthly' | 'yearly'>('yearly');
-  const [premiumOn, setPremiumOn] = useState(premium);
+  const { premium, purchaseSubscription, restorePremiumPurchases, togglePremium } = useApp();
+  const [selectedPlan, setSelectedPlan] = useState<SubscriptionPlan>('yearly');
+  const [monthlyPrice, setMonthlyPrice] = useState(getFallbackPrice('monthly'));
+  const [yearlyPrice, setYearlyPrice] = useState(getFallbackPrice('yearly'));
+  const [loadingOfferings, setLoadingOfferings] = useState(true);
+  const [purchasing, setPurchasing] = useState(false);
+  const [restoring, setRestoring] = useState(false);
+
+  const loadOfferings = useCallback(async () => {
+    setLoadingOfferings(true);
+    try {
+      const offering = await getSubscriptionOffering();
+      if (offering.monthly) setMonthlyPrice(offering.monthly.priceString);
+      if (offering.yearly) setYearlyPrice(offering.yearly.priceString);
+    } finally {
+      setLoadingOfferings(false);
+    }
+  }, []);
 
   useEffect(() => {
-    setPremiumOn(premium);
-  }, [premium]);
+    void loadOfferings();
+  }, [loadOfferings]);
 
-  const handlePremiumToggle = () => {
-    const next = !premiumOn;
-    setPremiumOn(next);
-    void togglePremium(next);
+  const getErrorMessage = (code: PurchaseErrorCode) => {
+    switch (code) {
+      case 'cancelled':
+        return t('purchase_cancelled');
+      case 'network':
+        return t('purchase_network_error');
+      case 'no_products':
+        return t('purchase_no_products');
+      case 'not_available':
+        return t('purchase_not_available');
+      case 'restore_failed':
+        return t('premium_restore_failed');
+      default:
+        return t('purchase_failed');
+    }
+  };
+
+  const handleSubscribe = async () => {
+    if (premium || purchasing) return;
+
+    if (!isNativeStoreSupported()) {
+      if (__DEV__) {
+        await togglePremium(true);
+        return;
+      }
+      Alert.alert(t('premium_title'), t('purchase_not_available'));
+      return;
+    }
+
+    setPurchasing(true);
+    const error = await purchaseSubscription(selectedPlan);
+    setPurchasing(false);
+
+    if (error && error !== 'cancelled') {
+      Alert.alert(t('premium_title'), getErrorMessage(error));
+    }
+  };
+
+  const handleRestore = async () => {
+    if (restoring) return;
+
+    if (!isNativeStoreSupported()) {
+      Alert.alert(t('premium_title'), t('purchase_not_available'));
+      return;
+    }
+
+    setRestoring(true);
+    const { restored, error } = await restorePremiumPurchases();
+    setRestoring(false);
+
+    if (error) {
+      Alert.alert(t('premium_title'), getErrorMessage(error));
+      return;
+    }
+
+    Alert.alert(
+      t('premium_title'),
+      restored ? t('premium_restore_success') : t('premium_restore_none')
+    );
   };
 
   const FEATURES = [
@@ -58,7 +137,7 @@ export default function PremiumScreen() {
   ];
 
   const PLANS: {
-    id: 'monthly' | 'yearly';
+    id: SubscriptionPlan;
     labelKey: string;
     price: string;
     periodKey: string;
@@ -68,7 +147,7 @@ export default function PremiumScreen() {
     {
       id: 'monthly',
       labelKey: 'plan_monthly_premium',
-      price: '$2.99',
+      price: monthlyPrice,
       periodKey: 'per_month',
       tag: null,
       discountKey: null,
@@ -76,17 +155,15 @@ export default function PremiumScreen() {
     {
       id: 'yearly',
       labelKey: 'plan_yearly_premium',
-      price: '$19.99',
+      price: yearlyPrice,
       periodKey: 'per_year',
       tag: 'best_value',
       discountKey: 'save_44',
     },
   ];
 
-  const getPlanPrice = () => {
-    const plan = PLANS.find((p) => p.id === selectedPlan);
-    return plan ? `${t(plan.labelKey)} ${plan.price}` : '';
-  };
+  const selectedPrice = selectedPlan === 'monthly' ? monthlyPrice : yearlyPrice;
+  const busy = purchasing || restoring || loadingOfferings;
 
   return (
     <SafeAreaView style={styles.safe}>
@@ -95,7 +172,6 @@ export default function PremiumScreen() {
         showsVerticalScrollIndicator={false}
         contentContainerStyle={styles.content}
       >
-        {/* Hero */}
         <LinearGradient
           colors={[COLORS.green, COLORS.bgDeep, '#071510']}
           style={styles.hero}
@@ -104,7 +180,7 @@ export default function PremiumScreen() {
             <Crown size={40} color={COLORS.gold} strokeWidth={1.5} />
           </View>
           <Text style={styles.heroTitle}>{t('premium_title')}</Text>
-          {premiumOn && (
+          {premium && (
             <View style={styles.activeBadge}>
               <CheckCircle size={14} color={COLORS.bgDeep} strokeWidth={2.5} />
               <Text style={styles.activeBadgeText}>{t('premium_active')}</Text>
@@ -114,7 +190,6 @@ export default function PremiumScreen() {
           <Text style={styles.heroArabic}>بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ</Text>
         </LinearGradient>
 
-        {/* Features */}
         <View style={styles.section}>
           <Text style={styles.sectionTitle}>{t('what_you_get')}</Text>
           <View style={styles.featureList}>
@@ -136,70 +211,94 @@ export default function PremiumScreen() {
           </View>
         </View>
 
-        {/* Plans */}
         <View style={styles.section}>
           <Text style={styles.sectionTitle}>{t('choose_plan')}</Text>
-          <View style={styles.planList}>
-            {PLANS.map((plan) => (
-              <TouchableOpacity
-                key={plan.id}
-                style={[styles.planCard, selectedPlan === plan.id && styles.planCardActive]}
-                onPress={() => setSelectedPlan(plan.id)}
-                activeOpacity={0.85}
-              >
-                <View style={styles.planLeft}>
-                  {plan.tag && (
-                    <View style={styles.planTag}>
-                      <Text style={styles.planTagText}>{t(plan.tag)}</Text>
-                    </View>
-                  )}
-                  <Text style={[styles.planLabel, selectedPlan === plan.id && styles.planLabelActive]}>
-                    {t(plan.labelKey)}
-                  </Text>
-                  {plan.discountKey && (
-                    <View style={styles.discountBadge}>
-                      <Text style={styles.discountText}>{t(plan.discountKey)}</Text>
-                    </View>
-                  )}
-                </View>
-                <View style={styles.planRight}>
-                  <Text style={[styles.planPrice, selectedPlan === plan.id && styles.planPriceActive]}>
-                    {plan.price}
-                  </Text>
-                  <Text style={[styles.planPeriod, selectedPlan === plan.id && styles.planPeriodActive]}>
-                    {t(plan.periodKey)}
-                  </Text>
-                </View>
-                {selectedPlan === plan.id && (
-                  <View style={styles.planCheck}>
-                    <CheckCircle size={20} color={COLORS.green} strokeWidth={2.5} />
+          {loadingOfferings ? (
+            <View style={styles.loadingRow}>
+              <ActivityIndicator color={COLORS.green} />
+              <Text style={styles.loadingText}>{t('premium_loading')}</Text>
+            </View>
+          ) : (
+            <View style={styles.planList}>
+              {PLANS.map((plan) => (
+                <TouchableOpacity
+                  key={plan.id}
+                  style={[styles.planCard, selectedPlan === plan.id && styles.planCardActive]}
+                  onPress={() => setSelectedPlan(plan.id)}
+                  activeOpacity={0.85}
+                  disabled={busy}
+                >
+                  <View style={styles.planLeft}>
+                    {plan.tag && (
+                      <View style={styles.planTag}>
+                        <Text style={styles.planTagText}>{t(plan.tag)}</Text>
+                      </View>
+                    )}
+                    <Text style={[styles.planLabel, selectedPlan === plan.id && styles.planLabelActive]}>
+                      {t(plan.labelKey)}
+                    </Text>
+                    {plan.discountKey && (
+                      <View style={styles.discountBadge}>
+                        <Text style={styles.discountText}>{t(plan.discountKey)}</Text>
+                      </View>
+                    )}
                   </View>
-                )}
-              </TouchableOpacity>
-            ))}
-          </View>
+                  <View style={styles.planRight}>
+                    <Text style={[styles.planPrice, selectedPlan === plan.id && styles.planPriceActive]}>
+                      {plan.price}
+                    </Text>
+                    <Text style={[styles.planPeriod, selectedPlan === plan.id && styles.planPeriodActive]}>
+                      {t(plan.periodKey)}
+                    </Text>
+                  </View>
+                  {selectedPlan === plan.id && (
+                    <View style={styles.planCheck}>
+                      <CheckCircle size={20} color={COLORS.green} strokeWidth={2.5} />
+                    </View>
+                  )}
+                </TouchableOpacity>
+              ))}
+            </View>
+          )}
         </View>
 
-        {/* CTA */}
         <View style={styles.ctaSection}>
           <TouchableOpacity
-            style={styles.ctaBtn}
+            style={[styles.ctaBtn, (busy || premium) && styles.ctaBtnDisabled]}
             activeOpacity={0.88}
-            onPress={handlePremiumToggle}
+            onPress={handleSubscribe}
+            disabled={busy || premium}
           >
             <LinearGradient
-              colors={premiumOn ? [COLORS.gold, COLORS.goldDark] : [COLORS.green, COLORS.greenMid]}
+              colors={premium ? [COLORS.gold, COLORS.goldDark] : [COLORS.green, COLORS.greenMid]}
               start={{ x: 0, y: 0 }}
               end={{ x: 1, y: 0 }}
               style={styles.ctaGradient}
             >
-              <Crown size={18} color={premiumOn ? COLORS.bgDeep : COLORS.gold} strokeWidth={1.8} />
+              {purchasing ? (
+                <ActivityIndicator color={COLORS.cream} />
+              ) : (
+                <Crown size={18} color={premium ? COLORS.bgDeep : COLORS.gold} strokeWidth={1.8} />
+              )}
               <Text style={styles.ctaBtnText}>
-                {premiumOn
-                  ? t('premium_test_lock')
-                  : `${t('premium_test_unlock')} — ${getPlanPrice()}`}
+                {premium
+                  ? t('premium_subscribed')
+                  : `${t('premium_subscribe_btn')} — ${selectedPrice}`}
               </Text>
             </LinearGradient>
+          </TouchableOpacity>
+
+          <TouchableOpacity
+            style={styles.restoreBtn}
+            onPress={handleRestore}
+            disabled={busy}
+            activeOpacity={0.8}
+          >
+            {restoring ? (
+              <ActivityIndicator color={COLORS.textMuted} size="small" />
+            ) : (
+              <Text style={styles.restoreBtnText}>{t('premium_restore')}</Text>
+            )}
           </TouchableOpacity>
 
           <Text style={styles.ctaNote}>{t('free_trial')}</Text>
@@ -211,7 +310,6 @@ export default function PremiumScreen() {
           </View>
         </View>
 
-        {/* Locked content preview */}
         <View style={styles.section}>
           <Text style={styles.sectionTitle}>{t('locked_preview')}</Text>
           <View style={styles.lockedGrid}>
@@ -300,6 +398,18 @@ const styles = StyleSheet.create({
     fontSize: 22,
     color: COLORS.textPrimary,
     marginBottom: SPACING.md,
+  },
+  loadingRow: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: SPACING.sm,
+    paddingVertical: SPACING.lg,
+    justifyContent: 'center',
+  },
+  loadingText: {
+    fontFamily: FONTS.sans,
+    fontSize: 14,
+    color: COLORS.textMuted,
   },
   featureList: { gap: SPACING.sm },
   featureCard: {
@@ -418,12 +528,16 @@ const styles = StyleSheet.create({
     overflow: 'hidden',
     ...SHADOW.md,
   },
+  ctaBtnDisabled: {
+    opacity: 0.85,
+  },
   ctaGradient: {
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center',
     paddingVertical: 18,
     gap: SPACING.sm,
+    minHeight: 56,
   },
   ctaBtnText: {
     fontFamily: FONTS.sansBold,
@@ -433,12 +547,24 @@ const styles = StyleSheet.create({
     flexShrink: 1,
     textAlign: 'center',
   },
+  restoreBtn: {
+    alignItems: 'center',
+    justifyContent: 'center',
+    paddingVertical: SPACING.md,
+    minHeight: 44,
+  },
+  restoreBtnText: {
+    fontFamily: FONTS.sansSemiBold,
+    fontSize: 14,
+    color: COLORS.textSecondary,
+    textDecorationLine: 'underline',
+  },
   ctaNote: {
     fontFamily: FONTS.sans,
     fontSize: 11,
     color: COLORS.textMuted,
     textAlign: 'center',
-    marginTop: SPACING.sm,
+    marginTop: SPACING.xs,
     lineHeight: 16,
   },
   trustRow: {

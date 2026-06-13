@@ -46,6 +46,11 @@
       "router": {},
       "eas": {
         "projectId": "ce082840-f56c-489c-9725-ba3e4b75b8d8"
+      },
+      "revenueCat": {
+        "entitlementId": "premium",
+        "monthlyProductId": "zikr_premium_monthly",
+        "yearlyProductId": "zikr_premium_yearly"
       }
     },
     "owner": "mirok1"

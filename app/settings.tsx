@@ -7,6 +7,9 @@ import {
   SafeAreaView,
   ScrollView,
   Linking,
+  Platform,
+  Alert,
+  ActivityIndicator,
 } from 'react-native';
 import { router } from 'expo-router';
 import Constants from 'expo-constants';
@@ -14,6 +17,7 @@ import { COLORS, FONTS, RADIUS, SPACING } from '@/constants/theme';
 import { useLanguage, Language } from '@/context/LanguageContext';
 import { useApp } from '@/context/AppContext';
 import { LANGUAGE_OPTIONS } from '@/lib/languages';
+import { isNativeStoreSupported } from '@/lib/revenuecat';
 import { ArrowLeft, CheckCircle, ExternalLink } from 'lucide-react-native';
 import { triggerTapHaptic } from '@/lib/haptics';
 
@@ -22,10 +26,11 @@ const TERMS_URL = 'https://zikr.app/terms';
 
 export default function SettingsScreen() {
   const { language, setLanguage, t } = useLanguage();
-  const { premium, hapticsEnabled, togglePremium, toggleHaptics } = useApp();
+  const { premium, hapticsEnabled, togglePremium, toggleHaptics, restorePremiumPurchases } = useApp();
   const [selected, setSelected] = useState<Language>(language);
   const [premiumOn, setPremiumOn] = useState(premium);
   const [hapticsOn, setHapticsOn] = useState(hapticsEnabled);
+  const [restoring, setRestoring] = useState(false);
 
   useEffect(() => {
     setPremiumOn(premium);
@@ -43,10 +48,37 @@ export default function SettingsScreen() {
   };
 
   const handlePremiumToggle = () => {
+    if (!__DEV__) return;
     const next = !premiumOn;
     setPremiumOn(next);
     triggerTapHaptic(true);
     void togglePremium(next);
+  };
+
+  const handleRestorePurchases = async () => {
+    if (!isNativeStoreSupported()) {
+      Alert.alert(t('settings_title'), t('purchase_not_available'));
+      return;
+    }
+    setRestoring(true);
+    const { restored, error } = await restorePremiumPurchases();
+    setRestoring(false);
+    if (error) {
+      Alert.alert(t('settings_title'), t('premium_restore_failed'));
+      return;
+    }
+    Alert.alert(
+      t('settings_title'),
+      restored ? t('premium_restore_success') : t('premium_restore_none')
+    );
+  };
+
+  const openManageSubscription = () => {
+    const url =
+      Platform.OS === 'ios'
+        ? 'https://apps.apple.com/account/subscriptions'
+        : 'https://play.google.com/store/account/subscriptions';
+    Linking.openURL(url).catch(() => {});
   };
 
   const appVersion = Constants.expoConfig?.version ?? '1.0.0';
@@ -117,22 +149,56 @@ export default function SettingsScreen() {
         </View>
 
         <View style={styles.card}>
-          <Text style={styles.cardTitle}>{t('settings_premium_test')}</Text>
-          <Text style={styles.cardDesc}>{t('settings_premium_test_desc')}</Text>
-          <View style={styles.rowItem}>
-            <Text style={styles.rowLabel}>
-              {premiumOn ? t('premium_active') : t('premium_inactive')}
-            </Text>
-            <TouchableOpacity
-              style={[styles.premiumToggle, premiumOn && styles.premiumToggleOn]}
-              onPress={handlePremiumToggle}
-            >
-              <Text style={[styles.premiumToggleText, premiumOn && styles.premiumToggleTextOn]}>
-                {premiumOn ? t('premium_test_lock') : t('premium_test_unlock')}
-              </Text>
-            </TouchableOpacity>
-          </View>
+          <Text style={styles.cardTitle}>{t('settings_subscription')}</Text>
+          <Text style={styles.cardDesc}>
+            {premium ? t('premium_active') : t('premium_inactive')}
+          </Text>
+          {isNativeStoreSupported() && (
+            <>
+              <TouchableOpacity
+                style={styles.actionBtn}
+                onPress={handleRestorePurchases}
+                disabled={restoring}
+                activeOpacity={0.85}
+              >
+                {restoring ? (
+                  <ActivityIndicator color={COLORS.green} size="small" />
+                ) : (
+                  <Text style={styles.actionBtnText}>{t('settings_restore_purchases')}</Text>
+                )}
+              </TouchableOpacity>
+              {premium && (
+                <TouchableOpacity
+                  style={[styles.actionBtn, styles.actionBtnSecondary]}
+                  onPress={openManageSubscription}
+                  activeOpacity={0.85}
+                >
+                  <Text style={styles.actionBtnTextSecondary}>{t('settings_manage_subscription')}</Text>
+                </TouchableOpacity>
+              )}
+            </>
+          )}
         </View>
+
+        {__DEV__ && (
+          <View style={styles.card}>
+            <Text style={styles.cardTitle}>{t('settings_premium_test')}</Text>
+            <Text style={styles.cardDesc}>{t('settings_premium_test_desc')}</Text>
+            <View style={styles.rowItem}>
+              <Text style={styles.rowLabel}>
+                {premiumOn ? t('premium_active') : t('premium_inactive')}
+              </Text>
+              <TouchableOpacity
+                style={[styles.premiumToggle, premiumOn && styles.premiumToggleOn]}
+                onPress={handlePremiumToggle}
+              >
+                <Text style={[styles.premiumToggleText, premiumOn && styles.premiumToggleTextOn]}>
+                  {premiumOn ? t('premium_test_lock') : t('premium_test_unlock')}
+                </Text>
+              </TouchableOpacity>
+            </View>
+          </View>
+        )}
 
         <View style={styles.card}>
           <View style={styles.rowItem}>
@@ -273,6 +339,32 @@ const styles = StyleSheet.create({
   },
   premiumToggleTextOn: {
     color: COLORS.green,
+  },
+  actionBtn: {
+    backgroundColor: COLORS.green + '12',
+    borderRadius: RADIUS.md,
+    paddingVertical: SPACING.md,
+    paddingHorizontal: SPACING.md,
+    alignItems: 'center',
+    marginTop: SPACING.sm,
+    borderWidth: 1,
+    borderColor: COLORS.green + '30',
+    minHeight: 44,
+    justifyContent: 'center',
+  },
+  actionBtnSecondary: {
+    backgroundColor: COLORS.bg,
+    borderColor: COLORS.border,
+  },
+  actionBtnText: {
+    fontFamily: FONTS.sansSemiBold,
+    fontSize: 14,
+    color: COLORS.green,
+  },
+  actionBtnTextSecondary: {
+    fontFamily: FONTS.sansSemiBold,
+    fontSize: 14,
+    color: COLORS.textSecondary,
   },
   linkRow: {
     flexDirection: 'row',

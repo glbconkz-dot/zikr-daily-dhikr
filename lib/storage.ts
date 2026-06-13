@@ -462,6 +462,7 @@ export function formatDuration(seconds: number, t: (key: string) => string): str
 
 // ── Premium ───────────────────────────────────────────────
 
+/** Cached premium flag — synced from RevenueCat entitlement, not a manual source of truth. */
 export function isPremiumSync(): boolean {
   return persistGetSync(KEYS.PREMIUM) === 'true';
 }

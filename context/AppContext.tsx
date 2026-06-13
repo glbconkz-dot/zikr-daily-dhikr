@@ -24,6 +24,18 @@ import {
   DayStats,
 } from '@/lib/storage';
 import {
+  attachCustomerInfoListener,
+  fetchPremiumStatus,
+  hasPremiumEntitlement,
+  initializeRevenueCat,
+  isNativeStoreSupported,
+  mapPurchaseError,
+  purchasePlan,
+  restorePurchases,
+  SubscriptionPlan,
+  PurchaseErrorCode,
+} from '@/lib/revenuecat';
+import {
   getCustomTasbihList,
   getTasbihSessions,
   getTasbihStats,
@@ -59,7 +71,10 @@ interface AppState {
   applyTasbihStats: (stats: TasbihStoredStats) => void;
   refreshAll: () => Promise<void>;
   refreshPremium: () => Promise<void>;
+  /** Dev-only manual premium toggle (Expo Go / local testing). */
   togglePremium: (enabled: boolean) => Promise<void>;
+  purchaseSubscription: (plan: SubscriptionPlan) => Promise<PurchaseErrorCode | null>;
+  restorePremiumPurchases: () => Promise<{ restored: boolean; error: PurchaseErrorCode | null }>;
   toggleHaptics: (enabled: boolean) => Promise<void>;
   applyStats: (stats: StoredStats) => void;
 }
@@ -174,21 +189,68 @@ export function AppProvider({ children }: { children: ReactNode }) {
     setTasbihStats(next);
   }, []);
 
-  const refreshPremium = useCallback(async () => {
-    if (Date.now() - lastPremiumToggleAt.current < 3000) return;
-    try {
-      const prem = await isPremium();
-      setPremiumState(prem);
-    } catch {
-      setPremiumState(false);
-    }
+  const applyPremiumStatus = useCallback(async (active: boolean) => {
+    setPremiumState(active);
+    await setPremium(active);
   }, []);
 
+  const syncPremiumFromStore = useCallback(async () => {
+    if (isNativeStoreSupported()) {
+      try {
+        await initializeRevenueCat();
+        const active = await fetchPremiumStatus();
+        await applyPremiumStatus(active);
+        return;
+      } catch {
+        const cached = await isPremium();
+        setPremiumState(cached);
+        return;
+      }
+    }
+
+    if (__DEV__) {
+      const cached = await isPremium();
+      setPremiumState(cached);
+      return;
+    }
+
+    await applyPremiumStatus(false);
+  }, [applyPremiumStatus]);
+
+  const refreshPremium = useCallback(async () => {
+    if (Date.now() - lastPremiumToggleAt.current < 3000) return;
+    await syncPremiumFromStore();
+  }, [syncPremiumFromStore]);
+
   const togglePremium = useCallback(async (enabled: boolean) => {
+    if (!__DEV__) return;
     lastPremiumToggleAt.current = Date.now();
-    setPremiumState(enabled);
-    await setPremium(enabled);
-  }, []);
+    await applyPremiumStatus(enabled);
+  }, [applyPremiumStatus]);
+
+  const purchaseSubscription = useCallback(async (plan: SubscriptionPlan) => {
+    try {
+      const info = await purchasePlan(plan);
+      lastPremiumToggleAt.current = Date.now();
+      await applyPremiumStatus(hasPremiumEntitlement(info));
+      return null;
+    } catch (error) {
+      return mapPurchaseError(error);
+    }
+  }, [applyPremiumStatus]);
+
+  const restorePremiumPurchases = useCallback(async () => {
+    try {
+      const info = await restorePurchases();
+      const active = hasPremiumEntitlement(info);
+      lastPremiumToggleAt.current = Date.now();
+      await applyPremiumStatus(active);
+      return { restored: active, error: null };
+    } catch (error) {
+      const code = mapPurchaseError(error);
+      return { restored: false, error: code === 'cancelled' ? 'restore_failed' : code };
+    }
+  }, [applyPremiumStatus]);
 
   const toggleHaptics = useCallback(async (enabled: boolean) => {
     lastHapticsToggleAt.current = Date.now();
@@ -198,7 +260,7 @@ export function AppProvider({ children }: { children: ReactNode }) {
 
   const refreshAll = useCallback(async () => {
     try {
-      const [s, f, pp, st, prem, haptics, ct, ts, tstats] = await Promise.all([
+      const [s, f, pp, st, cachedPremium, haptics, ct, ts, tstats] = await Promise.all([
         getSessions(),
         getFavorites(),
         getProgramsProgress(),
@@ -213,16 +275,26 @@ export function AppProvider({ children }: { children: ReactNode }) {
       setFavorites(f);
       setProgramsProgress(pp);
       setStats(st);
-      setPremiumState(prem);
+      setPremiumState(cachedPremium);
       setHapticsEnabledState(haptics);
       setCustomTasbih(ct);
       setTasbihSessions(ts);
       setTasbihStats(tstats);
       setError(null);
+      await syncPremiumFromStore();
     } catch {
       setError('error_load_data');
     }
-  }, []);
+  }, [syncPremiumFromStore]);
+
+  useEffect(() => {
+    if (!isNativeStoreSupported()) return;
+
+    void initializeRevenueCat();
+    attachCustomerInfoListener((info) => {
+      void applyPremiumStatus(hasPremiumEntitlement(info));
+    });
+  }, [applyPremiumStatus]);
 
   useEffect(() => {
     (async () => {
@@ -267,6 +339,8 @@ export function AppProvider({ children }: { children: ReactNode }) {
         refreshAll,
         refreshPremium,
         togglePremium,
+        purchaseSubscription,
+        restorePremiumPurchases,
         toggleHaptics,
         applyStats,
       }}
