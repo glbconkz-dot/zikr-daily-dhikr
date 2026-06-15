@@ -49,6 +49,7 @@ export default function ProgramCard({
         {isPremiumContent && (
           <PremiumBadge style={styles.premiumBadgePos} compact />
         )}
+        {locked && <View style={styles.lockedBackdrop} pointerEvents="none" />}
         {locked && (
           <View style={styles.lockOverlay}>
             <Lock size={14} color={COLORS.cream} strokeWidth={2} />
@@ -70,8 +71,8 @@ export default function ProgramCard({
           )}
         </View>
 
-        <Text style={styles.title}>{title}</Text>
-        <Text style={styles.desc} numberOfLines={2}>
+        <Text style={[styles.title, locked && styles.lockedTextDim]}>{title}</Text>
+        <Text style={[styles.desc, locked && styles.lockedTextDim]} numberOfLines={2}>
           {description}
         </Text>
 
@@ -106,6 +107,16 @@ const styles = StyleSheet.create({
     borderRadius: RADIUS.xl,
     padding: SPACING.lg,
     minHeight: 200,
+    overflow: 'hidden',
+  },
+  lockedBackdrop: {
+    ...StyleSheet.absoluteFillObject,
+    backgroundColor: 'rgba(15, 35, 24, 0.82)',
+    zIndex: 1,
+    borderRadius: RADIUS.xl,
+  },
+  lockedTextDim: {
+    opacity: 0.35,
   },
   premiumBadgePos: {
     position: 'absolute',
@@ -115,16 +126,19 @@ const styles = StyleSheet.create({
   },
   lockOverlay: {
     position: 'absolute',
-    top: SPACING.md,
-    left: SPACING.md,
+    top: '50%',
+    left: '50%',
+    transform: [{ translateX: -60 }, { translateY: -14 }],
     flexDirection: 'row',
     alignItems: 'center',
-    gap: 5,
-    backgroundColor: 'rgba(0,0,0,0.5)',
+    gap: 6,
+    backgroundColor: 'rgba(15, 35, 24, 0.92)',
     borderRadius: RADIUS.full,
-    paddingHorizontal: 10,
-    paddingVertical: 5,
-    zIndex: 2,
+    paddingHorizontal: 14,
+    paddingVertical: 8,
+    zIndex: 3,
+    borderWidth: 1,
+    borderColor: COLORS.gold + '50',
   },
   lockText: {
     fontFamily: FONTS.sansBold,

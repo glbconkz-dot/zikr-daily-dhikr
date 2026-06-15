@@ -184,7 +184,7 @@ const styles = StyleSheet.create({
     marginBottom: SPACING.sm,
   },
   blurredText: {
-    opacity: 0.15,
+    opacity: 0.06,
   },
   progressContainer: {
     flexDirection: 'row',
@@ -259,7 +259,7 @@ const styles = StyleSheet.create({
     left: 0,
     right: 0,
     bottom: 0,
-    backgroundColor: 'rgba(15,35,24,0.55)',
+    backgroundColor: 'rgba(15,35,24,0.85)',
     alignItems: 'center',
     justifyContent: 'center',
     borderRadius: RADIUS.lg,

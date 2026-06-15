@@ -5,3 +5,6 @@ export const PRODUCT_YEARLY_ID = 'zikr_premium_yearly';
 
 export const FALLBACK_MONTHLY_PRICE = '$2.99';
 export const FALLBACK_YEARLY_PRICE = '$19.99';
+
+/** Set false before store release — hides manual premium test toggle. */
+export const ENABLE_PREMIUM_TEST_TOGGLE = true;

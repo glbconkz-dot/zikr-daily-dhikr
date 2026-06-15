@@ -14,6 +14,7 @@ import { useFocusEffect } from 'expo-router';
 import { COLORS, FONTS, RADIUS, SHADOW, SPACING } from '@/constants/theme';
 import { useApp } from '@/context/AppContext';
 import { useLanguage, getDhikrTitle } from '@/context/LanguageContext';
+import { useTabBarScrollPadding } from '@/lib/tab-bar';
 import { formatDuration } from '@/lib/storage';
 import { getMostUsedTasbih } from '@/lib/tasbih-storage';
 import { getMostUsedDhikrFromSessions, mergeMostUsed } from '@/lib/stats-helpers';
@@ -37,6 +38,7 @@ export default function StatisticsScreen() {
     refreshCustomTasbih,
   } = useApp();
   const { t, language } = useLanguage();
+  const tabBarPadding = useTabBarScrollPadding();
   const [period, setPeriod] = useState<Period>('today');
 
   useFocusEffect(
@@ -97,7 +99,7 @@ export default function StatisticsScreen() {
       <ScrollView
         style={styles.scroll}
         showsVerticalScrollIndicator={false}
-        contentContainerStyle={styles.content}
+        contentContainerStyle={[styles.content, { paddingBottom: tabBarPadding }]}
       >
         <View style={styles.header}>
           <Text style={styles.pageTitle}>{t('your_journey')}</Text>

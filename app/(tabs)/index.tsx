@@ -20,6 +20,7 @@ import { Settings, Sparkles } from 'lucide-react-native';
 import { isDhikrLocked, isProgramLocked, isPremiumDhikrContent } from '@/lib/premium';
 import { getProgramTitle, getProgramDescription } from '@/data/programs-i18n';
 import ProgramCard from '@/components/ProgramCard';
+import { useTabBarScrollPadding } from '@/lib/tab-bar';
 
 export default function HomeScreen() {
   const {
@@ -35,6 +36,7 @@ export default function HomeScreen() {
     refreshPremium,
   } = useApp();
   const { t, language } = useLanguage();
+  const tabBarPadding = useTabBarScrollPadding();
 
   useFocusEffect(
     useCallback(() => {
@@ -68,7 +70,7 @@ export default function HomeScreen() {
       <ScrollView
         style={styles.scroll}
         showsVerticalScrollIndicator={false}
-        contentContainerStyle={styles.content}
+        contentContainerStyle={[styles.content, { paddingBottom: tabBarPadding }]}
       >
         {/* Header */}
         <View style={styles.header}>

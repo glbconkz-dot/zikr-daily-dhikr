@@ -1114,7 +1114,7 @@ export const DHIKR_EXPANDED: Dhikr[] = [
   {
     id: 'tefekkur_001',
     category: 'huzur-sukunet',
-    title: 'Subhanallah',
+    title: 'Sübhanallah',
     titleEn: 'Subhanallah',
     titleRu: 'Subhanallah',
     titleAr: 'سُبْحَانَ اللَّهِ',
@@ -1129,7 +1129,7 @@ export const DHIKR_EXPANDED: Dhikr[] = [
   {
     id: 'tefekkur_002',
     category: 'huzur-sukunet',
-    title: 'Alhamdulillah',
+    title: 'Elhamdülillah',
     titleEn: 'Alhamdulillah',
     titleRu: 'Alhamdulillah',
     titleAr: 'الْحَمْدُ لِلَّهِ',
@@ -1144,7 +1144,7 @@ export const DHIKR_EXPANDED: Dhikr[] = [
   {
     id: 'tefekkur_003',
     category: 'huzur-sukunet',
-    title: 'Allahu Akbar',
+    title: 'Allahu ekber',
     titleEn: 'Allahu Akbar',
     titleRu: 'Allahu Akbar',
     titleAr: 'اللَّهُ أَكْبَرُ',
@@ -1159,7 +1159,7 @@ export const DHIKR_EXPANDED: Dhikr[] = [
   {
     id: 'tefekkur_004',
     category: 'huzur-sukunet',
-    title: 'La ilaha illallah',
+    title: 'La ilahe illallah',
     titleEn: 'La ilaha illallah',
     titleRu: 'La ilaha illallah',
     titleAr: 'لَا إِلَٰهَ إِلَّا اللَّهُ',

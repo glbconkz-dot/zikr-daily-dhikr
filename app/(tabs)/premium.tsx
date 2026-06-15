@@ -22,9 +22,11 @@ import {
   SubscriptionPlan,
 } from '@/lib/revenuecat';
 import { Crown, CheckCircle, CloudUpload, BarChart3, Infinity, Sparkles, Lock } from 'lucide-react-native';
+import { useTabBarScrollPadding } from '@/lib/tab-bar';
 
 export default function PremiumScreen() {
   const { t } = useLanguage();
+  const tabBarPadding = useTabBarScrollPadding();
   const { premium, purchaseSubscription, restorePremiumPurchases, togglePremium } = useApp();
   const [selectedPlan, setSelectedPlan] = useState<SubscriptionPlan>('yearly');
   const [monthlyPrice, setMonthlyPrice] = useState(getFallbackPrice('monthly'));
@@ -170,7 +172,7 @@ export default function PremiumScreen() {
       <ScrollView
         style={styles.scroll}
         showsVerticalScrollIndicator={false}
-        contentContainerStyle={styles.content}
+        contentContainerStyle={[styles.content, { paddingBottom: tabBarPadding }]}
       >
         <LinearGradient
           colors={[COLORS.green, COLORS.bgDeep, '#071510']}

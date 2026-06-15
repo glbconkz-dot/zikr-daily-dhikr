@@ -19,6 +19,7 @@ import { useApp } from '@/context/AppContext';
 import { LANGUAGE_OPTIONS } from '@/lib/languages';
 import { isNativeStoreSupported } from '@/lib/revenuecat';
 import { ArrowLeft, CheckCircle, ExternalLink } from 'lucide-react-native';
+import { ENABLE_PREMIUM_TEST_TOGGLE } from '@/lib/premium-config';
 import { triggerTapHaptic } from '@/lib/haptics';
 
 const PRIVACY_URL = 'https://zikr.app/privacy';
@@ -48,7 +49,7 @@ export default function SettingsScreen() {
   };
 
   const handlePremiumToggle = () => {
-    if (!__DEV__) return;
+    if (!ENABLE_PREMIUM_TEST_TOGGLE) return;
     const next = !premiumOn;
     setPremiumOn(next);
     triggerTapHaptic(true);
@@ -180,7 +181,7 @@ export default function SettingsScreen() {
           )}
         </View>
 
-        {__DEV__ && (
+        {ENABLE_PREMIUM_TEST_TOGGLE && (
           <View style={styles.card}>
             <Text style={styles.cardTitle}>{t('settings_premium_test')}</Text>
             <Text style={styles.cardDesc}>{t('settings_premium_test_desc')}</Text>

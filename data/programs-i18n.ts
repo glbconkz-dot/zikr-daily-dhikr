@@ -115,6 +115,138 @@ export const PROGRAMS_I18N: Record<string, Record<Language, ProgramI18n>> = {
     ar: { title: 'برنامج الانضباط الروحي لمدة 40 يوماً', description: '40 يوماً من النية والذكر المستمر.' },
     kk: { title: '40 күндік рухани тәртіп бағдарламасы', description: '40 күн ниет пен тұрақты зікір.' },
   },
+  prog_protection_14: {
+    tr: {
+      title: '14 Günlük Korunma Programı',
+      description: 'Ayetel Kürsi, Muavvizeteyn ve korunma dualarıyla 14 günlük manevi korunma yolculuğu.',
+    },
+    en: {
+      title: '14-Day Protection Program',
+      description: 'Fourteen days of Ayat al-Kursi, Muawwidhatain, and protection duas.',
+    },
+    ru: {
+      title: '14-дневная программа защиты',
+      description: '14 дней Аятуль-Курси, Муаввизатайн и защитных дуа.',
+    },
+    ar: {
+      title: 'برنامج الحماية لمدة 14 يوماً',
+      description: '14 يوماً من آية الكرسي والمعوذتين وأدعية الحماية.',
+    },
+    kk: {
+      title: '14 күндік қорғану бағдарламасы',
+      description: 'Аят әл-Күрсі, Муаввизатайн және қорғану дұғаларымен 14 күн.',
+    },
+  },
+  prog_morning_evening_21: {
+    tr: {
+      title: '21 Günlük Sabah-Akşam Zikirleri',
+      description: '21 gün sabah ve akşam zikirleriyle istikrarlı manevi korunma ve bereket.',
+    },
+    en: {
+      title: '21-Day Morning & Evening Adhkar',
+      description: 'Twenty-one days of morning and evening remembrance for protection and barakah.',
+    },
+    ru: {
+      title: '21-дневная программа утренних и вечерних зикров',
+      description: '21 день утреннего и вечернего поминания для защиты и благодати.',
+    },
+    ar: {
+      title: 'برنامج أذكار الصباح والمساء لمدة 21 يوماً',
+      description: '21 يوماً من أذكار الصباح والمساء للحماية والبركة.',
+    },
+    kk: {
+      title: '21 күндік таңертең-кеш зікірлері',
+      description: '21 күн таңертең және кеш зікірлерімен қорғану және береке.',
+    },
+  },
+  prog_love_harmony_14: {
+    tr: {
+      title: '14 Günlük Sevgi ve Huzur Programı',
+      description: 'Aile huzuru, gönül birliği ve hayırlı ilişkiler için 14 günlük dua ve zikir programı.',
+    },
+    en: {
+      title: '14-Day Love & Harmony Program',
+      description: 'Fourteen days of duas for family harmony and righteous relationships.',
+    },
+    ru: {
+      title: '14-дневная программа любви и гармонии',
+      description: '14 дней дуа для семейного мира и праведных отношений.',
+    },
+    ar: {
+      title: 'برنامج المحبة والسكينة لمدة 14 يوماً',
+      description: '14 يوماً من الأدعية للوئام الأسري والعلاقات الطيبة.',
+    },
+    kk: {
+      title: '14 күндік махаббат пен тыныштық бағдарламасы',
+      description: 'Отбасы тыныштығы мен жақсы қарым-қатынас үшін 14 күн дұға мен зікір.',
+    },
+  },
+  prog_opportunities_21: {
+    tr: {
+      title: '21 Günlük Hayırlı Kapılar Programı',
+      description: 'İş, ev ve hayırlı fırsatlar için 21 günlük dua ve zikir yolculuğu.',
+    },
+    en: {
+      title: '21-Day Open Doors Program',
+      description: 'Twenty-one days of duas for work, home, and righteous opportunities.',
+    },
+    ru: {
+      title: '21-дневная программа благих возможностей',
+      description: '21 день дуа для работы, дома и праведных возможностей.',
+    },
+    ar: {
+      title: 'برنامج الأبواب الطيبة لمدة 21 يوماً',
+      description: '21 يوماً من الأدعية للعمل والبيت والفرص الطيبة.',
+    },
+    kk: {
+      title: '21 күндік жақсы есіктер бағдарламасы',
+      description: 'Жұмыс, үй және жақсы мүмкіндіктер үшін 21 күн дұға мен зікір.',
+    },
+  },
+  prog_forgiveness_10: {
+    tr: {
+      title: '10 Günlük Af ve Tövbe Programı',
+      description: 'İstiğfar, af ve gönül yumuşaklığı için 10 günlük odaklı zikir programı.',
+    },
+    en: {
+      title: '10-Day Forgiveness & Tawbah',
+      description: 'Ten days focused on istighfar, forgiveness, and softening the heart.',
+    },
+    ru: {
+      title: '10-дневная программа прощения и покаяния',
+      description: '10 дней истигфара, прощения и смягчения сердца.',
+    },
+    ar: {
+      title: 'برنامج المغفرة والتوبة لمدة 10 أيام',
+      description: '10 أيام من الاستغفار والمغفرة ولين القلب.',
+    },
+    kk: {
+      title: '10 күндік кешірім және тәубе бағдарламасы',
+      description: '10 күн истигфар, кешірім және жүрек жұмсартуға бағытталған зікір.',
+    },
+  },
+  prog_patience_14: {
+    tr: {
+      title: '14 Günlük Sabır Programı',
+      description: 'Hayatın sınavlarında sabır, dinginlik ve iç güç için 14 günlük zikir yolculuğu.',
+    },
+    en: {
+      title: '14-Day Patience & Sabr Program',
+      description: 'Fourteen days of dhikr for patience, inner strength, and calm.',
+    },
+    ru: {
+      title: '14-дневная программа терпения',
+      description: '14 дней зикра для терпения, внутренней силы и спокойствия.',
+    },
+    ar: {
+      title: 'برنامج الصبر لمدة 14 يوماً',
+      description: '14 يوماً من الذكر للصبر والقوة الداخلية والسكينة.',
+    },
+    kk: {
+      title: '14 күндік сабыр бағдарламасы',
+      description: 'Сабыр, ішкі күш және тыныштық үшін 14 күн зікір жолы.',
+    },
+  },
 };
 
 export function getProgramTitle(programId: string, language: Language): string {

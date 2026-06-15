@@ -39,6 +39,21 @@ const NIYET_DHIKR = [
   'niyet_006', 'niyet_007', 'niyet_008', 'niyet_009', 'niyet_010',
 ];
 
+const KORUNMA_DHIKR = [
+  'korunma_001', 'korunma_002', 'korunma_003', 'korunma_004', 'korunma_005',
+  'korunma_006', 'korunma_007',
+];
+
+const ILISKI_DHIKR = [
+  'iliski_001', 'iliski_002', 'iliski_003', 'iliski_004', 'iliski_005',
+  'iliski_006', 'iliski_007',
+];
+
+const EV_IS_DHIKR = [
+  'ev_is_001', 'ev_is_002', 'ev_is_003', 'ev_is_004', 'ev_is_005',
+  'ev_is_006', 'ev_is_007',
+];
+
 function buildDays(duration: number, dhikrPool: string[]): ProgramDayAssignment[] {
   return Array.from({ length: duration }, (_, i) => {
     const day = i + 1;
@@ -129,6 +144,72 @@ export const PROGRAM_LIST: ProgramDefinition[] = [
     premium: true,
     sort_order: 7,
     days: buildDays(40, [...NIYET_DHIKR, ...HUZUR_DHIKR]),
+  },
+  {
+    id: 'prog_protection_14',
+    title: '14-Day Protection Program',
+    description:
+      'Fourteen days of Ayat al-Kursi, Muawwidhatain, and protection duas for spiritual and daily safety.',
+    duration_days: 14,
+    category: 'protection',
+    premium: true,
+    sort_order: 8,
+    days: buildDays(14, KORUNMA_DHIKR),
+  },
+  {
+    id: 'prog_morning_evening_21',
+    title: '21-Day Morning & Evening Adhkar',
+    description:
+      'Twenty-one days of morning and evening remembrance for consistent spiritual protection and barakah.',
+    duration_days: 21,
+    category: 'protection',
+    premium: true,
+    sort_order: 9,
+    days: buildDays(21, [...KORUNMA_DHIKR, ...HUZUR_DHIKR]),
+  },
+  {
+    id: 'prog_love_harmony_14',
+    title: '14-Day Love & Harmony Program',
+    description:
+      'Fourteen days of duas and Esma for family harmony, heartfelt connection, and righteous relationships.',
+    duration_days: 14,
+    category: 'peace',
+    premium: true,
+    sort_order: 10,
+    days: buildDays(14, ILISKI_DHIKR),
+  },
+  {
+    id: 'prog_opportunities_21',
+    title: '21-Day Open Doors Program',
+    description:
+      'Twenty-one days of duas for work, home, and righteous opportunities — opening hayırlı kapılar.',
+    duration_days: 21,
+    category: 'rizq',
+    premium: true,
+    sort_order: 11,
+    days: buildDays(21, EV_IS_DHIKR),
+  },
+  {
+    id: 'prog_forgiveness_10',
+    title: '10-Day Forgiveness & Tawbah',
+    description:
+      'Ten days focused on istighfar, forgiveness, and softening the heart through structured dhikr.',
+    duration_days: 10,
+    category: 'healing',
+    premium: true,
+    sort_order: 12,
+    days: buildDays(10, [...HUZUR_DHIKR, ...NIYET_DHIKR]),
+  },
+  {
+    id: 'prog_patience_14',
+    title: '14-Day Patience & Sabr Program',
+    description:
+      'Fourteen days of dhikr for patience, inner strength, and calm through life\'s trials.',
+    duration_days: 14,
+    category: 'peace',
+    premium: true,
+    sort_order: 13,
+    days: buildDays(14, [...HUZUR_DHIKR, ...ESMA_DHIKR]),
   },
 ];
 

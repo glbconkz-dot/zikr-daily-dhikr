@@ -18,6 +18,7 @@ import { CATEGORIES } from '@/data/categories';
 import CategoryCard from '@/components/CategoryCard';
 import DhikrCard from '@/components/DhikrCard';
 import { Search, X } from 'lucide-react-native';
+import { useTabBarScrollPadding } from '@/lib/tab-bar';
 
 export default function CategoriesScreen() {
   const { dhikrList, sessions, favorites, premium, refreshPremium } = useApp();
@@ -28,6 +29,7 @@ export default function CategoriesScreen() {
     }, [refreshPremium])
   );
   const { t, language } = useLanguage();
+  const tabBarPadding = useTabBarScrollPadding();
   const params = useLocalSearchParams<{ cat?: string }>();
   const [selectedCat, setSelectedCat] = useState<string | null>(params.cat ?? null);
   const [query, setQuery] = useState('');
@@ -66,7 +68,7 @@ export default function CategoriesScreen() {
       <ScrollView
         style={styles.scroll}
         showsVerticalScrollIndicator={false}
-        contentContainerStyle={styles.content}
+        contentContainerStyle={[styles.content, { paddingBottom: tabBarPadding }]}
         stickyHeaderIndices={[0]}
       >
         {/* Sticky Header */}

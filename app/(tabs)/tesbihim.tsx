@@ -12,28 +12,22 @@ import {
   Modal,
 } from 'react-native';
 import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context';
-import { useFocusEffect } from 'expo-router';
+import { router, useFocusEffect } from 'expo-router';
 import { COLORS, FONTS, RADIUS, SHADOW, SPACING } from '@/constants/theme';
 import { useLanguage } from '@/context/LanguageContext';
 import { useApp } from '@/context/AppContext';
 import { createCustomTasbih, deleteCustomTasbih } from '@/lib/tasbih-storage';
+import { FREE_NAMAZ_TESBIH } from '@/lib/tesbih-presets';
+import { useTabBarScrollPadding } from '@/lib/tab-bar';
 import TasbihCounter from '@/components/TasbihCounter';
 import ScreenErrorBoundary from '@/components/ScreenErrorBoundary';
 import { CustomTasbih } from '@/types';
-import { Plus, CircleDot, Trash2 } from 'lucide-react-native';
-
-const QUICK_PRESETS = [
-  'Allah',
-  'Subhanallah',
-  'Alhamdulillah',
-  'Astaghfirullah',
-  'La ilaha illallah',
-  'Salawat',
-];
+import { Plus, CircleDot, Trash2, Lock, Crown } from 'lucide-react-native';
 
 export default function TesbihimScreen() {
   const { t } = useLanguage();
-  const { customTasbih, tasbihSessions, refreshCustomTasbih, refreshTasbihSessions } = useApp();
+  const { customTasbih, tasbihSessions, premium, refreshCustomTasbih, refreshTasbihSessions } = useApp();
+  const tabBarPadding = useTabBarScrollPadding();
   const [name, setName] = useState('');
   const [target, setTarget] = useState('');
   const [creating, setCreating] = useState(false);
@@ -51,7 +45,16 @@ export default function TesbihimScreen() {
     }, [refreshCustomTasbih, refreshTasbihSessions])
   );
 
-  const startTasbih = async (tasbihName: string, targetStr?: string) => {
+  const openFreeTasbih = (preset: CustomTasbih) => {
+    setActiveTasbih(preset);
+  };
+
+  const startCustomTasbih = async (tasbihName: string, targetStr?: string) => {
+    if (!premium) {
+      router.push('/(tabs)/premium');
+      return;
+    }
+
     const trimmed = tasbihName.trim();
     if (!trimmed) return;
     setCreating(true);
@@ -101,7 +104,10 @@ export default function TesbihimScreen() {
             <Text style={styles.loadingText}>{t('programs_loading')}</Text>
           </View>
         ) : (
-          <ScrollView contentContainerStyle={styles.content} showsVerticalScrollIndicator={false}>
+          <ScrollView
+            contentContainerStyle={[styles.content, { paddingBottom: tabBarPadding }]}
+            showsVerticalScrollIndicator={false}
+          >
             <View style={styles.header}>
               <CircleDot size={22} color={COLORS.green} strokeWidth={1.8} />
               <View>
@@ -127,51 +133,72 @@ export default function TesbihimScreen() {
             )}
 
             <View style={[styles.card, SHADOW.sm]}>
-              <Text style={styles.cardTitle}>{t('tesbih_quick')}</Text>
+              <Text style={styles.cardTitle}>{t('tesbih_namaz_end')}</Text>
+              <Text style={styles.cardDesc}>{t('tesbih_namaz_end_desc')}</Text>
               <View style={styles.presetRow}>
-                {QUICK_PRESETS.map((preset) => (
+                {FREE_NAMAZ_TESBIH.map((preset) => (
                   <TouchableOpacity
-                    key={preset}
+                    key={preset.id}
                     style={styles.presetChip}
-                    onPress={() => startTasbih(preset)}
-                    disabled={creating}
+                    onPress={() => openFreeTasbih(preset)}
                   >
-                    <Text style={styles.presetText}>{preset}</Text>
+                    <Text style={styles.presetText}>{preset.name}</Text>
+                    <Text style={styles.presetTarget}>×{preset.targetCount}</Text>
                   </TouchableOpacity>
                 ))}
               </View>
             </View>
 
-            <View style={[styles.card, SHADOW.sm]}>
-              <Text style={styles.cardTitle}>{t('tesbih_create')}</Text>
+            <View style={[styles.card, SHADOW.sm, !premium && styles.cardLocked]}>
+              <View style={styles.premiumCardHeader}>
+                <Text style={styles.cardTitle}>{t('tesbih_premium_create')}</Text>
+                {!premium && (
+                  <View style={styles.premiumTag}>
+                    <Crown size={12} color={COLORS.goldDark} strokeWidth={2} />
+                    <Text style={styles.premiumTagText}>{t('premium_label')}</Text>
+                  </View>
+                )}
+              </View>
+              {!premium && (
+                <Text style={styles.cardDesc}>{t('tesbih_premium_locked')}</Text>
+              )}
               <Text style={styles.label}>{t('tesbih_name')}</Text>
               <TextInput
-                style={styles.input}
+                style={[styles.input, !premium && styles.inputDisabled]}
                 value={name}
                 onChangeText={setName}
                 placeholder={t('tesbih_name_placeholder')}
                 placeholderTextColor={COLORS.textMuted}
+                editable={premium}
               />
               <Text style={styles.label}>{t('tesbih_target')}</Text>
               <TextInput
-                style={styles.input}
+                style={[styles.input, !premium && styles.inputDisabled]}
                 value={target}
                 onChangeText={setTarget}
                 placeholder={t('tesbih_target_placeholder')}
                 placeholderTextColor={COLORS.textMuted}
                 keyboardType="number-pad"
+                editable={premium}
               />
               <TouchableOpacity
-                style={[styles.createBtn, (!name.trim() || creating) && styles.createBtnDisabled]}
-                onPress={() => startTasbih(name, target)}
-                disabled={!name.trim() || creating}
+                style={[
+                  styles.createBtn,
+                  (!premium || !name.trim() || creating) && styles.createBtnDisabled,
+                ]}
+                onPress={() => (premium ? startCustomTasbih(name, target) : router.push('/(tabs)/premium'))}
+                disabled={creating}
               >
                 {creating ? (
                   <ActivityIndicator size="small" color={COLORS.cream} />
+                ) : !premium ? (
+                  <Lock size={18} color={COLORS.cream} strokeWidth={2} />
                 ) : (
                   <Plus size={18} color={COLORS.cream} strokeWidth={2} />
                 )}
-                <Text style={styles.createBtnText}>{t('tesbih_create')}</Text>
+                <Text style={styles.createBtnText}>
+                  {!premium ? t('premium_upgrade_btn') : t('tesbih_create')}
+                </Text>
               </TouchableOpacity>
             </View>
 
@@ -212,7 +239,6 @@ export default function TesbihimScreen() {
                 );
               })
             )}
-            <View style={{ height: SPACING.xxl }} />
           </ScrollView>
         )}
 
@@ -306,25 +332,65 @@ const styles = StyleSheet.create({
     borderColor: COLORS.border,
     marginBottom: SPACING.lg,
   },
+  cardLocked: {
+    borderColor: COLORS.gold + '40',
+  },
   cardTitle: {
     fontFamily: FONTS.serif,
     fontSize: 18,
     color: COLORS.textPrimary,
+    marginBottom: SPACING.xs,
+  },
+  cardDesc: {
+    fontFamily: FONTS.sans,
+    fontSize: 13,
+    color: COLORS.textMuted,
     marginBottom: SPACING.md,
+    lineHeight: 19,
+  },
+  premiumCardHeader: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    marginBottom: SPACING.xs,
+  },
+  premiumTag: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 4,
+    backgroundColor: COLORS.gold + '20',
+    borderRadius: RADIUS.full,
+    paddingHorizontal: 8,
+    paddingVertical: 4,
+  },
+  premiumTagText: {
+    fontFamily: FONTS.sansBold,
+    fontSize: 10,
+    color: COLORS.goldDark,
   },
   presetRow: { flexDirection: 'row', flexWrap: 'wrap', gap: SPACING.sm },
   presetChip: {
     backgroundColor: COLORS.green + '12',
-    borderRadius: RADIUS.full,
+    borderRadius: RADIUS.lg,
     paddingHorizontal: SPACING.md,
     paddingVertical: SPACING.sm,
     borderWidth: 1,
     borderColor: COLORS.green + '30',
+    minWidth: '30%',
+    flexGrow: 1,
   },
   presetText: {
     fontFamily: FONTS.sansSemiBold,
-    fontSize: 13,
+    fontSize: 14,
     color: COLORS.green,
+    textAlign: 'center',
+  },
+  presetTarget: {
+    fontFamily: FONTS.sans,
+    fontSize: 11,
+    color: COLORS.textMuted,
+    textAlign: 'center',
+    marginTop: 2,
   },
   label: {
     fontFamily: FONTS.sansMedium,
@@ -345,6 +411,10 @@ const styles = StyleSheet.create({
     color: COLORS.textPrimary,
     marginBottom: SPACING.md,
   },
+  inputDisabled: {
+    opacity: 0.55,
+    backgroundColor: COLORS.bg + '80',
+  },
   createBtn: {
     flexDirection: 'row',
     alignItems: 'center',
@@ -354,7 +424,7 @@ const styles = StyleSheet.create({
     borderRadius: RADIUS.lg,
     paddingVertical: 14,
   },
-  createBtnDisabled: { opacity: 0.5 },
+  createBtnDisabled: { opacity: 0.7 },
   createBtnText: {
     fontFamily: FONTS.sansBold,
     fontSize: 15,

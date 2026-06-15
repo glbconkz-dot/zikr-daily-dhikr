@@ -14,9 +14,11 @@ import { useApp } from '@/context/AppContext';
 import { getProgramTitle, getProgramDescription } from '@/data/programs-i18n';
 import { isProgramLocked } from '@/lib/premium';
 import ProgramCard from '@/components/ProgramCard';
+import { useTabBarScrollPadding } from '@/lib/tab-bar';
 
 export default function ProgramsScreen() {
   const { t, language } = useLanguage();
+  const tabBarPadding = useTabBarScrollPadding();
   const { programs, programsProgress, premium, refreshProgramsProgress, refreshPremium } = useApp();
 
   useFocusEffect(
@@ -31,7 +33,7 @@ export default function ProgramsScreen() {
       <ScrollView
         style={styles.scroll}
         showsVerticalScrollIndicator={false}
-        contentContainerStyle={styles.content}
+        contentContainerStyle={[styles.content, { paddingBottom: tabBarPadding }]}
       >
         <View style={styles.header}>
           <Text style={styles.pageTitle}>{t('spiritual_programs')}</Text>

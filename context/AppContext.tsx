@@ -35,6 +35,7 @@ import {
   SubscriptionPlan,
   PurchaseErrorCode,
 } from '@/lib/revenuecat';
+import { ENABLE_PREMIUM_TEST_TOGGLE } from '@/lib/premium-config';
 import {
   getCustomTasbihList,
   getTasbihSessions,
@@ -223,7 +224,7 @@ export function AppProvider({ children }: { children: ReactNode }) {
   }, [syncPremiumFromStore]);
 
   const togglePremium = useCallback(async (enabled: boolean) => {
-    if (!__DEV__) return;
+    if (!ENABLE_PREMIUM_TEST_TOGGLE) return;
     lastPremiumToggleAt.current = Date.now();
     await applyPremiumStatus(enabled);
   }, [applyPremiumStatus]);

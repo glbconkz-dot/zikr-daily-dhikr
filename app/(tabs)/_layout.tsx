@@ -2,10 +2,15 @@ import { Tabs } from 'expo-router';
 import { Home, BookOpen, BarChart3, Crown, Compass, CircleDot } from 'lucide-react-native';
 import { COLORS, FONTS } from '@/constants/theme';
 import { Platform } from 'react-native';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { useLanguage } from '@/context/LanguageContext';
+import { getTabBarBottomInset, getTabBarHeight } from '@/lib/tab-bar';
 
 export default function TabLayout() {
   const { t } = useLanguage();
+  const insets = useSafeAreaInsets();
+  const tabBarHeight = getTabBarHeight(insets);
+  const bottomInset = getTabBarBottomInset(insets);
 
   return (
     <Tabs
@@ -15,11 +20,14 @@ export default function TabLayout() {
           backgroundColor: COLORS.bgCard,
           borderTopColor: COLORS.border,
           borderTopWidth: 1,
-          height: Platform.OS === 'ios' ? 88 : 64,
-          paddingBottom: Platform.OS === 'ios' ? 28 : 8,
+          height: tabBarHeight,
+          paddingBottom: bottomInset,
           paddingTop: 8,
-          elevation: 0,
-          shadowOpacity: 0,
+          elevation: 8,
+          shadowColor: '#000',
+          shadowOffset: { width: 0, height: -2 },
+          shadowOpacity: 0.08,
+          shadowRadius: 4,
         },
         tabBarActiveTintColor: COLORS.green,
         tabBarInactiveTintColor: COLORS.textMuted,
@@ -27,6 +35,10 @@ export default function TabLayout() {
           fontFamily: FONTS.sansMedium,
           fontSize: 10,
           letterSpacing: 0.2,
+          marginBottom: Platform.OS === 'android' ? 2 : 0,
+        },
+        tabBarItemStyle: {
+          paddingTop: 4,
         },
       }}
     >
