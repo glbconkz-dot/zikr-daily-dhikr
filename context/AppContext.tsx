@@ -196,6 +196,20 @@ export function AppProvider({ children }: { children: ReactNode }) {
   }, []);
 
   const syncPremiumFromStore = useCallback(async () => {
+    if (ENABLE_PREMIUM_TEST_TOGGLE) {
+      const cached = await isPremium();
+      setPremiumState(cached);
+      if (!isNativeStoreSupported()) return;
+      try {
+        await initializeRevenueCat();
+        const active = await fetchPremiumStatus();
+        if (active) await applyPremiumStatus(true);
+      } catch {
+        // Keep manual test toggle from cache.
+      }
+      return;
+    }
+
     if (isNativeStoreSupported()) {
       try {
         await initializeRevenueCat();

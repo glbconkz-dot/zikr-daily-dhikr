@@ -247,7 +247,7 @@ const translations: Record<Language, Record<string, string>> = {
     settings_haptics_on: 'Açık',
     settings_haptics_off: 'Kapalı',
     settings_premium_test: 'Premium Test Modu',
-    settings_premium_test_desc: 'Kilitli içerikleri test etmek için açın (geliştirme)',
+    settings_premium_test_desc: 'Test için premium içeriği aç/kapa. Yayın öncesi kapatılacak.',
     premium_active: 'Premium Aktif',
     premium_inactive: 'Ücretsiz Sürüm',
     premium_test_unlock: 'Test için Premium Aç',

@@ -9,6 +9,7 @@ import {
   Platform,
   ActivityIndicator,
   Alert,
+  Switch,
 } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 import { COLORS, FONTS, RADIUS, SHADOW, SPACING } from '@/constants/theme';
@@ -23,6 +24,7 @@ import {
 } from '@/lib/revenuecat';
 import { Crown, CheckCircle, CloudUpload, BarChart3, Infinity, Sparkles, Lock } from 'lucide-react-native';
 import { useTabBarScrollPadding } from '@/lib/tab-bar';
+import { ENABLE_PREMIUM_TEST_TOGGLE } from '@/lib/premium-config';
 
 export default function PremiumScreen() {
   const { t } = useLanguage();
@@ -69,6 +71,11 @@ export default function PremiumScreen() {
 
   const handleSubscribe = async () => {
     if (premium || purchasing) return;
+
+    if (ENABLE_PREMIUM_TEST_TOGGLE) {
+      await togglePremium(true);
+      return;
+    }
 
     if (!isNativeStoreSupported()) {
       if (__DEV__) {
@@ -191,6 +198,27 @@ export default function PremiumScreen() {
           <Text style={styles.heroSubtitle}>{t('premium_subtitle')}</Text>
           <Text style={styles.heroArabic}>بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ</Text>
         </LinearGradient>
+
+        {ENABLE_PREMIUM_TEST_TOGGLE && (
+          <View style={[styles.testCard, SHADOW.sm]}>
+            <View style={styles.testCardRow}>
+              <View style={styles.testCardText}>
+                <Text style={styles.testCardTitle}>{t('settings_premium_test')}</Text>
+                <Text style={styles.testCardDesc}>{t('settings_premium_test_desc')}</Text>
+              </View>
+              <Switch
+                value={premium}
+                onValueChange={(value) => void togglePremium(value)}
+                trackColor={{ false: COLORS.border, true: COLORS.green + '99' }}
+                thumbColor={premium ? COLORS.gold : COLORS.bgCard}
+                ios_backgroundColor={COLORS.border}
+              />
+            </View>
+            <Text style={[styles.testCardStatus, premium && styles.testCardStatusOn]}>
+              {premium ? t('premium_active') : t('premium_inactive')}
+            </Text>
+          </View>
+        )}
 
         <View style={styles.section}>
           <Text style={styles.sectionTitle}>{t('what_you_get')}</Text>
@@ -341,6 +369,43 @@ const styles = StyleSheet.create({
     paddingBottom: SPACING.xxl,
     paddingHorizontal: SPACING.xl,
     alignItems: 'center',
+  },
+  testCard: {
+    marginHorizontal: SPACING.md,
+    marginTop: SPACING.md,
+    backgroundColor: COLORS.bgCard,
+    borderRadius: RADIUS.xl,
+    padding: SPACING.md,
+    borderWidth: 1.5,
+    borderColor: COLORS.gold + '55',
+  },
+  testCardRow: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    gap: SPACING.md,
+  },
+  testCardText: { flex: 1 },
+  testCardTitle: {
+    fontFamily: FONTS.sansSemiBold,
+    fontSize: 15,
+    color: COLORS.textPrimary,
+    marginBottom: 4,
+  },
+  testCardDesc: {
+    fontFamily: FONTS.sans,
+    fontSize: 12,
+    color: COLORS.textMuted,
+    lineHeight: 17,
+  },
+  testCardStatus: {
+    marginTop: SPACING.sm,
+    fontFamily: FONTS.sansMedium,
+    fontSize: 13,
+    color: COLORS.textMuted,
+  },
+  testCardStatusOn: {
+    color: COLORS.green,
   },
   crownWrapper: {
     width: 72,
