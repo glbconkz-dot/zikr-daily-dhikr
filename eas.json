@@ -24,6 +24,16 @@
       "environment": "production",
       "android": {
         "buildType": "app-bundle"
+      },
+      "ios": {
+        "simulator": false
+      }
+    }
+  },
+  "submit": {
+    "production": {
+      "ios": {
+        "ascAppId": "6781307280"
       }
     }
   }
