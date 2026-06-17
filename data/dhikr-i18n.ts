@@ -21,8 +21,8 @@ export const DHIKR_I18N: Record<string, Record<Language, DhikrI18nEntry>> = {
       explanation: 'من أسماء الله الحسنى التي يمكن قراءتها بنية طلب الرزق والبركة والكسب الحلال.',
     },
     kk: {
-      meaning: "Ризық беруші, барлық тірі жанның ризысын жаратқан Алла.",
-      explanation: "Ризық, береке және халал табыс ниетімен оқылатын Алланың көркем есімдерінен.",
+      meaning: 'Ризық беруші, барлық тірі жанның ризығын жаратқан Аллаһ.',
+      explanation: 'Ризық, береке және халал табыс ниетімен оқылатын Алланың көркем есімдерінен.',
     },
   },
   'rizik_002': {
@@ -131,8 +131,8 @@ export const DHIKR_I18N: Record<string, Record<Language, DhikrI18nEntry>> = {
       explanation: 'يُقرأ بنية اتساع الرزق وزيادة البركة والوفرة.',
     },
     kk: {
-      meaning: 'Алла, Расширяющий, ол ашады, расширяет и благословляет ризық.',
-      explanation: 'Оқуға болады ниетімен расширения ризықа, умножения берекеи и обретения изобилия.',
+      meaning: 'Ризықты ашушы, кеңейтетін және бейек ететін Алла.',
+      explanation: 'Ризық кеңеюі, береке артуы және молшылық ниетімен оқылады.',
     },
   },
   'rizik_007': {
@@ -153,8 +153,8 @@ export const DHIKR_I18N: Record<string, Record<Language, DhikrI18nEntry>> = {
       explanation: 'دعاء صحيح يُقرأ قبل الطعام وبالنية شكر الرزق.',
     },
     kk: {
-      meaning: 'Алла! Благослови нас в том, что Ты даровал нам, и қорғаныси нас от наказания Ада.',
-      explanation: 'Достоверная молитва, читаемая перед едой и ниетімен шүкіршіліки за ризық.',
+      meaning: 'Алла! Бізге несіп еткен ризығымызға berekе ber, бізді tозақ azabından сақta.',
+      explanation: 'Тамақтан bұрын және ризыққа shüкürshilik niетіmen oқylatin дұrys дұға mätini.',
     },
   },
   'rizik_008': {
@@ -175,8 +175,8 @@ export const DHIKR_I18N: Record<string, Record<Language, DhikrI18nEntry>> = {
       explanation: 'دعاء ورد في الترمذي يُقرأ لطلب الرزق الحلال والقناعة.',
     },
     kk: {
-      meaning: 'Алла! Доволь меня дозволенным и оберегай от запретного, и обогати меня Своей мейірімю, чтобы я не нуждался ни в ком кроме Тебя.',
-      explanation: 'Эта молитва из Тirmidhi читается для дозволенного ризықа и довольства.',
+      meaning: 'Алла! Менi halal ризықпен хaram істен сақta, Өz мейіріміmen meni Senen basqa ешkimgе muhtaç etpe.',
+      explanation: 'Tirmizi kitabında aytilgan bul дұға halal ризық pen qanağatтанu ushin oqyлады.',
     },
   },
   'rizik_009': {
@@ -197,8 +197,8 @@ export const DHIKR_I18N: Record<string, Record<Language, DhikrI18nEntry>> = {
       explanation: 'دعاء يُستحب قراءته سبع مرات يومياً بنية التوكل والحماية.',
     },
     kk: {
-      meaning: 'Мне достаточно Алланың. Нет бога кроме Него. Я уповаю на Него, и Он — Господь Великого Трона.',
-      explanation: 'Молитва, рекомендуемая к чтению 7 раз в день, ниетімен упования на Алланың и қорғанысы.',
+      meaning: 'Mağan Alla jetkilikti. Odan basqa quday joq. Men Oğan senдim. Ol — Uly Taqta Rabbı.',
+      explanation: 'Kunine 7 ret oquуga usynylady; Allaga senu jane qorganys niетіmen oqylatin duğa.',
     },
   },
   'rizik_010': {
@@ -219,8 +219,8 @@ export const DHIKR_I18N: Record<string, Record<Language, DhikrI18nEntry>> = {
       explanation: 'يُقرأ بنية طلب إكرام الله والفرص الطيبة والتيسير.',
     },
     kk: {
-      meaning: 'Алла, Щедрый, обладающий великодушием и благородством.',
-      explanation: 'Оқуға болады ниетімен просить щедрости Алланың, благих возможностей и облегчения.',
+      meaning: 'Сағанкер және икрам иесі Алла.',
+      explanation: 'Алланың икрамын, игі мүмкіндіктерді және жеңілдікті сұрау ниетімен оқылады.',
     },
   },
   'sifa_001': {
@@ -241,8 +241,8 @@ export const DHIKR_I18N: Record<string, Record<Language, DhikrI18nEntry>> = {
       explanation: 'يُقرأ بنية طلب الشفاء من الله في أوقات المرض والتعب والضيق المعنوي.',
     },
     kk: {
-      meaning: 'Алла, Целитель.',
-      explanation: 'Оқуға болады ниетімен просить шипа у Алланың во время болезни, усталости и руханиых трудностей.',
+      meaning: 'Shипa berушi Алла.',
+      explanation: 'Auru, sharshaqandiq jane rukhani qiyinshilik uaqıttarında Alladan shipa surau niетіmen oqyлады.',
     },
   },
   'sifa_002': {
@@ -263,8 +263,8 @@ export const DHIKR_I18N: Record<string, Record<Language, DhikrI18nEntry>> = {
       explanation: 'من الأدعية الصحيحة التي تُقرأ بنية الشفاء من المرض.',
     },
     kk: {
-      meaning: 'Алла, Господь людей! Устрани недуг и исцели. Только Ты — Целитель.',
-      explanation: 'Одна из достоверных молитв, которую оқуға болады ниетімен шипа от болезни.',
+      meaning: 'Аллаһым, адамзаттың Раббы! Қиыншылықты жой, шипа бер. Шипа беруші тек Сенсің.',
+      explanation: 'Аурулық пен шипа ниетімен оқылатын дұрыс дұға мәтіндерінің бірі.',
     },
   },
   'sifa_003': {
@@ -285,8 +285,8 @@ export const DHIKR_I18N: Record<string, Record<Language, DhikrI18nEntry>> = {
       explanation: 'يُقرأ عند الشعور بالألم أو الانزعاج، بالاستعاذة بالله وطلب الشفاء.',
     },
     kk: {
-      meaning: 'С именем Алланың. Я прибегаю к Аллаға и Его могуществу от зла того, что я ощущаю и чего опасаюсь.',
-      explanation: 'Оқуға болады при боли или недомогании, прибегая к Аллаға и прося шипа.',
+      meaning: 'Алланың атымен. Сезінетінім мен қорқатынымнан нәрсенің зиянынан Аллаға және Оның құдыретіне жасынамын.',
+      explanation: 'Ауру сезілгенде немесе денсаулық бұзылғанда Аллаға жасырынып, шипа ниетімен оқылады.',
     },
   },
   'sifa_004': {
@@ -307,8 +307,8 @@ export const DHIKR_I18N: Record<string, Record<Language, DhikrI18nEntry>> = {
       explanation: 'يُقرأ بنية الشفاء والقوة والاكتفاء المعنوي.',
     },
     kk: {
-      meaning: 'Алла, Достаточный, ол удовлетворяет каждую нужду.',
-      explanation: 'Оқуға болады ниетімен шипа, силы и руханиой достаточности.',
+      meaning: 'Är qajettilikke jetetin, jetkilikti Алла.',
+      explanation: 'Shipa, kuat jane rukhani jetkilik niетіmen oqyлады.',
     },
   },
   'sifa_005': {
@@ -329,8 +329,8 @@ export const DHIKR_I18N: Record<string, Record<Language, DhikrI18nEntry>> = {
       explanation: 'دعاء يُقرأ لقلق القلب والوسوسة والضيق الروحي.',
     },
     kk: {
-      meaning: 'Алла! Исцели моё жане от всякой болезни и навязчивых мыслей.',
-      explanation: 'Молитва, которую оқуға болады при бестыныштықстве жана, навязчивых мыслях и руханиых трудностях.',
+      meaning: 'Алла! Juregimdi barlıq aurulıqtan jane vesveseden shipa et.',
+      explanation: 'Jurek tin\'ishsizligi, vesvese jane rukhani qiyinshilik ushin oqylatin duğa niеті.',
     },
   },
   'sifa_006': {
@@ -351,8 +351,8 @@ export const DHIKR_I18N: Record<string, Record<Language, DhikrI18nEntry>> = {
       explanation: 'دعاء النبي أيوب (عليه السلام)، يُقرأ بنية الالتجاء إلى الله في المرض والضيق.',
     },
     kk: {
-      meaning: 'Господи! Меня постигло страдание, а Ты — Самый милостивый из милующих.',
-      explanation: 'Молитва пророка Айюба (мир ему), читаемая ниетімен взывания к Аллаға в болезни и скорби.',
+      meaning: 'Rabbım! Mağan ziyan tidi. Sen meйirimдilerdiñ en meйirimдisisin.',
+      explanation: 'Payğambar Ayub (s.a.b.) duasy. Aurulıq pen qiyinshilik ishinde Allaga jalbaru niетіmen oqyлады.',
     },
   },
   'sifa_007': {
@@ -373,8 +373,8 @@ export const DHIKR_I18N: Record<string, Record<Language, DhikrI18nEntry>> = {
       explanation: 'دعاء مستند إلى حديث صحيح، يُستحب قراءته سبع مرات عند زيارة المريض.',
     },
     kk: {
-      meaning: 'Я прошу Алланың Великого, Господа Великого Трона, исцелить тебя.',
-      explanation: 'Молитва, основанная на достоверном хадисе, рекомендуется читать 7 раз при посещении больного.',
+      meaning: 'Uly Taqta Rabbı bolgan Ulken Alladan seni shipa etuin tilayman.',
+      explanation: 'Durys hadisige negizdelgen, aurulı ziyaretinde 7 ret oquуga usynylady duğa.',
     },
   },
   'sifa_008': {
@@ -395,8 +395,8 @@ export const DHIKR_I18N: Record<string, Record<Language, DhikrI18nEntry>> = {
       explanation: 'من بداية دعاء القنوت. يُقرأ بنية الصحة والعافية العامة.',
     },
     kk: {
-      meaning: 'Алла! Направь меня среди тех, кого Ты направил, и даруй мне благополучие среди тех, кому Ты даровал благополучие.',
-      explanation: 'Начало молитвы Кунут. Оқуға болады ниетімен общего здоровья и благополучия.',
+      meaning: 'Алла! Nurlandyrgandardın arasynda mağan nur ber, afereset bergender arasynda mağan da afereset ber.',
+      explanation: 'Kunut duasynyn basy. Jalpy densaulyq pen afereset niетіmen oqyлады.',
     },
   },
   'huzur_001': {
@@ -417,8 +417,8 @@ export const DHIKR_I18N: Record<string, Record<Language, DhikrI18nEntry>> = {
       explanation: 'يُقرأ بنية التوكل على الله في أوقات الهم والخوف وعدم اليقين.',
     },
     kk: {
-      meaning: 'Нам достаточно Алланың, и Он — лучший Попечитель.',
-      explanation: 'Оқуға болады ниетімен упования на Алланың во времена тревоги, страха и неопределённости.',
+      meaning: 'Bizge Alla jetkilikti. Ol — en jaqsı qamqorşı.',
+      explanation: 'Tuyqyn, qorqıq jane belgisizdik uaqıttarında Allaga senu niетіmen oqyлады.',
     },
   },
   'huzur_002': {
@@ -439,8 +439,8 @@ export const DHIKR_I18N: Record<string, Record<Language, DhikrI18nEntry>> = {
       explanation: 'يُقرأ في الأوقات الصعبة بنية التسليم والصبر والطمأنينة.',
     },
     kk: {
-      meaning: 'Нет силы и могущества, кроме как с помощью Алланың.',
-      explanation: 'Оқуға болады в трудные времена ниетімен смирения, терпения и внутреннего покоя.',
+      meaning: 'Allanyn kömegimen bolganısızsha kuat jane kush joq.',
+      explanation: 'Qiyin uaqıttarda berilu, sabır jane ishki tin\'ishlik niетіmen oqyлады.',
     },
   },
   'huzur_003': {
@@ -461,8 +461,8 @@ export const DHIKR_I18N: Record<string, Record<Language, DhikrI18nEntry>> = {
       explanation: 'يُقرأ بنية طمأنينة القلب والسكينة الداخلية والأمان.',
     },
     kk: {
-      meaning: 'Алла, Источник покоя и тыныштандыруия.',
-      explanation: 'Оқуға болады ниетімен покоя жана, внутреннего стыныштықствия и чувства защищённости.',
+      meaning: 'Tınyshtıq pen esenlik kozі bolgan Алла.',
+      explanation: 'Jurek tin\'ishligi, ishki tınyshtıq jane qauipsizdik sezimi niетіmen oqyлады.',
     },
   },
   'huzur_004': {
@@ -483,8 +483,8 @@ export const DHIKR_I18N: Record<string, Record<Language, DhikrI18nEntry>> = {
       explanation: 'يُقرأ بنية الأمان في القلب وتجديد الإيمان وإزالة الهموم.',
     },
     kk: {
-      meaning: 'Алла, беруші веру и безопасность.',
-      explanation: 'Оқуға болады ниетімен доверия жану, обновления веры и избавления от тревог.',
+      meaning: 'Iman jane qauipsizdik berушi Алла.',
+      explanation: 'Jurekke senim, imannı jañartu jane tuyqınan arılу niетіmen oqyлады.',
     },
   },
   'huzur_005': {
@@ -505,8 +505,8 @@ export const DHIKR_I18N: Record<string, Record<Language, DhikrI18nEntry>> = {
       explanation: 'ذكر يسير على اللسان ثقيل في الميزان محبوب إلى الرحمن.',
     },
     kk: {
-      meaning: 'Пречист Аллах, и Ему хвала.',
-      explanation: 'Зикр, лёгкий в произнесении, тяжёлый на весах и любимый Милостивым.',
+      meaning: 'Alla pakt, Oğa hamd.',
+      explanation: 'Aytuğa oңay, tarauzada agır jane Rahman seyilgen zikr.',
     },
   },
   'huzur_006': {
@@ -527,8 +527,8 @@ export const DHIKR_I18N: Record<string, Record<Language, DhikrI18nEntry>> = {
       explanation: 'دعاء ورد في البخاري يُقرأ للهم والحزن وقلة النشاط.',
     },
     kk: {
-      meaning: 'Алла! Я прибегаю к Тебе от тревоги и печали, от беспомощности и лени.',
-      explanation: 'Эта молитва из Бухари читается от тревоги, печали и нехватки энергии.',
+      meaning: 'Алла! Tuyqın men qaygıdan, acizdik pen jaldauşılıqtan Senge jasynameyn.',
+      explanation: 'Buhari kitabında geсетin bul duğa tuyqın, qaygı jane energiya jetispeu ushin oqyлады.',
     },
   },
   'huzur_007': {
@@ -549,8 +549,8 @@ export const DHIKR_I18N: Record<string, Record<Language, DhikrI18nEntry>> = {
       explanation: 'دعاء يُستحب قراءته ثلاث مرات صباحاً ومساءً بنية الطمأنينة والتسليم.',
     },
     kk: {
-      meaning: 'Я доволен Алламен как Господом, исламом как религией и Мухаммадом (мир ему) как пророком.',
-      explanation: 'Молитва, рекомендуемая к чтению по 3 раза утром и вечером, ниетімен покоя и смирения.',
+      meaning: 'Men Allany Rabb, Islammı din, Muhammedti (s.a.b.) Payğambar retinde qabyldayman.',
+      explanation: 'Tañerete jane keshke 3 ret oquуga usynylady; tin\'ishlik pen berilu niетіmen oqylatin duğa.',
     },
   },
   'huzur_008': {
@@ -571,8 +571,8 @@ export const DHIKR_I18N: Record<string, Record<Language, DhikrI18nEntry>> = {
       explanation: 'يُقرأ بنية الصبر وضبط الغضب والسكينة الداخلية.',
     },
     kk: {
-      meaning: 'Алла, Кроткий, ол шыдамды и не торопится.',
-      explanation: 'Оқуға болады ниетімен терпения, сдержанности гнева и внутреннего стыныштықствия.',
+      meaning: 'Jumıs qılуyı jumıs, shashpaityn Алла.',
+      explanation: 'Sabır, ashushılıqtı basqaru jane ishki tınyshtıq niетіmen oqyлады.',
     },
   },
   'korunma_001': {
@@ -602,9 +602,9 @@ export const DHIKR_I18N: Record<string, Record<Language, DhikrI18nEntry>> = {
     },
     kk: {
       meaning:
-        'Алла — Оның өзінен басқа құдай жоқ. Ол тірі, Қайюм (барлығын тұрғызушы). Оны ұйқы да, күз жеткізе алмайды. Аспандағы да, жердегі де бәрі Оның. Оның рұқсатысыз Оның алдында кім аралықтық ете алады? Ол адамдардың алдындағы мен артындағыны біледі. Олар Оның білімінен тек Оның қалайтыны ғана қамти алады. Оның ақсиясы (тәлісі) аспанды да, жерді де қамтиды. Оларды қорғау Оған ауыр емес. Ол — Ұлы, Кеңұлылы.',
-      explanation:
-        'Құранның ең ұлы аяты. Әр міндетті намаздан кейін, ұйықтар алдында және қорғану ниетімен оқылады. Пайғамбар ﷺ ұйықтар алдында Аят әл-Күрсіні оқыған кісі таңға дейін Алланың қорғауында болады деп хабарлаған.',
+              'Алла — Оның өзінен басқа құдай жоқ. Ол тірі, Қайюм (барлығын тұрғызушы). Оны ұйқы да, күз жеткізе алмайды. Аспандағы да, жердегі де бәрі Оның. Оның рұқсатысыз Оның алдында кім аралықтық ете алады? Ол адамдардың алдындағы мен артындағыны біледі. Олар Оның білімінен тек Оның қалайтыны ғана қамти алады. Оның ақсиясы (тәлісі) аспанды да, жерді де қамтиды. Оларды қорғау Оған ауыр емес. Ол — Ұлы, Кеңұлылы.',
+            explanation:
+              'Құранның ең ұлы аяты. Әр міндетті намаздан кейін, ұйықтар алдында және қорғану ниетімен оқылады. Пайғамбар ﷺ ұйықтар алдында Аят әл-Күрсіні оқыған кісі таңға дейін Алланың қорғауында болады деп хабарлаған.',
     },
   },
   'korunma_002': {
@@ -634,9 +634,9 @@ export const DHIKR_I18N: Record<string, Record<Language, DhikrI18nEntry>> = {
     },
     kk: {
       meaning:
-        'Айт: Таңның Раббына жасынамын: Оның жаратқанының жамандығынан, қоюланған қараңғылықтың жамандығынан, түйінге үйретушілердің жамандығынан және қызғанған кездегі қызғаныштың жамандығынан.',
-      explanation:
-        'Муаввизатайннің біріншісі. Таңертең және кешке 3 рет оқылады. Пайғамбар ﷺ ұйықтар алдында Фаляқ пен Нас сүрелерін оқып, алақанына үріп, денесіне сүрткен. Көз қорқынышы, қорқыныш және көрінбейтін зияннан қорғану ниетімен оқылады.',
+              'Айт: Таңның Раббына жасынамын: Оның жаратқанының жамандығынан, қоюланған қараңғылықтың жамандығынан, түйінге үйретушілердің жамандығынан және қызғанған кездегі қызғаныштың жамандығынан.',
+            explanation:
+              'Муаввизатайннің біріншісі. Таңертең және кешке 3 рет оқылады. Пайғамбар ﷺ ұйықтар алдында Фаляқ пен Нас сүрелерін оқып, алақанына үріп, денесіне сүрткен. Көз қорқынышы, қорқыныш және көрінбейтін зияннан қорғану ниетімен оқылады.',
     },
   },
   'korunma_003': {
@@ -666,9 +666,9 @@ export const DHIKR_I18N: Record<string, Record<Language, DhikrI18nEntry>> = {
     },
     kk: {
       meaning:
-        'Айт: Адамзаттың Раббына, адамзаттың Патшасына, адамзаттың Құдайына жасынамын: адамзаттың жүрегіне сыбырлаған, жасырынып кететін сыбыршының жамандығынан — жин мен адамзаттан.',
-      explanation:
-        'Муаввизатайннің екіншісі. Фаляқ сүресімен бірге таңертең және кешке 3 рет оқылады. Сыбыр, шайтанның ынталандыруы және рухани зияннан қорғану ниетімен оқылады. Пайғамбар ﷺ ұйықтар алдында екі сүрені оқып, алақанына үріп, денесіне сүрткен.',
+              'Айт: Адамзаттың Раббына, адамзаттың Патшасына, адамзаттың Құдайына жасынамын: адамзаттың жүрегіне сыбырлаған, жасырынып кететін сыбыршының жамандығынан — жин мен адамзаттан.',
+            explanation:
+              'Муаввизатайннің екіншісі. Фаляқ сүресімен бірге таңертең және кешке 3 рет оқылады. Сыбыр, шайтанның ынталандыруы және рухани зияннан қорғану ниетімен оқылады. Пайғамбар ﷺ ұйықтар алдында екі сүрені оқып, алақанына үріп, денесіне сүрткен.',
     },
   },
   'korunma_004': {
@@ -689,8 +689,8 @@ export const DHIKR_I18N: Record<string, Record<Language, DhikrI18nEntry>> = {
       explanation: 'ورد في الحديث أن من قرأها ثلاث مرات صباحاً ومساءً لم يضره شيء ذلك اليوم.',
     },
     kk: {
-      meaning: 'С именем Алланың, с которым ничто на земле и на небе не причинит вреда.',
-      explanation: 'Есть хадис о том, что тот, кто читает это три раза утром и вечером, не пострадает в тот день.',
+      meaning: 'Алланың аtymen, Oñnıñ atymen birge jerde jane aspende eshnarsa ziyan jetkizbeidi.',
+      explanation: 'Tañerete jane keshke 3 ret oqıgan kisi sol kuni ziyan kormeydi degan hadis bar.',
     },
   },
   'korunma_005': {
@@ -711,8 +711,8 @@ export const DHIKR_I18N: Record<string, Record<Language, DhikrI18nEntry>> = {
       explanation: 'ورد في الحديث أن من قرأها ثلاث مرات مساءً لم يضره شيء تلك الليلة.',
     },
     kk: {
-      meaning: 'Я прибегаю к совершенным словам Алланың от зла того, что Он создал.',
-      explanation: 'Есть хадис о том, что тот, кто читает это три раза вечером, не пострадает той ночью.',
+      meaning: 'Alla jasağan narsenin ziyinан Oñnıñ kemel sozderine jasynameyn.',
+      explanation: 'Keshke 3 ret oqıgan kisi sol tunde ziyan kormeydi degan hadis bar.',
     },
   },
   'korunma_006': {
@@ -733,8 +733,8 @@ export const DHIKR_I18N: Record<string, Record<Language, DhikrI18nEntry>> = {
       explanation: 'يُقرأ بنية حماية النفس والأسرة والأحباب.',
     },
     kk: {
-      meaning: 'Алла, Хранитель, ол охраняет и оберегает всё.',
-      explanation: 'Оқуға болады ниетімен қорғанысы себя, семьи и близких.',
+      meaning: 'Barlıq narseni qorğaytyn jane saqtaytyn Алла.',
+      explanation: 'Adamnyn, otbasynyn jane jaqın adamdarynyn qorganysy niетіmen oqyлады.',
     },
   },
   'korunma_007': {
@@ -755,8 +755,8 @@ export const DHIKR_I18N: Record<string, Record<Language, DhikrI18nEntry>> = {
       explanation: 'آية يُستحب قراءتها عند ركوب وسيلة النقل، بنية السفر الآمن.',
     },
     kk: {
-      meaning: 'Пречист Тот, кто подчинил нам это, и мы непременно вернёмся к нашему Господу.',
-      explanation: 'Аят, рекомендуемый при посадке в транспорт, читается ниетімен безопасного пути.',
+      meaning: 'Buldy bizge boğynдyrğany ashuly, biz Rabbımızga qaytamyz.',
+      explanation: 'Kolikke mingende oquуga sunylady ayat. Qauipsiz sapar niетіmen oqyлады.',
     },
   },
   'salavat_001': {
@@ -777,8 +777,8 @@ export const DHIKR_I18N: Record<string, Record<Language, DhikrI18nEntry>> = {
       explanation: 'يُقرأ بنية الصلاة على النبي صلى الله عليه وسلم.',
     },
     kk: {
-      meaning: 'Алла, благослови нашего Господина Мухаммада.',
-      explanation: 'Читается ниетімен отправить благословения Пророку (мир ему).',
+      meaning: 'Аллаһым, Пайғамбарымыз Мұхаммедке салават ет.',
+      explanation: 'Пайғамбарға салават айту ниетімен оқылады.',
     },
   },
   'salavat_002': {
@@ -799,8 +799,8 @@ export const DHIKR_I18N: Record<string, Record<Language, DhikrI18nEntry>> = {
       explanation: 'متن الصلاة الأساسي للمتابعة اليومية على النبي.',
     },
     kk: {
-      meaning: 'Алла, благослови нашего Господина Мухаммада и его семью.',
-      explanation: 'Основной текст салавата для ежедневного поминания Пророка.',
+      meaning: 'Аллаһым, Пайғамбарымыз Мұхаммедке және Оның отбасына салават ет.',
+      explanation: 'Пайғамбарды күнделікті еске алу үшін негізгі салават мәтіні.',
     },
   },
   'salavat_003': {
@@ -821,8 +821,8 @@ export const DHIKR_I18N: Record<string, Record<Language, DhikrI18nEntry>> = {
       explanation: 'الصلاة الإبراهيمية التي تُقرأ في الصلاة، من أفضل صيغ الصلاة على النبي.',
     },
     kk: {
-      meaning: 'Алла! Благослови Мухаммада и его семью так, как Ты благословил Ибрахима и его семью.',
-      explanation: 'Ибрагимийский салават, читаемый в намазе, — один из самых берекеных текстов салавата.',
+      meaning: 'Алла! Ibrahimke jane ailesine salawat etkenindei Muhammedke jane ailesine de salawat et.',
+      explanation: 'Namazda oqylatin Ibrahimiy salawat, en faziletli salawat mätinlerinin biri.',
     },
   },
   'salavat_004': {
@@ -843,8 +843,8 @@ export const DHIKR_I18N: Record<string, Record<Language, DhikrI18nEntry>> = {
       explanation: 'صيغة صلاة يُستحب كثرة قراءتها يوم الجمعة.',
     },
     kk: {
-      meaning: 'Алла! Благослови и приветствуй неграмотного пророка Мухаммада, его семью и сподвижников.',
-      explanation: 'Текст салавата, рекомендуемый к обильному чтению по пятницам.',
+      meaning: 'Алла! Ummi Payğambar Muhammedke, ailesine jane sahabalarına salawat jane selam et.',
+      explanation: 'Juma kuninde kop oquуga usynylady salawat mätini.',
     },
   },
   'salavat_005': {
@@ -865,8 +865,8 @@ export const DHIKR_I18N: Record<string, Record<Language, DhikrI18nEntry>> = {
       explanation: 'صيغة صلاة مختصرة يُستحب قراءتها عند ذكر اسم النبي.',
     },
     kk: {
-      meaning: 'Благословение Алланың и мир ему.',
-      explanation: 'Краткая форма салавата, рекомендуемая при каждом упоминании имени Пророка.',
+      meaning: 'Allanyn salawaty jane selamı Oğan bolsin.',
+      explanation: 'Payğambar aty aytylganda oquуga usynylady qysqa salawat nusqasy.',
     },
   },
   'salavat_006': {
@@ -887,8 +887,8 @@ export const DHIKR_I18N: Record<string, Record<Language, DhikrI18nEntry>> = {
       explanation: 'معروف بصلاة التنجينا، يُقرأ بنية الحماية من البلاء والآفات.',
     },
     kk: {
-      meaning: 'Алла! Благослови нашего Господина Мухаммада — благословением, которым Ты избавишь нас от всех страхов и бед.',
-      explanation: 'Известный как Салават Тунджина, этот текст читается ниетімен қорғанысы от испытаний и трудностей.',
+      meaning: 'Алла! Payğambarımız Muhammedke — barlıq qorqıq pen belalardan qutqaradığan salawat et.',
+      explanation: 'Tuncina salawaty dep tanılady; sinaptar men qiyinshilikterden qorganys niетіmen oqyлады.',
     },
   },
   'esma_001': {
@@ -909,8 +909,8 @@ export const DHIKR_I18N: Record<string, Record<Language, DhikrI18nEntry>> = {
       explanation: 'يُقرأ بنية طلب رحمة الله ورحمته ولطفه.',
     },
     kk: {
-      meaning: 'Алла, Милостивый, проявляющий мейірім ко всему творению в этом мире.',
-      explanation: 'Оқуға болады ниетімен просить милости, сострадания и берекеи Алланың.',
+      meaning: 'Bul dunıede barlıq jaratylısqa meйirim etetin Алла.',
+      explanation: 'Allanyn meйirimіn, shapshıqtıqtı jane lutfın surau niетіmen oqyлады.',
     },
   },
   'esma_002': {
@@ -931,8 +931,8 @@ export const DHIKR_I18N: Record<string, Record<Language, DhikrI18nEntry>> = {
       explanation: 'يُقرأ بنية تليين القلب والرحمة والقرب المعنوي من الله.',
     },
     kk: {
-      meaning: 'Алла, Милосердный, обладающий безграничной мейірімю.',
-      explanation: 'Оқуға болады ниетімен смягчения жана, милости и руханиой близости к Аллаға.',
+      meaning: 'Sheksiz meйirim иesi Алла.',
+      explanation: 'Jurekti jumsartu, meйirim jane rukhani jaqynlıq niетіmen oqyлады.',
     },
   },
   'esma_003': {
@@ -953,8 +953,8 @@ export const DHIKR_I18N: Record<string, Record<Language, DhikrI18nEntry>> = {
       explanation: 'يُقرأ بنية طلب الملك والحكم وتيسير الأمور الدنيوية.',
     },
     kk: {
-      meaning: 'Алла, Царь, истинный Владелец и Правитель всего сущего.',
-      explanation: 'Оқуға болады ниетімен просить власти, управления и решения мирских дел.',
+      meaning: 'Barlıq narsenin haqıqıy иesi jane hukimdari Алла.',
+      explanation: 'Bilіk, basqaru jane dunıeuilik istерdi sheshu niетіmen oqyлады.',
     },
   },
   'esma_004': {
@@ -975,8 +975,8 @@ export const DHIKR_I18N: Record<string, Record<Language, DhikrI18nEntry>> = {
       explanation: 'يُقرأ بنية طهارة القلب والتطهر من الذنوب والسمو المعنوي.',
     },
     kk: {
-      meaning: 'Алла, Святой, ол пречист от всякого недостатка.',
-      explanation: 'Оқуға болады ниетімен чистоты жана, очищения от грехов и руханиого возвышения.',
+      meaning: 'Barlıq kemshilikten pakt Алла.',
+      explanation: 'Jurek tazalığı, keshirimnen arılu jane rukhani kotterilu niетіmen oqyлады.',
     },
   },
   'esma_005': {
@@ -997,8 +997,8 @@ export const DHIKR_I18N: Record<string, Record<Language, DhikrI18nEntry>> = {
       explanation: 'يُقرأ بنية القوة والكرامة والصمود أمام الصعاب.',
     },
     kk: {
-      meaning: 'Алла, Могущественный, обладающий абсолютной силой и достоинством, непобедимый.',
-      explanation: 'Оқуға болады ниетімен силы, достоинства, чести и стойкости перед трудностями.',
+      meaning: 'Mutlak kuat pen izzet иesi, jeñilmes Алла.',
+      explanation: 'Kuat, qadirmet, abıroy jane qiyinshilikterge qarsy turys niетіmen oqyлады.',
     },
   },
   'esma_006': {
@@ -1019,8 +1019,8 @@ export const DHIKR_I18N: Record<string, Record<Language, DhikrI18nEntry>> = {
       explanation: 'يُقرأ بنية إصلاح القلوب المكسورة والاستعاذة من الظلم.',
     },
     kk: {
-      meaning: 'Алла, Покоряющий, ол подчиняет всё Своей воле и исцеляет сломанных.',
-      explanation: 'Оқуға болады ниетімен шипа разбитых сердец и прибегания к Аллаға от несправедливости.',
+      meaning: 'Barlıq narseni Öz iradesine boğynдyratyn, sindirılgenдерdi düzetetin Алла.',
+      explanation: 'Sindirılgen jurekterdi düzetu jane adilsizdikten Allağa jasınıp qalu niетіmen oqyлады.',
     },
   },
   'esma_007': {
@@ -1041,8 +1041,8 @@ export const DHIKR_I18N: Record<string, Record<Language, DhikrI18nEntry>> = {
       explanation: 'يُقرأ بنية التفكر في الخلق والبدايات الجديدة والشكر.',
     },
     kk: {
-      meaning: 'Алла, Творец, ол создаёт всё из ничего.',
-      explanation: 'Оқуға болады ниетімен размышления о творении, новых началах и шүкіршіліки.',
+      meaning: 'Barlıq narseni joqtan jaratatyn Алла.',
+      explanation: 'Jaratılıstı oylau, jaña bastau jane shukirshilik niетіmen oqyлады.',
     },
   },
   'esma_008': {
@@ -1063,8 +1063,8 @@ export const DHIKR_I18N: Record<string, Record<Language, DhikrI18nEntry>> = {
       explanation: 'يُقرأ بنية طلب العلم والفهم واتخاذ القرار الصحيح.',
     },
     kk: {
-      meaning: 'Алла, Всезнающий, ол знает всё до мельчайших деталей.',
-      explanation: 'Оқуға болады ниетімен просить знания, понимания и мудрых решений.',
+      meaning: 'Barlıq narseni en uaktya deyin biletın Алла.',
+      explanation: 'Bilim, tusu jane durys sheshim qabyldau niетіmen oqyлады.',
     },
   },
   'esma_009': {
@@ -1085,8 +1085,8 @@ export const DHIKR_I18N: Record<string, Record<Language, DhikrI18nEntry>> = {
       explanation: 'يُقرأ عند الشعور بالعجز، بالاستعاذة بالله في الأمور التي تبدو مستحيلة.',
     },
     kk: {
-      meaning: 'Алла, Всемогущий, ол способен на всё и обладает безграничной силой.',
-      explanation: 'Оқуға болады в чувстве беспомощности, прибегая к Аллаға в делах, кажущихся невозможными.',
+      meaning: 'Barlıq narsеge kuaty jetetin, sheksiz kudret иesi Алла.',
+      explanation: 'Kushsizdik sezilgende, mumkin emes dep korgen istерde Allağa jasınıp qalu niетіmen oqyлады.',
     },
   },
   'esma_010': {
@@ -1107,8 +1107,8 @@ export const DHIKR_I18N: Record<string, Record<Language, DhikrI18nEntry>> = {
       explanation: 'يُقرأ بنية قبول الدعاء وفتح القلب لله والتضرع.',
     },
     kk: {
-      meaning: 'Алла, Всеслышащий, ол слышит всё.',
-      explanation: 'Оқуға болады ниетімен принятия молитв, открытия жана Аллаға и усердной просьбы.',
+      meaning: 'Barlıq narseni estitin Алла.',
+      explanation: 'Duany qabyldau, jurekti Allağa ashу jane shapshı duа niетіmen oqyлады.',
     },
   },
   'esma_011': {
@@ -1129,8 +1129,8 @@ export const DHIKR_I18N: Record<string, Record<Language, DhikrI18nEntry>> = {
       explanation: 'يُقرأ بنية تذكر أن الله يرى كل شيء والإخلاص والصدق.',
     },
     kk: {
-      meaning: 'Алла, Всевидящий, ол видит всё.',
-      explanation: 'Оқуға болады ниетімен помнить, что Аллах видит всё, искренности и преданности.',
+      meaning: 'Barlıq narseni koretin Алла.',
+      explanation: 'Alla barlign koretinin eske alu, shındıq jane adaldaq niетіmen oqyлады.',
     },
   },
   'esma_012': {
@@ -1151,8 +1151,8 @@ export const DHIKR_I18N: Record<string, Record<Language, DhikrI18nEntry>> = {
       explanation: 'يُقرأ بنية التوبة والندم والرجوع إلى الله.',
     },
     kk: {
-      meaning: 'Алла, Принимающий покаяние, ол принимает покаяние снова и снова.',
-      explanation: 'Оқуға болады ниетімен покаяния, раскаяния и возвращения к Аллаға.',
+      meaning: 'Keшirimdi qabyldaytyn, keшirimdi qayta-qayta qabyldaytyn Алла.',
+      explanation: 'Tobе, qynalanu jane Allağa qaytu niетіmen oqyлады.',
     },
   },
   'iliski_001': {
@@ -1173,8 +1173,8 @@ export const DHIKR_I18N: Record<string, Record<Language, DhikrI18nEntry>> = {
       explanation: 'يُقرأ بنية المحبة في القلب والمودة وطمأنينة الأسرة والعلاقات الطيبة.',
     },
     kk: {
-      meaning: 'Алла, Любящий, источник любви, ол любит обильно.',
-      explanation: 'Оқуға болады ниетімен любви в жане, привязанности, семейного мира и благих отношений.',
+      meaning: 'Kop seyitın jane muhabbat kozі bolgan Алла.',
+      explanation: 'Jurekte muhabbat, jaqynlıq, otbası tin\'ishligi jane igі qarym-qatynas niетіmen oqyлады.',
     },
   },
   'iliski_002': {
@@ -1195,8 +1195,8 @@ export const DHIKR_I18N: Record<string, Record<Language, DhikrI18nEntry>> = {
       explanation: 'يُقرأ بنية اللقاء الطيب ووحدة الأسرة وطمأنينة القلب.',
     },
     kk: {
-      meaning: 'Алла, Собирающий, ол сводит вместе кого пожелает.',
-      explanation: 'Оқуға болады ниетімен благого воссоединения, семейного единства и покоя жана.',
+      meaning: 'Qalağanın birge jinaityn Алла.',
+      explanation: 'Igі qosu, otbası birligi jane jurek tin\'ishligi niетіmen oqyлады.',
     },
   },
   'iliski_003': {
@@ -1217,8 +1217,8 @@ export const DHIKR_I18N: Record<string, Record<Language, DhikrI18nEntry>> = {
       explanation: 'يُقرأ في العلاقات المشددة بنية تليين القلوب والفهم والحل الطيب.',
     },
     kk: {
-      meaning: 'Алла, Тонкий, ол обращается со Своими рабами с добротой и мягкостью.',
-      explanation: 'Оқуға болады в напряжённых отношениях ниетімен смягчения сердец, понимания и благого решения.',
+      meaning: 'Qullaryna lutfpen jane jumısqalıqpen muamеle etetin Алла.',
+      explanation: 'Qiyin qarym-qatynasta jurekterdi jumsartu, tusinу jane igі sheshim niетіmen oqyлады.',
     },
   },
   'iliski_004': {
@@ -1239,8 +1239,8 @@ export const DHIKR_I18N: Record<string, Record<Language, DhikrI18nEntry>> = {
       explanation: 'دعاء من سورة الفرقان يُقرأ بنية السعادة الزوجية والذرية الصالحة.',
     },
     kk: {
-      meaning: 'Господь наш! Даруй нам от наших супругов и потомков радость для глаз и сделай нас образцом для богобоязненных.',
-      explanation: 'Эта молитва из суры Аль-Фуркан читается ниетімен семейного мира и благочестивого потомства.',
+      meaning: 'Rabbımız! Bizge jubaylarımızdan jane urpaqtarımızdan koz quanarymyzdy qyzyqtar jane bizi taqwa иelerine uildir.',
+      explanation: 'Furqan suresinen alınğan bul duğa otbası tin\'ishligi jane igі urpaq niетіmen oqyлады.',
     },
   },
   'iliski_005': {
@@ -1261,8 +1261,8 @@ export const DHIKR_I18N: Record<string, Record<Language, DhikrI18nEntry>> = {
       explanation: 'دعاء يُقرأ بنية الانسجام ووحدة القلوب والصلح.',
     },
     kk: {
-      meaning: 'Алла! Сблизь наши жана и исправь отношения между нами.',
-      explanation: 'Молитва, которую оқуға болады ниетімен согласия, единства сердец и примирения.',
+      meaning: 'Алла! Jurekterimizdi bir-birine jaqyndat jane aramızdagy qarym-qatynasty tyzу et.',
+      explanation: 'Qarym-qatynasta uılas, jurek birligi jane kelisim niетіmen oqylatin duğa.',
     },
   },
   'iliski_006': {
@@ -1283,8 +1283,8 @@ export const DHIKR_I18N: Record<string, Record<Language, DhikrI18nEntry>> = {
       explanation: 'يُقرأ عند صعوبة العفو، لسعة الصدر والطمأنينة.',
     },
     kk: {
-      meaning: 'Алла! Прости меня и тех, кто поступил со мной несправедливо. Направь меня и тех, кто ввёл меня в заблуждение.',
-      explanation: 'Оқуға болады, когда трудно простить, для широты жана и внутреннего покоя.',
+      meaning: 'Алла! Meni jane mağan zulim etkenderdi keшir. Meni jane meni adasqandardy nurlandyr.',
+      explanation: 'Keшiru qiyin bolganda, jurek kengligi jane ishki tin\'ishlik ushin oqyлады.',
     },
   },
   'iliski_007': {
@@ -1305,8 +1305,8 @@ export const DHIKR_I18N: Record<string, Record<Language, DhikrI18nEntry>> = {
       explanation: 'دعاء النبي موسى (عليه السلام) يُقرأ بنية الزوج الصالح واللقاء الطيب.',
     },
     kk: {
-      meaning: 'Господи! Поистине, я нуждаюсь в любом благе, ол Ты ниспошлёшь мне.',
-      explanation: 'Молитва пророка Мусы (мир ему), которую оқуға болады ниетімен праведного супруга и благого соединения.',
+      meaning: 'Rabbım! Shındy men Sagan tusiп etetin barlıq igіlikke muhtajmın.',
+      explanation: 'Payğambar Musa (s.a.b.) duasy; igі jubay jane igі qosu niетіmen oqylatin duğa.',
     },
   },
   'ev_is_001': {
@@ -1327,8 +1327,8 @@ export const DHIKR_I18N: Record<string, Record<Language, DhikrI18nEntry>> = {
       explanation: 'يُقرأ بنية البيت والعمل والمشاريع والبدايات الجديدة والفرص الطيبة.',
     },
     kk: {
-      meaning: 'Алла, Открывающий, ол ашады благие двери.',
-      explanation: 'Оқуға болады ниетімен дома, работы, проектов, новых начал и благих возможностей.',
+      meaning: 'Igі esikterdi ashushy Алла.',
+      explanation: 'Uй, jumys, joba, jaña bastau jane igі mumkindikter niетіmen oqyлады.',
     },
   },
   'ev_is_002': {
@@ -1349,8 +1349,8 @@ export const DHIKR_I18N: Record<string, Record<Language, DhikrI18nEntry>> = {
       explanation: 'يُقرأ بنية طلب إكرام الله والفرص الطيبة والتيسير.',
     },
     kk: {
-      meaning: 'Алла, Щедрый, обладающий великодушием и благородством.',
-      explanation: 'Оқуға болады ниетімен просить щедрости Алланың, благих возможностей и облегчения.',
+      meaning: 'Sagander jane ikram иesi Алла.',
+      explanation: 'Allanyn ikramyn, igі mumkindikterdi jane jeñildikti surau niетіmen oqyлады.',
     },
   },
   'ev_is_003': {
@@ -1371,8 +1371,8 @@ export const DHIKR_I18N: Record<string, Record<Language, DhikrI18nEntry>> = {
       explanation: 'يُقرأ بنية البركة والأمانة في العمل.',
     },
     kk: {
-      meaning: 'Алла! Я прошу Тебя даровать мне совершать добро и держаться подальше от запретного.',
-      explanation: 'Оқуға болады ниетімен берекеи и честности в трудовой жизни.',
+      meaning: 'Алла! Igіlik isteu jane jamanlıqtan qashu ushin Senen surayman.',
+      explanation: 'Jumys omirinde bereke jane adaldıq niетіmen oqyлады.',
     },
   },
   'ev_is_004': {
@@ -1393,8 +1393,8 @@ export const DHIKR_I18N: Record<string, Record<Language, DhikrI18nEntry>> = {
       explanation: 'دعاء يُستحب عند دخول البيت، يُقرأ بنية بركة البيت وطمأنينته.',
     },
     kk: {
-      meaning: 'Алла! Я прошу у Тебя блага входа и выхода.',
-      explanation: 'Молитва, рекомендуемая при входе в дом, читается ниетімен берекеи и покоя в доме.',
+      meaning: 'Алла! Kiru jane shıgu igiligin Senen surayman.',
+      explanation: 'Uйge kirgende oquуga sunylady duğa; uй berekesi jane tin\'ishligi niетіmen oqyлады.',
     },
   },
   'ev_is_005': {
@@ -1415,8 +1415,8 @@ export const DHIKR_I18N: Record<string, Record<Language, DhikrI18nEntry>> = {
       explanation: 'دعاء من سورة الإسراء يُقرأ عند بدء مشروع أو عمل أو مكان جديد.',
     },
     kk: {
-      meaning: 'Господи! Введи меня правдивым входом и выведи правдивым выходом, и даруй мне от Себя поддерживающую силу.',
-      explanation: 'Молитва из суры Аль-Исра, которую оқуға болады при начале нового проекта, работы или места.',
+      meaning: 'Rabbım! Meni adal kirispen kirtir, adal shıguymen shıgar jane Özingnen qoldau kuaty ber.',
+      explanation: 'Isra suresinen duğa; jaña joba, jumys nemese jer bastaganda oqylatin duğa.',
     },
   },
   'ev_is_006': {
@@ -1437,8 +1437,8 @@ export const DHIKR_I18N: Record<string, Record<Language, DhikrI18nEntry>> = {
       explanation: 'من دعاء النبي موسى (عليه السلام) يُقرأ لصعوبات العمل والخطوات الجديدة.',
     },
     kk: {
-      meaning: 'Господи! Расширь мою грудь и облегчи моё дело.',
-      explanation: 'Эта часть молитвы пророка Мусы (мир ему) может читаться при трудностях в работе и новых шагах.',
+      meaning: 'Rabbım! Kеudemdi kengitet jane isimdi jeñildet.',
+      explanation: 'Payğambar Musa (s.a.b.) duasynan alınğan bul bölіm; jumys qiyinshilikteri jane jaña qadamdar ushin oqyлады.',
     },
   },
   'ev_is_007': {
@@ -1459,8 +1459,8 @@ export const DHIKR_I18N: Record<string, Record<Language, DhikrI18nEntry>> = {
       explanation: 'يُقرأ بنية التيسير في العمل أو التقديم أو المراحل الصعبة.',
     },
     kk: {
-      meaning: 'Алла, Облегчающий! Облегчи наши дела.',
-      explanation: 'Оқуға болады ниетімен облегчения в работе, заявках или трудном процессе.',
+      meaning: 'Isterdi jeñildetushy Алла! Isterimizdi bizge jeñildet.',
+      explanation: 'Jumys, otinish nemese qiyin surette jeñildik niетіmen oqyлады.',
     },
   },
 };

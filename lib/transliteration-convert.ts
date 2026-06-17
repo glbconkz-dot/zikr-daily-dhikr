@@ -88,21 +88,48 @@ export function toRuTransliteration(tr: string): string {
     .join('');
 }
 
-/** Russian Cyrillic → Kazakh Cyrillic adjustments */
+/** Russian/Cyrillic → Kazakh Cyrillic adjustments */
 export function ruToKkTransliteration(ru: string): string {
   return ru
+    .replace(/^Йа\s+/g, 'Я ')
+    .replace(/^Va\s+/gi, 'Я ')
     .replace(/ ва /g, ' жә ')
     .replace(/ак\b/g, 'ақ')
+    .replace(/ек\b/g, 'ек')
+    .replace(/ик\b/g, 'ик')
     .replace(/гъ/g, 'ғ')
+    .replace(/Гани\b/g, 'Ғани')
+    .replace(/гу/g, 'ғу')
     .replace(/кув/g, 'қув')
     .replace(/ку/g, 'қу')
+    .replace(/Куддус/g, 'Құдыс')
+    .replace(/Кадир/g, 'Қадир')
     .replace(/ля /g, 'ла ')
     .replace(/илла /g, 'илла ');
 }
 
-/** Turkish-style Latin → Kazakh Cyrillic (via Russian + Kazakh tuning) */
+const PHRASES_KK: [RegExp, string][] = [
+  [/Allâhümme/gi, 'Аллахумма'],
+  [/Allâhu/g, 'Аллаху'],
+  [/Allâh/gi, 'Аллах'],
+  [/Bismillâh/gi, 'Бисмиллаһ'],
+  [/^Yâ\s+/g, 'Я '],
+  [/^Ya\s+/g, 'Я '],
+  [/\bYâ\s+/g, 'Я '],
+  [/\bYa\s+/g, 'Я '],
+  [/ ve /g, ' жә '],
+  [/ min /g, ' мин '],
+  [/ bi /g, ' би '],
+];
+
+/** Turkish-style Latin → Kazakh Cyrillic */
 export function toKkTransliteration(tr: string): string {
-  return ruToKkTransliteration(toRuTransliteration(tr));
+  let s = tr;
+  for (const [re, rep] of PHRASES_KK) {
+    s = s.replace(re, rep);
+  }
+  const viaRu = ruToKkTransliteration(toRuTransliteration(s));
+  return viaRu.replace(/^Йа\s+/g, 'Я ').replace(/^Va\s+/gi, 'Я ');
 }
 
 /** Short Esma pattern: "Yâ Name" — title fields often carry correct script */

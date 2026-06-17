@@ -6,6 +6,7 @@ import {
   toKkTransliteration,
   toRuTransliteration,
 } from '@/lib/transliteration-convert';
+import { esmaTrToKkTitle, toKkDhikrTitle } from '@/lib/kazakh-titles';
 
 export function getDhikrTransliterationTr(dhikr: Dhikr): string {
   return dhikr.transliteration_tr ?? dhikr.transliteration ?? '';
@@ -36,8 +37,10 @@ export function getDhikrTransliteration(dhikr: Dhikr, language: Language): strin
     case 'kk': {
       const stored = dhikr.transliteration_kk ?? i18n?.kk;
       if (stored) return stored;
-      if (shortEsma && dhikr.titleRu) {
-        return dhikr.titleRu.replace(/ак\b/g, 'ақ').replace(/ек\b/g, 'ек').replace(/ик\b/g, 'ик');
+      if (shortEsma) {
+        const kkTitle = toKkDhikrTitle(dhikr.titleRu, dhikr.titleEn, tr);
+        if (kkTitle) return kkTitle;
+        return esmaTrToKkTitle(tr);
       }
       return toKkTransliteration(tr);
     }

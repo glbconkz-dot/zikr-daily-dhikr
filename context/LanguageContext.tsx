@@ -2,6 +2,10 @@ import React, { createContext, useContext, useEffect, useState, ReactNode } from
 import { NativeModules, Platform } from 'react-native';
 import { Dhikr, Language } from '@/types';
 import { DHIKR_I18N } from '@/data/dhikr-i18n';
+import {
+  esmaTrToKkTitle,
+  toKkDhikrTitle,
+} from '@/lib/kazakh-titles';
 import { getDhikrTransliteration } from '@/lib/dhikr-transliteration';
 import { getStoredLanguage, setStoredLanguage, hasSelectedLanguage as checkStoredLanguage } from '@/lib/storage';
 import { SUPPORTED_LANGUAGES } from '@/lib/languages';
@@ -21,7 +25,7 @@ export function getDhikrTitle(dhikr: Dhikr, language: Language): string {
     case 'ar':
       return dhikr.titleAr ?? '';
     case 'kk':
-      return dhikr.titleRu ?? dhikr.titleEn ?? dhikr.title;
+      return toKkDhikrTitle(dhikr.titleRu, dhikr.titleEn, dhikr.title);
     case 'tr':
     default:
       return dhikr.title;
