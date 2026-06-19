@@ -242,7 +242,30 @@ const translations: Record<Language, Record<string, string>> = {
     tesbih_empty: 'Henüz özel tesbih yok',
     tesbih_empty_desc: 'Premium ile kendi zikir adınızı ve hedefinizi belirleyebilirsiniz',
     tesbih_namaz_end: 'Namaz Sonu Tesbihleri',
-    tesbih_namaz_end_desc: 'Her namazdan sonra çekilen 33\'er tesbih — ücretsiz.',
+    tesbih_namaz_end_desc: 'Selâmdan sonra okunan dualar ve 33\'er tesbih — ücretsiz.',
+    namaz_pre_section: 'Selâmdan sonra okunur',
+    namaz_istigfar_title: 'İstiğfar Duası',
+    namaz_istigfar_translit:
+      'Esteğfirullâhe\'l-âzîmellezî lâ ilâhe illâ hüvel-hayyul-kayyûmü ve etûbü ileyhi.',
+    namaz_istigfar_meaning:
+      'Ulu Allah\'tan bağışlanmamı dilerim; O\'ndan başka ilah yoktur, O diridir ve kayyumdur. O\'na tövbe ederim.',
+    namaz_selam_title: 'Selam Duası',
+    namaz_selam_translit:
+      'Allahümme entesselâmü ve minke\'sselâmü tebârakte yâ ze\'l-celâli ve\'l-ikrâm.',
+    namaz_selam_meaning:
+      'Allah\'ım! Sen selâmsın, selamet sendendir. Ey celâl ve ikrâm sahibi! Sen münezzehsin.',
+    namaz_salavat_title: 'Salavat',
+    namaz_salavat_translit: 'Allâhümme salli alâ Muhammed.',
+    namaz_salavat_meaning: 'Allah\'ım, Efendimiz Muhammed\'e salât eyle.',
+    namaz_flow_steps: 'Sübhanallah ×33 → Elhamdülillah ×33 → Allahu ekber ×33 → Tevhid Duası',
+    namaz_flow_start: 'Tesbihlere Başla',
+    tesbih_tevhid_title: 'Tevhid Duası',
+    tesbih_tevhid_translit:
+      'Lâ ilâhe illallâhu vahdehû lâ şerîke leh. Lehü\'l-mülkü ve lehü\'l-hamdü ve hüve alâ kulli şey\'in kadîr.',
+    tesbih_tevhid_meaning:
+      'Allah\'tan başka ilah yoktur; O birdir, ortağı yoktur. Mülk O\'nundur, hamd O\'nadır. O her şeye kadirdir.',
+    tesbih_tevhid_screen_sub: 'Üç tesbih tamamlandıktan sonra bir kez okunur.',
+    tesbih_tevhid_done: 'Bitir',
     tesbih_premium_create: 'Özel Tesbih Oluştur',
     tesbih_premium_locked: 'Kendi zikir adınızı ve sayınızı yazmak için Premium gerekir.',
     tesbih_my_list: 'Özel Tesbihlerim',
@@ -438,7 +461,30 @@ const translations: Record<Language, Record<string, string>> = {
     tesbih_empty: 'No tasbih yet',
     tesbih_empty_desc: 'Create your own dhikr name and target with Premium',
     tesbih_namaz_end: 'Post-Prayer Dhikr',
-    tesbih_namaz_end_desc: 'The three 33-count dhikr after each prayer — free for everyone.',
+    tesbih_namaz_end_desc: 'Supplications after salam and three 33-count dhikr — free for everyone.',
+    namaz_pre_section: 'Recite after salam',
+    namaz_istigfar_title: 'Istighfar Supplication',
+    namaz_istigfar_translit:
+      'Astaghfirullaha al-azim alladhi la ilaha illa huwa al-hayy al-qayyum wa atubu ilayhi.',
+    namaz_istigfar_meaning:
+      'I seek forgiveness from Allah the Magnificent, there is no god but Him, the Ever-Living, the Sustainer. I repent to Him.',
+    namaz_selam_title: 'Salam Supplication',
+    namaz_selam_translit:
+      'Allahumma anta as-salamu wa minka as-salamu tabarakta ya dhal-jalali wal-ikram.',
+    namaz_selam_meaning:
+      'O Allah, You are Peace and from You comes peace. Blessed are You, O Lord of majesty and honor.',
+    namaz_salavat_title: 'Salawat',
+    namaz_salavat_translit: 'Allahumma salli ala Muhammad.',
+    namaz_salavat_meaning: 'O Allah, send blessings upon our Master Muhammad.',
+    namaz_flow_steps: 'Subhanallah ×33 → Alhamdulillah ×33 → Allahu Akbar ×33 → Tawheed Supplication',
+    namaz_flow_start: 'Start Dhikr',
+    tesbih_tevhid_title: 'Tawheed Supplication',
+    tesbih_tevhid_translit:
+      'La ilaha illallahu wahdahu la sharika lah. Lahul-mulku wa lahul-hamdu wa huwa ala kulli shayin qadir.',
+    tesbih_tevhid_meaning:
+      'There is no god but Allah alone, without partner. To Him belongs dominion and praise, and He has power over all things.',
+    tesbih_tevhid_screen_sub: 'Recite once after completing all three dhikr.',
+    tesbih_tevhid_done: 'Done',
     tesbih_premium_create: 'Create Custom Tasbih',
     tesbih_premium_locked: 'Premium is required to write your own dhikr and count.',
     tesbih_my_list: 'My Custom Tasbih',
@@ -634,7 +680,30 @@ const translations: Record<Language, Record<string, string>> = {
     tesbih_empty: 'لا يوجد تسبيح مخصص بعد',
     tesbih_empty_desc: 'أنشئ ذكراً مخصصاً باسمك وعددك مع بريميوم',
     tesbih_namaz_end: 'أذكار ما بعد الصلاة',
-    tesbih_namaz_end_desc: 'ثلاثة أذكار بعد كل صلاة — 33 مرة لكل منها، مجاناً للجميع.',
+    tesbih_namaz_end_desc: 'الأدعية بعد السلام وثلاثة أذكار — 33 مرة لكل منها، مجاناً للجميع.',
+    namaz_pre_section: 'يُقرأ بعد السلام',
+    namaz_istigfar_title: 'دعاء الاستغفار',
+    namaz_istigfar_translit:
+      'Astaghfirullaha al-azim alladhi la ilaha illa huwa al-hayy al-qayyum wa atubu ilayhi.',
+    namaz_istigfar_meaning:
+      'أستغفر الله العظيم الذي لا إله إلا هو الحي القيوم وأتوب إليه.',
+    namaz_selam_title: 'دعاء السلام',
+    namaz_selam_translit:
+      'Allahumma anta as-salamu wa minka as-salamu tabarakta ya dhal-jalali wal-ikram.',
+    namaz_selam_meaning:
+      'اللهم أنت السلام ومنك السلام تباركت يا ذا الجلال والإكرام.',
+    namaz_salavat_title: 'الصلاة على النبي',
+    namaz_salavat_translit: 'Allahumma salli ala Muhammad.',
+    namaz_salavat_meaning: 'اللهم صل على محمد.',
+    namaz_flow_steps: 'سبحان الله ×33 → الحمد لله ×33 → الله أكبر ×33 → دعاء التوحيد',
+    namaz_flow_start: 'ابدأ التسبيح',
+    tesbih_tevhid_title: 'دعاء التوحيد',
+    tesbih_tevhid_translit:
+      'La ilaha illallahu wahdahu la sharika lah. Lahul-mulku wa lahul-hamdu wa huwa ala kulli shayin qadir.',
+    tesbih_tevhid_meaning:
+      'لا إله إلا الله وحده لا شريك له، له الملك وله الحمد وهو على كل شيء قدير.',
+    tesbih_tevhid_screen_sub: 'يُقرأ مرة واحدة بعد إتمام الأذكار الثلاثة.',
+    tesbih_tevhid_done: 'تم',
     tesbih_premium_create: 'إنشاء تسبيح مخصص',
     tesbih_premium_locked: 'يتطلب بريميوم كتابة اسم الذكر والعدد الخاص بك.',
     tesbih_my_list: 'تسبيحاتي المخصصة',
@@ -830,7 +899,30 @@ const translations: Record<Language, Record<string, string>> = {
     tesbih_empty: 'Пользовательских тасбихов пока нет',
     tesbih_empty_desc: 'Создайте свой зикр с названием и числом с Премиум',
     tesbih_namaz_end: 'Зикр после намаза',
-    tesbih_namaz_end_desc: 'Три зикра по 33 раза после каждого намаза — бесплатно для всех.',
+    tesbih_namaz_end_desc: 'Дуа после саляма и три зикра по 33 раза — бесплатно для всех.',
+    namaz_pre_section: 'Читается после саляма',
+    namaz_istigfar_title: 'Дуа истигфара',
+    namaz_istigfar_translit:
+      'Астагфируллаха аль-Азым, аль-лязи ля иляха илля Хува, аль-Хайй, аль-Кайюм, ва аътубу иляйхи.',
+    namaz_istigfar_meaning:
+      'Прошу прощения у Аллаха Великого, нет бога кроме Него, Живого и Поддерживающего. Каюсь перед Ним.',
+    namaz_selam_title: 'Дуа саляма',
+    namaz_selam_translit:
+      'Аллахумма анта ас-салям, ва минка ас-салям, табаракта йа За аль-джаляли валь-икрам.',
+    namaz_selam_meaning:
+      'О Аллах, Ты — Мир, и от Тебя мир. Благословен Ты, О Обладатель величия и чести.',
+    namaz_salavat_title: 'Салават',
+    namaz_salavat_translit: 'Аллахумма салли аля Мухаммад.',
+    namaz_salavat_meaning: 'О Аллах, благослови нашего Господина Мухаммада.',
+    namaz_flow_steps: 'Субханаллах ×33 → Альхамдулиллях ×33 → Аллаху акбар ×33 → Дуа тавхида',
+    namaz_flow_start: 'Начать зикр',
+    tesbih_tevhid_title: 'Дуа тавхида',
+    tesbih_tevhid_translit:
+      'Ля иляха иллаллаху вахдаху ля шарика лях. Ляхуль-мульку ва ляхуль-хамду, ва Хува аля кулли шайин Кадир.',
+    tesbih_tevhid_meaning:
+      'Нет бога, кроме Аллаха, Единого, у Которого нет сотоварища. Ему принадлежит власть и хвала, и Он властен над всем сущим.',
+    tesbih_tevhid_screen_sub: 'Читается один раз после завершения всех трёх зикров.',
+    tesbih_tevhid_done: 'Готово',
     tesbih_premium_create: 'Создать свой тасбих',
     tesbih_premium_locked: 'Для своего названия и числа зикра нужен Премиум.',
     tesbih_my_list: 'Мои тасбихи',
@@ -1055,7 +1147,30 @@ const translations: Record<Language, Record<string, string>> = {
     tesbih_empty: 'Әлі жеке тәсібіх жоқ',
     tesbih_empty_desc: 'Premium арқылы өз зікір атыңыз бен санын жасаңыз',
     tesbih_namaz_end: 'Намаз соңы зікірлері',
-    tesbih_namaz_end_desc: 'Әр намаздан кейін 33 рет айтылатын үш зікір — барлығына тегін.',
+    tesbih_namaz_end_desc: 'Саламнан кейінгі дұғалар және 33 реттік үш зікір — барлығына тегін.',
+    namaz_pre_section: 'Саламнан кейін оқылады',
+    namaz_istigfar_title: 'Истигфар дұғасы',
+    namaz_istigfar_translit:
+      'Астығфируллаһ әл-әзім әл-лези ла илаһа илла һу әл-хайй әл-қаййум уә әтүбү илейһи.',
+    namaz_istigfar_meaning:
+      'Улы Аллаһтан кешірім сұраймын; Одан басқа құдай жоқ, Ол тірі және қамқоршы. Оған тәубе етемін.',
+    namaz_selam_title: 'Салам дұғасы',
+    namaz_selam_translit:
+      'Аллаһумма әнтәссаламу уа минкәссаламу тебаракта йа зәл-жәлали уәл-икрам.',
+    namaz_selam_meaning:
+      'Аллаһым, Сен бейбітшіліксің, бейбітшілік Сенен. Ұлылық пен ибарат иесін благословен!',
+    namaz_salavat_title: 'Салауат',
+    namaz_salavat_translit: 'Аллаһумма салли аля Мұхаммед.',
+    namaz_salavat_meaning: 'Аллаһым, Пайғамбарымыз Мұхаммедке салауат ет.',
+    namaz_flow_steps: 'Субханаллах ×33 → Әлхамдулиллах ×33 → Аллаху акбар ×33 → Тәухид дұғасы',
+    namaz_flow_start: 'Зікірді бастау',
+    tesbih_tevhid_title: 'Тәухид дұғасы',
+    tesbih_tevhid_translit:
+      'Лә илаһа иллаллаһу уахдәһу лә шәрикә ләһ. Ләһүл-мулку уә ләһүл-хамду уә һуу аля кулли шәйин қадир.',
+    tesbih_tevhid_meaning:
+      'Аллаһтан басқа құдай жоқ, Ол жалғыз, Оның серігі жоқ. Барлықтық Оныңдікі, мақтау Оған тән. Ол әр нәрсеге қудиретті.',
+    tesbih_tevhid_screen_sub: 'Үш зікір аяқталғаннан кейін бір рет оқылады.',
+    tesbih_tevhid_done: 'Аяқтау',
     tesbih_premium_create: 'Жеке тәсібіх жасау',
     tesbih_premium_locked: 'Өз зікір атыңыз бен саныңызды жазу үшін Premium қажет.',
     tesbih_my_list: 'Жеке тәсібіхтерім',

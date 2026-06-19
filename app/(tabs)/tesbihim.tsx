@@ -17,12 +17,13 @@ import { COLORS, FONTS, RADIUS, SHADOW, SPACING } from '@/constants/theme';
 import { useLanguage } from '@/context/LanguageContext';
 import { useApp } from '@/context/AppContext';
 import { createCustomTasbih, deleteCustomTasbih } from '@/lib/tasbih-storage';
-import { FREE_NAMAZ_TESBIH } from '@/lib/tesbih-presets';
+import { NAMAZ_PRE_DUAS } from '@/lib/namaz-pre-dua';
 import { useTabBarScrollPadding } from '@/lib/tab-bar';
 import TasbihCounter from '@/components/TasbihCounter';
+import NamazTesbihFlow, { resetNamazBuiltinSessions } from '@/components/NamazTesbihFlow';
 import ScreenErrorBoundary from '@/components/ScreenErrorBoundary';
 import { CustomTasbih } from '@/types';
-import { Plus, CircleDot, Trash2, Lock, Crown } from 'lucide-react-native';
+import { Plus, CircleDot, Trash2, Lock, Crown, Play } from 'lucide-react-native';
 
 export default function TesbihimScreen() {
   const { t } = useLanguage();
@@ -32,6 +33,8 @@ export default function TesbihimScreen() {
   const [target, setTarget] = useState('');
   const [creating, setCreating] = useState(false);
   const [activeTasbih, setActiveTasbih] = useState<CustomTasbih | null>(null);
+  const [showNamazFlow, setShowNamazFlow] = useState(false);
+  const [startingFlow, setStartingFlow] = useState(false);
   const [screenError, setScreenError] = useState<string | null>(null);
   const [listLoading, setListLoading] = useState(true);
 
@@ -45,8 +48,23 @@ export default function TesbihimScreen() {
     }, [refreshCustomTasbih, refreshTasbihSessions])
   );
 
-  const openFreeTasbih = (preset: CustomTasbih) => {
-    setActiveTasbih(preset);
+  const startNamazFlow = async () => {
+    setStartingFlow(true);
+    setScreenError(null);
+    try {
+      await resetNamazBuiltinSessions();
+      await refreshTasbihSessions();
+      setShowNamazFlow(true);
+    } catch {
+      setScreenError('error_load_data');
+    } finally {
+      setStartingFlow(false);
+    }
+  };
+
+  const closeNamazFlow = () => {
+    setShowNamazFlow(false);
+    refreshTasbihSessions();
   };
 
   const startCustomTasbih = async (tasbihName: string, targetStr?: string) => {
@@ -135,18 +153,35 @@ export default function TesbihimScreen() {
             <View style={[styles.card, SHADOW.sm]}>
               <Text style={styles.cardTitle}>{t('tesbih_namaz_end')}</Text>
               <Text style={styles.cardDesc}>{t('tesbih_namaz_end_desc')}</Text>
-              <View style={styles.presetRow}>
-                {FREE_NAMAZ_TESBIH.map((preset) => (
-                  <TouchableOpacity
-                    key={preset.id}
-                    style={styles.presetChip}
-                    onPress={() => openFreeTasbih(preset)}
-                  >
-                    <Text style={styles.presetText}>{preset.name}</Text>
-                    <Text style={styles.presetTarget}>×{preset.targetCount}</Text>
-                  </TouchableOpacity>
-                ))}
-              </View>
+              <Text style={styles.preDuaSection}>{t('namaz_pre_section')}</Text>
+              {NAMAZ_PRE_DUAS.map((dua, index) => (
+                <View key={dua.id} style={styles.preDuaBlock}>
+                  <View style={styles.preDuaHeader}>
+                    <View style={styles.preDuaNumberBadge}>
+                      <Text style={styles.preDuaNumber}>{index + 1}</Text>
+                    </View>
+                    <Text style={styles.preDuaTitle}>{t(dua.titleKey)}</Text>
+                    <Text style={styles.preDuaCount}>×{dua.count}</Text>
+                  </View>
+                  <Text style={styles.preDuaArabic}>{dua.arabic}</Text>
+                  <Text style={styles.preDuaTranslit}>{t(dua.translitKey)}</Text>
+                  <Text style={styles.preDuaMeaning}>{t(dua.meaningKey)}</Text>
+                </View>
+              ))}
+              <Text style={styles.flowHint}>{t('namaz_flow_steps')}</Text>
+              <TouchableOpacity
+                style={[styles.flowStartBtn, startingFlow && styles.flowStartBtnDisabled]}
+                onPress={() => void startNamazFlow()}
+                disabled={startingFlow}
+                activeOpacity={0.85}
+              >
+                {startingFlow ? (
+                  <ActivityIndicator size="small" color={COLORS.cream} />
+                ) : (
+                  <Play size={18} color={COLORS.cream} strokeWidth={2} fill={COLORS.cream} />
+                )}
+                <Text style={styles.flowStartBtnText}>{t('namaz_flow_start')}</Text>
+              </TouchableOpacity>
             </View>
 
             <View style={[styles.card, SHADOW.sm, !premium && styles.cardLocked]}>
@@ -261,6 +296,17 @@ export default function TesbihimScreen() {
             )}
           </SafeAreaProvider>
         </Modal>
+
+        <Modal
+          visible={showNamazFlow}
+          animationType="slide"
+          presentationStyle="fullScreen"
+          onRequestClose={closeNamazFlow}
+        >
+          <SafeAreaProvider>
+            {showNamazFlow && <NamazTesbihFlow onClose={closeNamazFlow} />}
+          </SafeAreaProvider>
+        </Modal>
       </SafeAreaView>
     </ScreenErrorBoundary>
   );
@@ -348,6 +394,101 @@ const styles = StyleSheet.create({
     marginBottom: SPACING.md,
     lineHeight: 19,
   },
+  preDuaSection: {
+    fontFamily: FONTS.sansSemiBold,
+    fontSize: 12,
+    color: COLORS.green,
+    textTransform: 'uppercase',
+    letterSpacing: 0.5,
+    marginBottom: SPACING.sm,
+  },
+  preDuaBlock: {
+    backgroundColor: COLORS.green + '08',
+    borderRadius: RADIUS.lg,
+    borderWidth: 1,
+    borderColor: COLORS.green + '20',
+    padding: SPACING.md,
+    marginBottom: SPACING.sm,
+  },
+  preDuaHeader: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: SPACING.sm,
+    marginBottom: SPACING.sm,
+  },
+  preDuaNumberBadge: {
+    width: 22,
+    height: 22,
+    borderRadius: 11,
+    backgroundColor: COLORS.green,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  preDuaNumber: {
+    fontFamily: FONTS.sansBold,
+    fontSize: 12,
+    color: COLORS.cream,
+  },
+  preDuaTitle: {
+    flex: 1,
+    fontFamily: FONTS.sansSemiBold,
+    fontSize: 14,
+    color: COLORS.textPrimary,
+  },
+  preDuaCount: {
+    fontFamily: FONTS.sansBold,
+    fontSize: 13,
+    color: COLORS.green,
+  },
+  preDuaArabic: {
+    fontFamily: FONTS.sans,
+    fontSize: 17,
+    color: COLORS.textPrimary,
+    textAlign: 'center',
+    lineHeight: 28,
+    writingDirection: 'rtl',
+    marginBottom: SPACING.xs,
+  },
+  preDuaTranslit: {
+    fontFamily: FONTS.sans,
+    fontSize: 12,
+    color: COLORS.textMuted,
+    textAlign: 'center',
+    lineHeight: 18,
+    fontStyle: 'italic',
+    marginBottom: SPACING.xs,
+  },
+  preDuaMeaning: {
+    fontFamily: FONTS.sans,
+    fontSize: 12,
+    color: COLORS.textSecondary,
+    textAlign: 'center',
+    lineHeight: 18,
+  },
+  flowHint: {
+    fontFamily: FONTS.sans,
+    fontSize: 12,
+    color: COLORS.textMuted,
+    textAlign: 'center',
+    marginTop: SPACING.sm,
+    marginBottom: SPACING.md,
+    lineHeight: 18,
+  },
+  flowStartBtn: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+    gap: SPACING.sm,
+    backgroundColor: COLORS.green,
+    borderRadius: RADIUS.lg,
+    paddingVertical: 14,
+  },
+  flowStartBtnDisabled: { opacity: 0.7 },
+  flowStartBtnText: {
+    fontFamily: FONTS.sansBold,
+    fontSize: 15,
+    color: COLORS.cream,
+  },
   premiumCardHeader: {
     flexDirection: 'row',
     alignItems: 'center',
@@ -367,30 +508,6 @@ const styles = StyleSheet.create({
     fontFamily: FONTS.sansBold,
     fontSize: 10,
     color: COLORS.goldDark,
-  },
-  presetRow: { flexDirection: 'row', flexWrap: 'wrap', gap: SPACING.sm },
-  presetChip: {
-    backgroundColor: COLORS.green + '12',
-    borderRadius: RADIUS.lg,
-    paddingHorizontal: SPACING.md,
-    paddingVertical: SPACING.sm,
-    borderWidth: 1,
-    borderColor: COLORS.green + '30',
-    minWidth: '30%',
-    flexGrow: 1,
-  },
-  presetText: {
-    fontFamily: FONTS.sansSemiBold,
-    fontSize: 14,
-    color: COLORS.green,
-    textAlign: 'center',
-  },
-  presetTarget: {
-    fontFamily: FONTS.sans,
-    fontSize: 11,
-    color: COLORS.textMuted,
-    textAlign: 'center',
-    marginTop: 2,
   },
   label: {
     fontFamily: FONTS.sansMedium,

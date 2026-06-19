@@ -21,9 +21,11 @@ import {
 } from '@/lib/counter-safe-area';
 import { useApp } from '@/context/AppContext';
 import { useLanguage } from '@/context/LanguageContext';
+import { getNamazTasbihTitle } from '@/lib/namaz-i18n';
 import { upsertTasbihSession, recordTasbihCount } from '@/lib/tasbih-storage';
 import { triggerTapHaptic, triggerSuccessHaptic } from '@/lib/haptics';
 import { CustomTasbih, TasbihSession } from '@/types';
+import { isNamazBuiltinTasbih } from '@/lib/tevhid-dua';
 import { ArrowLeft, RotateCcw, CheckCircle } from 'lucide-react-native';
 
 const { width: W } = Dimensions.get('window');
@@ -32,11 +34,14 @@ const TAP_SIZE = Math.min(W * 0.62, 260);
 interface Props {
   tasbih: CustomTasbih;
   onClose: () => void;
+  /** Namaz sonu akışında 33 tamamlanınca bir sonraki adıma geç */
+  onTargetReached?: () => void;
+  flowMode?: boolean;
 }
 
-export default function TasbihCounter({ tasbih, onClose }: Props) {
+export default function TasbihCounter({ tasbih, onClose, onTargetReached, flowMode }: Props) {
   const { tasbihSessions, refreshTasbihSessions, refreshTasbihStats, applyTasbihStats } = useApp();
-  const { t } = useLanguage();
+  const { t, language } = useLanguage();
   const insets = useSafeAreaInsets();
   const bottomPadding = getCounterBottomPadding(insets.bottom);
 
@@ -97,6 +102,10 @@ export default function TasbihCounter({ tasbih, onClose }: Props) {
         tension: 60,
         friction: 8,
       }).start();
+
+      if (flowMode && onTargetReached && isNamazBuiltinTasbih(tasbih.id)) {
+        setTimeout(() => onTargetReached(), 700);
+      }
     }
 
     try {
@@ -137,6 +146,8 @@ export default function TasbihCounter({ tasbih, onClose }: Props) {
   const rippleOpacity = rippleAnim.interpolate({ inputRange: [0, 0.5, 1], outputRange: [0.3, 0.15, 0] });
   const completedScale = completedAnim.interpolate({ inputRange: [0, 1], outputRange: [0, 1] });
 
+  const displayName = getNamazTasbihTitle(tasbih.id, language, tasbih.name);
+
   return (
     <LinearGradient colors={[COLORS.green, COLORS.bgDeep, '#0A1A10']} style={styles.container}>
       <SafeAreaView style={[styles.safe, { paddingBottom: bottomPadding }]} edges={[]}>
@@ -162,7 +173,7 @@ export default function TasbihCounter({ tasbih, onClose }: Props) {
         </TouchableOpacity>
         <View style={styles.titleRow}>
           <Text style={styles.title} numberOfLines={2}>
-            {tasbih.name}
+            {displayName}
           </Text>
         </View>
 
