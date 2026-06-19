@@ -2,10 +2,8 @@ import React, { createContext, useContext, useEffect, useState, ReactNode } from
 import { NativeModules, Platform } from 'react-native';
 import { Dhikr, Language } from '@/types';
 import { DHIKR_I18N } from '@/data/dhikr-i18n';
-import {
-  esmaTrToKkTitle,
-  toKkDhikrTitle,
-} from '@/lib/kazakh-titles';
+import { DHIKR_EXPANDED_I18N } from '@/data/dhikr-expanded-i18n';
+import { toKkDhikrTitle } from '@/lib/kazakh-titles';
 import { getDhikrTransliteration } from '@/lib/dhikr-transliteration';
 import { getStoredLanguage, setStoredLanguage, hasSelectedLanguage as checkStoredLanguage } from '@/lib/storage';
 import { SUPPORTED_LANGUAGES } from '@/lib/languages';
@@ -33,11 +31,23 @@ export function getDhikrTitle(dhikr: Dhikr, language: Language): string {
 }
 
 export function getDhikrMeaning(dhikr: Dhikr, language: Language): string {
-  return DHIKR_I18N[dhikr.id]?.[language]?.meaning ?? '';
+  const base = DHIKR_I18N[dhikr.id]?.[language]?.meaning;
+  if (base) return base;
+
+  const expanded = DHIKR_EXPANDED_I18N[dhikr.id]?.[language]?.meaning;
+  if (expanded) return expanded;
+
+  return language === 'tr' ? dhikr.meaningTr : '';
 }
 
 export function getDhikrExplanation(dhikr: Dhikr, language: Language): string {
-  return DHIKR_I18N[dhikr.id]?.[language]?.explanation ?? '';
+  const base = DHIKR_I18N[dhikr.id]?.[language]?.explanation;
+  if (base) return base;
+
+  const expanded = DHIKR_EXPANDED_I18N[dhikr.id]?.[language]?.explanation;
+  if (expanded) return expanded;
+
+  return language === 'tr' ? dhikr.explanationTr : '';
 }
 
 export function getDhikrSearchText(dhikr: Dhikr, language: Language): string {
@@ -272,6 +282,9 @@ const translations: Record<Language, Record<string, string>> = {
     settings_restore_purchases: 'Satın Alımları Geri Yükle',
     settings_manage_subscription: 'Aboneliği Yönet',
     lang_kazakh: 'Қазақша',
+    screen_not_found: 'Bulunamadı',
+    screen_not_found_desc: 'Bu ekran mevcut değil.',
+    go_home: 'Ana sayfaya dön',
   },
   en: {
     tab_home: 'Home',
@@ -463,6 +476,9 @@ const translations: Record<Language, Record<string, string>> = {
     settings_restore_purchases: 'Restore Purchases',
     settings_manage_subscription: 'Manage Subscription',
     lang_kazakh: 'Қазақша',
+    screen_not_found: 'Not Found',
+    screen_not_found_desc: 'This screen does not exist.',
+    go_home: 'Go to home',
   },
   ar: {
     tab_home: 'الرئيسية',
@@ -654,6 +670,9 @@ const translations: Record<Language, Record<string, string>> = {
     settings_restore_purchases: 'استعادة المشتريات',
     settings_manage_subscription: 'إدارة الاشتراك',
     lang_kazakh: 'Қазақша',
+    screen_not_found: 'غير موجود',
+    screen_not_found_desc: 'هذه الشاشة غير موجودة.',
+    go_home: 'العودة إلى الرئيسية',
   },
   ru: {
     tab_home: 'Главная',
@@ -845,6 +864,9 @@ const translations: Record<Language, Record<string, string>> = {
     settings_restore_purchases: 'Восстановить покупки',
     settings_manage_subscription: 'Управление подпиской',
     lang_kazakh: 'Қазақша',
+    screen_not_found: 'Не найдено',
+    screen_not_found_desc: 'Этот экран не существует.',
+    go_home: 'На главную',
   },
   kk: {
     tab_home: 'Басты бет',
@@ -1036,6 +1058,9 @@ const translations: Record<Language, Record<string, string>> = {
     most_used_dhikr: 'Ең көп қолданылған зікір',
     tesbih_stats_title: 'Тәсібіх статистикасы',
     tesbih_total: 'Жалпы сан',
+    screen_not_found: 'Табылмады',
+    screen_not_found_desc: 'Бұл экран қолжетімсіз.',
+    go_home: 'Басты бетке өту',
   },
 };
 
