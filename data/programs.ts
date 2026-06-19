@@ -26,7 +26,7 @@ const HUZUR_DHIKR = [
 
 const ESMA_DHIKR = [
   'esma_001', 'esma_002', 'esma_003', 'esma_004', 'esma_005',
-  'esma_ext_001', 'esma_ext_002', 'esma_ext_003', 'esma_ext_004', 'esma_ext_005',
+  'esma_006', 'esma_007', 'esma_008', 'esma_009', 'esma_010',
 ];
 
 const SALAVAT_DHIKR = [
@@ -75,7 +75,7 @@ export const PROGRAM_LIST: ProgramDefinition[] = [
       'Seven days of focused peace-seeking dhikr to quiet the mind, calm anxiety, and reconnect with tranquility.',
     duration_days: 7,
     category: 'peace',
-    premium: false,
+    premium: true,
     sort_order: 1,
     days: buildDays(7, HUZUR_DHIKR),
   },

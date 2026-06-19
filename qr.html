@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>ZIKR — Expo QR (19.06.2026)</title>
+  <title>ZIKR — Expo QR</title>
   <style>
     * { box-sizing: border-box; margin: 0; padding: 0; }
     body {
@@ -40,13 +40,15 @@
     .steps { font-size: 0.95rem; opacity: 0.9; }
     .steps li { margin: 6px 0; }
     .note { font-size: 0.85rem; opacity: 0.75; }
+    .features { font-size: 0.8rem; opacity: 0.7; text-align: left; max-width: 360px; }
+    .features li { margin: 4px 0; }
   </style>
 </head>
 <body>
   <h1>ZIKR — Telefon için QR</h1>
   <p class="date">Güncelleme: 19 Haziran 2026</p>
   <p>Telefon kamerası veya <strong>Expo Go</strong> ile aşağıdaki kodu tara.</p>
-  <p class="note">Lokalizasyon denetimi sonrası sürüm. Premium testi: Ayarlar → Premium test anahtarı.</p>
+  <p class="note">Premium testi: Ayarlar → Premium test anahtarı</p>
   <div class="qr-wrap">
     <img
       src="https://api.qrserver.com/v1/create-qr-code/?size=320x320&data=exp%3A%2F%2Frbvvjus-mirok1-8081.exp.direct"
@@ -56,11 +58,15 @@
     />
   </div>
   <code>exp://rbvvjus-mirok1-8081.exp.direct</code>
+  <ul class="features">
+    <li>99 Esmaül Hüsna tam liste</li>
+    <li>5 dil lokalizasyon (TR/KK/RU/EN/AR)</li>
+    <li>İstatistik → eksik oturuma dokun, zikre devam (Premium)</li>
+  </ul>
   <ol class="steps">
     <li>Expo Go uygulamasını aç</li>
     <li>Scan QR code / QR tara</li>
     <li>Bu ekrandaki kodu tara</li>
-    <li>5 dilde incele: TR, KK, RU, EN, AR</li>
   </ol>
 </body>
 </html>

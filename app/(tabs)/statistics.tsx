@@ -10,7 +10,7 @@ import {
   ActivityIndicator,
 } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
-import { useFocusEffect } from 'expo-router';
+import { useFocusEffect, router } from 'expo-router';
 import { COLORS, FONTS, RADIUS, SHADOW, SPACING } from '@/constants/theme';
 import { useApp } from '@/context/AppContext';
 import { useLanguage, getDhikrTitle } from '@/context/LanguageContext';
@@ -18,8 +18,9 @@ import { useTabBarScrollPadding } from '@/lib/tab-bar';
 import { formatDuration } from '@/lib/storage';
 import { getMostUsedTasbih } from '@/lib/tasbih-storage';
 import { getMostUsedDhikrFromSessions, mergeMostUsed } from '@/lib/stats-helpers';
+import { isDhikrLocked } from '@/lib/premium';
 import StatCard from '@/components/StatCard';
-import { TrendingUp, Calendar, Clock, Award } from 'lucide-react-native';
+import { TrendingUp, Calendar, Clock, Award, ChevronRight, Lock } from 'lucide-react-native';
 
 type Period = 'today' | 'week' | 'month' | 'allTime';
 
@@ -36,6 +37,8 @@ export default function StatisticsScreen() {
     refreshSessions,
     refreshTasbihStats,
     refreshCustomTasbih,
+    premium,
+    refreshPremium,
   } = useApp();
   const { t, language } = useLanguage();
   const tabBarPadding = useTabBarScrollPadding();
@@ -47,7 +50,24 @@ export default function StatisticsScreen() {
       refreshSessions();
       refreshTasbihStats();
       refreshCustomTasbih();
-    }, [refreshStats, refreshSessions, refreshTasbihStats, refreshCustomTasbih])
+      refreshPremium();
+    }, [refreshStats, refreshSessions, refreshTasbihStats, refreshCustomTasbih, refreshPremium])
+  );
+
+  const handleSessionPress = useCallback(
+    (session: (typeof sessions)[number], dhikr: (typeof dhikrList)[number] | undefined) => {
+      if (session.completed || !dhikr) return;
+      if (!premium) {
+        router.push('/(tabs)/premium');
+        return;
+      }
+      if (isDhikrLocked(dhikr, premium)) {
+        router.push('/(tabs)/premium');
+        return;
+      }
+      router.push(`/dhikr/${dhikr.id}`);
+    },
+    [premium]
   );
 
   const PERIODS: { key: Period; label: string }[] = [
@@ -207,6 +227,9 @@ export default function StatisticsScreen() {
         {sessions.length > 0 && (
           <View>
             <Text style={styles.sectionTitle}>{t('recent_sessions')}</Text>
+            {!premium && (
+              <Text style={styles.sessionHint}>{t('stats_session_premium_hint')}</Text>
+            )}
             <View style={styles.sessionList}>
               {sessions
                 .slice(-5)
@@ -214,8 +237,11 @@ export default function StatisticsScreen() {
                 .map((session) => {
                   const prog = Math.min(session.current_count / session.target_count, 1);
                   const dhikr = dhikrList.find((d) => d.id === session.dhikr_id);
-                  return (
-                    <View key={session.id} style={[styles.sessionItem, SHADOW.sm]}>
+                  const isIncomplete = !session.completed;
+                  const canResume = isIncomplete && !!dhikr;
+
+                  const content = (
+                    <>
                       <View style={styles.sessionLeft}>
                         <View
                           style={[
@@ -223,13 +249,16 @@ export default function StatisticsScreen() {
                             { backgroundColor: session.completed ? COLORS.green : COLORS.gold },
                           ]}
                         />
-                        <View>
+                        <View style={styles.sessionInfo}>
                           <Text style={styles.sessionDhikrId} numberOfLines={1}>
                             {dhikr ? getDhikrTitle(dhikr, language) : session.dhikr_id}
                           </Text>
                           <Text style={styles.sessionDate}>
                             {new Date(session.last_updated).toLocaleDateString()}
                           </Text>
+                          {canResume && premium && (
+                            <Text style={styles.sessionTapHint}>{t('stats_tap_resume')}</Text>
+                          )}
                         </View>
                       </View>
                       <View style={styles.sessionRight}>
@@ -241,8 +270,41 @@ export default function StatisticsScreen() {
                             style={[styles.sessionFill, { width: `${prog * 100}%` as `${number}%` }]}
                           />
                         </View>
+                        {canResume && (
+                          premium ? (
+                            <ChevronRight size={16} color={COLORS.gold} strokeWidth={2} />
+                          ) : (
+                            <Lock size={14} color={COLORS.textMuted} strokeWidth={2} />
+                          )
+                        )}
                       </View>
-                    </View>
+                    </>
+                  );
+
+                  if (!canResume) {
+                    return (
+                      <View
+                        key={session.id}
+                        style={[styles.sessionItem, styles.sessionItemStatic, SHADOW.sm]}
+                      >
+                        {content}
+                      </View>
+                    );
+                  }
+
+                  return (
+                    <TouchableOpacity
+                      key={session.id}
+                      style={[
+                        styles.sessionItem,
+                        premium ? styles.sessionItemTappable : styles.sessionItemLocked,
+                        SHADOW.sm,
+                      ]}
+                      onPress={() => handleSessionPress(session, dhikr)}
+                      activeOpacity={0.7}
+                    >
+                      {content}
+                    </TouchableOpacity>
                   );
                 })}
             </View>
@@ -390,6 +452,14 @@ const styles = StyleSheet.create({
     lineHeight: 16,
   },
   sessionList: { gap: SPACING.sm },
+  sessionHint: {
+    fontFamily: FONTS.sans,
+    fontSize: 12,
+    color: COLORS.textMuted,
+    marginTop: -SPACING.sm,
+    marginBottom: SPACING.md,
+    lineHeight: 18,
+  },
   sessionItem: {
     flexDirection: 'row',
     alignItems: 'center',
@@ -400,10 +470,22 @@ const styles = StyleSheet.create({
     borderColor: COLORS.border,
     justifyContent: 'space-between',
   },
+  sessionItemStatic: {
+    opacity: 0.92,
+  },
+  sessionItemTappable: {
+    borderColor: COLORS.gold + '55',
+  },
+  sessionItemLocked: {
+    borderColor: COLORS.border,
+  },
   sessionLeft: {
     flexDirection: 'row',
     alignItems: 'center',
     gap: SPACING.sm,
+    flex: 1,
+  },
+  sessionInfo: {
     flex: 1,
   },
   sessionDot: {
@@ -421,9 +503,16 @@ const styles = StyleSheet.create({
     fontSize: 10,
     color: COLORS.textMuted,
   },
+  sessionTapHint: {
+    fontFamily: FONTS.sans,
+    fontSize: 10,
+    color: COLORS.gold,
+    marginTop: 2,
+  },
   sessionRight: {
     alignItems: 'flex-end',
     gap: 4,
+    marginLeft: SPACING.sm,
   },
   sessionCount: {
     fontFamily: FONTS.sansBold,
