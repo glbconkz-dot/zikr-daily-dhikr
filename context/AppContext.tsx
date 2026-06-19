@@ -36,6 +36,7 @@ import {
   PurchaseErrorCode,
 } from '@/lib/revenuecat';
 import { ENABLE_PREMIUM_TEST_TOGGLE } from '@/lib/premium-config';
+import { shouldGrantReviewPremium } from '@/lib/app-review-mode';
 import {
   getCustomTasbihList,
   getTasbihSessions,
@@ -196,6 +197,12 @@ export function AppProvider({ children }: { children: ReactNode }) {
   }, []);
 
   const syncPremiumFromStore = useCallback(async () => {
+    // App Store Review Mode: unlock Premium without purchase for Apple reviewers.
+    if (shouldGrantReviewPremium()) {
+      await applyPremiumStatus(true);
+      return;
+    }
+
     if (ENABLE_PREMIUM_TEST_TOGGLE) {
       const cached = await isPremium();
       setPremiumState(cached);

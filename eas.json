@@ -28,6 +28,12 @@
       "ios": {
         "simulator": false
       }
+    },
+    "appStoreReview": {
+      "extends": "production",
+      "env": {
+        "EXPO_PUBLIC_APP_REVIEW_MODE": "true"
+      }
     }
   },
   "submit": {
@@ -35,6 +41,9 @@
       "ios": {
         "ascAppId": "6781307280"
       }
+    },
+    "appStoreReview": {
+      "extends": "production"
     }
   }
 }

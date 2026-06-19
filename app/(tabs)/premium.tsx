@@ -10,6 +10,7 @@ import {
   ActivityIndicator,
   Alert,
   Switch,
+  Linking,
 } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 import { COLORS, FONTS, RADIUS, SHADOW, SPACING } from '@/constants/theme';
@@ -22,14 +23,16 @@ import {
   PurchaseErrorCode,
   SubscriptionPlan,
 } from '@/lib/revenuecat';
-import { Crown, CheckCircle, CloudUpload, BarChart3, Infinity, Sparkles, Lock } from 'lucide-react-native';
+import { Crown, CheckCircle, CloudUpload, BarChart3, Infinity, Sparkles, Lock, ExternalLink } from 'lucide-react-native';
 import { useTabBarScrollPadding } from '@/lib/tab-bar';
-import { ENABLE_PREMIUM_TEST_TOGGLE } from '@/lib/premium-config';
+import { ENABLE_PREMIUM_TEST_TOGGLE, DISPLAY_MONTHLY_PRICE, DISPLAY_YEARLY_PRICE } from '@/lib/premium-config';
+import { registerReviewModeTap, isAppReviewModeActive } from '@/lib/app-review-mode';
+import { PRIVACY_POLICY_URL, getTermsOfUseUrl } from '@/lib/legal-links';
 
 export default function PremiumScreen() {
   const { t } = useLanguage();
   const tabBarPadding = useTabBarScrollPadding();
-  const { premium, purchaseSubscription, restorePremiumPurchases, togglePremium } = useApp();
+  const { premium, purchaseSubscription, restorePremiumPurchases, togglePremium, refreshPremium } = useApp();
   const [selectedPlan, setSelectedPlan] = useState<SubscriptionPlan>('yearly');
   const [monthlyPrice, setMonthlyPrice] = useState(getFallbackPrice('monthly'));
   const [yearlyPrice, setYearlyPrice] = useState(getFallbackPrice('yearly'));
@@ -174,6 +177,18 @@ export default function PremiumScreen() {
   const selectedPrice = selectedPlan === 'monthly' ? monthlyPrice : yearlyPrice;
   const busy = purchasing || restoring || loadingOfferings;
 
+  const openLegalLink = (url: string) => {
+    Linking.openURL(url).catch(() => {});
+  };
+
+  const handleCrownPress = () => {
+    if (registerReviewModeTap()) {
+      void refreshPremium();
+    }
+  };
+
+  const billingNoticeKey = Platform.OS === 'ios' ? 'billing_notice_ios' : 'billing_notice_android';
+
   return (
     <SafeAreaView style={styles.safe}>
       <ScrollView
@@ -185,10 +200,22 @@ export default function PremiumScreen() {
           colors={[COLORS.green, COLORS.bgDeep, '#071510']}
           style={styles.hero}
         >
-          <View style={styles.crownWrapper}>
-            <Crown size={40} color={COLORS.gold} strokeWidth={1.5} />
-          </View>
+          <TouchableOpacity
+            onPress={handleCrownPress}
+            activeOpacity={0.85}
+            accessibilityRole="button"
+            accessibilityLabel={t('premium_title')}
+          >
+            <View style={styles.crownWrapper}>
+              <Crown size={40} color={COLORS.gold} strokeWidth={1.5} />
+            </View>
+          </TouchableOpacity>
           <Text style={styles.heroTitle}>{t('premium_title')}</Text>
+          {isAppReviewModeActive() && (
+            <View style={styles.reviewBadge}>
+              <Text style={styles.reviewBadgeText}>{t('review_mode_active')}</Text>
+            </View>
+          )}
           {premium && (
             <View style={styles.activeBadge}>
               <CheckCircle size={14} color={COLORS.bgDeep} strokeWidth={2.5} />
@@ -280,6 +307,12 @@ export default function PremiumScreen() {
                     <Text style={[styles.planPeriod, selectedPlan === plan.id && styles.planPeriodActive]}>
                       {t(plan.periodKey)}
                     </Text>
+                    <Text style={[styles.planRenew, selectedPlan === plan.id && styles.planRenewActive]}>
+                      {t('subscription_auto_renewable')}
+                    </Text>
+                    <Text style={styles.planDisplayPrice}>
+                      {plan.id === 'monthly' ? DISPLAY_MONTHLY_PRICE : DISPLAY_YEARLY_PRICE}
+                    </Text>
                   </View>
                   {selectedPlan === plan.id && (
                     <View style={styles.planCheck}>
@@ -331,7 +364,8 @@ export default function PremiumScreen() {
             )}
           </TouchableOpacity>
 
-          <Text style={styles.ctaNote}>{t('free_trial')}</Text>
+          <Text style={styles.ctaNote}>{t(billingNoticeKey)}</Text>
+          <Text style={styles.renewDisclaimer}>{t('subscription_auto_renew_disclaimer')}</Text>
 
           <View style={styles.trustRow}>
             <Text style={styles.trustText}>🔒 {t('secure_payment')}</Text>
@@ -352,6 +386,25 @@ export default function PremiumScreen() {
               )
             )}
           </View>
+        </View>
+
+        <View style={styles.legalSection}>
+          <TouchableOpacity
+            style={styles.legalLink}
+            onPress={() => openLegalLink(PRIVACY_POLICY_URL)}
+            activeOpacity={0.8}
+          >
+            <Text style={styles.legalLinkText}>{t('premium_privacy_policy')}</Text>
+            <ExternalLink size={16} color={COLORS.green} strokeWidth={2} />
+          </TouchableOpacity>
+          <TouchableOpacity
+            style={styles.legalLink}
+            onPress={() => openLegalLink(getTermsOfUseUrl(Platform.OS))}
+            activeOpacity={0.8}
+          >
+            <Text style={styles.legalLinkText}>{t('premium_terms_eula')}</Text>
+            <ExternalLink size={16} color={COLORS.green} strokeWidth={2} />
+          </TouchableOpacity>
         </View>
 
         <View style={{ height: SPACING.xxl }} />
@@ -417,6 +470,19 @@ const styles = StyleSheet.create({
     marginBottom: SPACING.lg,
     borderWidth: 1,
     borderColor: 'rgba(201,168,76,0.3)',
+  },
+  reviewBadge: {
+    backgroundColor: 'rgba(201,168,76,0.25)',
+    borderRadius: RADIUS.full,
+    paddingHorizontal: 12,
+    paddingVertical: 6,
+    marginBottom: SPACING.sm,
+  },
+  reviewBadgeText: {
+    fontFamily: FONTS.sansSemiBold,
+    fontSize: 11,
+    color: COLORS.goldLight,
+    letterSpacing: 0.3,
   },
   heroTitle: {
     fontFamily: FONTS.serifBold,
@@ -580,6 +646,19 @@ const styles = StyleSheet.create({
     color: COLORS.textMuted,
   },
   planPeriodActive: { color: COLORS.textSecondary },
+  planRenew: {
+    fontFamily: FONTS.sans,
+    fontSize: 10,
+    color: COLORS.textMuted,
+    marginTop: 2,
+  },
+  planRenewActive: { color: COLORS.textSecondary },
+  planDisplayPrice: {
+    fontFamily: FONTS.sansMedium,
+    fontSize: 11,
+    color: COLORS.textMuted,
+    marginTop: 2,
+  },
   planCheck: {
     position: 'absolute',
     right: SPACING.md,
@@ -634,6 +713,15 @@ const styles = StyleSheet.create({
     marginTop: SPACING.xs,
     lineHeight: 16,
   },
+  renewDisclaimer: {
+    fontFamily: FONTS.sans,
+    fontSize: 11,
+    color: COLORS.textMuted,
+    textAlign: 'center',
+    marginTop: SPACING.sm,
+    lineHeight: 17,
+    paddingHorizontal: SPACING.sm,
+  },
   trustRow: {
     flexDirection: 'row',
     justifyContent: 'center',
@@ -664,5 +752,23 @@ const styles = StyleSheet.create({
     fontFamily: FONTS.sansMedium,
     fontSize: 13,
     color: COLORS.textMuted,
+  },
+  legalSection: {
+    paddingHorizontal: SPACING.md,
+    marginTop: SPACING.lg,
+    gap: SPACING.sm,
+  },
+  legalLink: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+    gap: SPACING.xs,
+    paddingVertical: SPACING.sm,
+  },
+  legalLinkText: {
+    fontFamily: FONTS.sansSemiBold,
+    fontSize: 14,
+    color: COLORS.green,
+    textDecorationLine: 'underline',
   },
 });

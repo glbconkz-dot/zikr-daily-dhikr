@@ -20,14 +20,17 @@ import { LANGUAGE_OPTIONS } from '@/lib/languages';
 import { isNativeStoreSupported } from '@/lib/revenuecat';
 import { ArrowLeft, CheckCircle, ExternalLink } from 'lucide-react-native';
 import { ENABLE_PREMIUM_TEST_TOGGLE } from '@/lib/premium-config';
+import { registerReviewModeTap } from '@/lib/app-review-mode';
+import {
+  PRIVACY_POLICY_URL,
+  getTermsOfUseUrl,
+  getSubscriptionManagementUrl,
+} from '@/lib/legal-links';
 import { triggerTapHaptic } from '@/lib/haptics';
-
-const PRIVACY_URL = 'https://zikr.app/privacy';
-const TERMS_URL = 'https://zikr.app/terms';
 
 export default function SettingsScreen() {
   const { language, setLanguage, t } = useLanguage();
-  const { premium, hapticsEnabled, togglePremium, toggleHaptics, restorePremiumPurchases } = useApp();
+  const { premium, hapticsEnabled, togglePremium, toggleHaptics, restorePremiumPurchases, refreshPremium } = useApp();
   const [selected, setSelected] = useState<Language>(language);
   const [premiumOn, setPremiumOn] = useState(premium);
   const [hapticsOn, setHapticsOn] = useState(hapticsEnabled);
@@ -75,14 +78,16 @@ export default function SettingsScreen() {
   };
 
   const openManageSubscription = () => {
-    const url =
-      Platform.OS === 'ios'
-        ? 'https://apps.apple.com/account/subscriptions'
-        : 'https://play.google.com/store/account/subscriptions';
-    Linking.openURL(url).catch(() => {});
+    Linking.openURL(getSubscriptionManagementUrl(Platform.OS)).catch(() => {});
   };
 
   const appVersion = Constants.expoConfig?.version ?? '1.0.0';
+
+  const handleVersionTap = () => {
+    if (registerReviewModeTap()) {
+      void refreshPremium();
+    }
+  };
 
   const handleSelect = async (code: Language) => {
     setSelected(code);
@@ -202,19 +207,22 @@ export default function SettingsScreen() {
         )}
 
         <View style={styles.card}>
-          <View style={styles.rowItem}>
+          <TouchableOpacity style={styles.rowItem} onPress={handleVersionTap} activeOpacity={0.8}>
             <Text style={styles.rowLabel}>{t('settings_version')}</Text>
             <Text style={styles.rowValue}>{appVersion}</Text>
-          </View>
+          </TouchableOpacity>
         </View>
 
         <View style={styles.card}>
-          <TouchableOpacity style={styles.linkRow} onPress={() => openLink(PRIVACY_URL)}>
+          <TouchableOpacity style={styles.linkRow} onPress={() => openLink(PRIVACY_POLICY_URL)}>
             <Text style={styles.linkLabel}>{t('settings_privacy')}</Text>
             <ExternalLink size={18} color={COLORS.textMuted} strokeWidth={2} />
           </TouchableOpacity>
           <View style={styles.divider} />
-          <TouchableOpacity style={styles.linkRow} onPress={() => openLink(TERMS_URL)}>
+          <TouchableOpacity
+            style={styles.linkRow}
+            onPress={() => openLink(getTermsOfUseUrl(Platform.OS))}
+          >
             <Text style={styles.linkLabel}>{t('settings_terms')}</Text>
             <ExternalLink size={18} color={COLORS.textMuted} strokeWidth={2} />
           </TouchableOpacity>

@@ -1,0 +1,195 @@
+{
+  "generatedAt": "2026-06-19T14:31:00.136Z",
+  "dhikr": {
+    "total": 172,
+    "free": 51,
+    "premium": 121
+  },
+  "esma": {
+    "total": 99,
+    "free": 30,
+    "premium": 69,
+    "badArabic": 0,
+    "badArabicIds": []
+  },
+  "missingTranslations": {
+    "tr": 40,
+    "en": 40,
+    "ru": 40,
+    "kk": 40,
+    "ar": 40
+  },
+  "missingTranslationSamples": {
+    "tr": [
+      {
+        "id": "niyet_001",
+        "field": "meaning"
+      },
+      {
+        "id": "niyet_001",
+        "field": "explanation"
+      },
+      {
+        "id": "niyet_002",
+        "field": "meaning"
+      },
+      {
+        "id": "niyet_002",
+        "field": "explanation"
+      },
+      {
+        "id": "niyet_003",
+        "field": "meaning"
+      }
+    ],
+    "en": [
+      {
+        "id": "niyet_001",
+        "field": "meaning"
+      },
+      {
+        "id": "niyet_001",
+        "field": "explanation"
+      },
+      {
+        "id": "niyet_002",
+        "field": "meaning"
+      },
+      {
+        "id": "niyet_002",
+        "field": "explanation"
+      },
+      {
+        "id": "niyet_003",
+        "field": "meaning"
+      }
+    ],
+    "ru": [
+      {
+        "id": "niyet_001",
+        "field": "meaning"
+      },
+      {
+        "id": "niyet_001",
+        "field": "explanation"
+      },
+      {
+        "id": "niyet_002",
+        "field": "meaning"
+      },
+      {
+        "id": "niyet_002",
+        "field": "explanation"
+      },
+      {
+        "id": "niyet_003",
+        "field": "meaning"
+      }
+    ],
+    "kk": [
+      {
+        "id": "niyet_001",
+        "field": "meaning"
+      },
+      {
+        "id": "niyet_001",
+        "field": "explanation"
+      },
+      {
+        "id": "niyet_002",
+        "field": "meaning"
+      },
+      {
+        "id": "niyet_002",
+        "field": "explanation"
+      },
+      {
+        "id": "niyet_003",
+        "field": "meaning"
+      }
+    ],
+    "ar": [
+      {
+        "id": "niyet_001",
+        "field": "meaning"
+      },
+      {
+        "id": "niyet_001",
+        "field": "explanation"
+      },
+      {
+        "id": "niyet_002",
+        "field": "meaning"
+      },
+      {
+        "id": "niyet_002",
+        "field": "explanation"
+      },
+      {
+        "id": "niyet_003",
+        "field": "meaning"
+      }
+    ]
+  },
+  "kkLatinMeaningCount": 0,
+  "kkLatinMeaningSamples": [],
+  "ruLatinMeaningCount": 0,
+  "emptyArabicCount": 0,
+  "uiMissingKeys": {
+    "en": 1,
+    "ru": 0,
+    "kk": 208,
+    "ar": 0
+  },
+  "uiMissingKeySamples": {
+    "en": [
+      "assigned_dhikr"
+    ],
+    "ru": [],
+    "kk": [
+      "tab_home",
+      "tab_dhikr",
+      "tab_tesbihim",
+      "tab_programs",
+      "tab_statistics",
+      "tab_premium",
+      "home_tagline",
+      "home_daily_inspiration"
+    ],
+    "ar": []
+  },
+  "googlePlayReferencesRemaining": [
+    {
+      "file": "context/LanguageContext.tsx",
+      "line": 207,
+      "text": "billing_notice_android: 'Google Play üzerinden faturalandırılır. İstediğiniz zaman iptal edebilirsiniz.',"
+    },
+    {
+      "file": "context/LanguageContext.tsx",
+      "line": 438,
+      "text": "billing_notice_android: 'Billed through Google Play. Cancel anytime.',"
+    },
+    {
+      "file": "context/LanguageContext.tsx",
+      "line": 665,
+      "text": "billing_notice_android: 'يُحسب عبر Google Play. يمكنك الإلغاء في أي وقت.',"
+    },
+    {
+      "file": "context/LanguageContext.tsx",
+      "line": 892,
+      "text": "billing_notice_android: 'Оплата через Google Play. Отмена в любое время.',"
+    },
+    {
+      "file": "context/LanguageContext.tsx",
+      "line": 1147,
+      "text": "billing_notice_android: 'Google Play арқылы төленеді. Кез келген уақытта бас тартуға болады.',"
+    }
+  ],
+  "appleReadiness": {
+    "noGooglePlayOnIosStrings": true,
+    "esmaComplete": true,
+    "privacyUrl": "https://zikr.app/privacy",
+    "eulaUrl": "https://www.apple.com/legal/internet-services/itunes/dev/stdeula/"
+  },
+  "appleReviewReadinessScore": "75/100"
+}
